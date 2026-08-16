@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes sfSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Home (orientation)" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --text-h1: 49px; --lh-h1: 56px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-4: #0D0C0B;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --confirm: #D9705C;
+  --v-approve: #7C8A5E; --v-defer: #C08A4A; --v-reject: #B87264;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh;
+">
+
+  <dc-import name="Header" signed-in="{{ false }}" max-width="1280px" hint-size="100%,72px"></dc-import>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: var(--space-9) var(--space-6) var(--space-8); display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr); gap: var(--space-9); align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-5); animation: sfSettle var(--dur-slow) var(--ease-settle) both;">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim);">Peer review for engineers</span>
+      <h1 style="margin: 0; max-width: 26ch; font-family: var(--font-heading); font-size: var(--text-h1); line-height: var(--lh-h1); font-weight: 800; letter-spacing: -0.026em; text-wrap: pretty;">A case study is an experiment. A verdict is a conclusion that survived scrutiny.</h1>
+      <p style="margin: 0; max-width: 56ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Engineers publish the reasoning behind their work — the challenge, the hypothesis, the design, the build — and peers matched to that niche review it. Nobody grades their own work here. Reading is open to everyone; signing in is only for taking part.</p>
+    </div>
+
+    <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">How to read a case</span>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <sc-for list="{{ readingParts }}" as="p" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: 96px minmax(0,1fr); gap: var(--space-4); align-items: baseline; padding-bottom: var(--space-4); border-bottom: 1px solid var(--boundary-2);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">{{ p.label }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ p.text }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 0 var(--space-6) var(--space-9);">
+    <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3); margin-bottom: var(--space-7);">
+      <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">The loop</h2>
+      <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">Learn something, document it, put it up for review. Each step sinks deeper.</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr); align-items: stretch; gap: 0;">
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">01</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700;">Learn</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Take on a real problem — a swap you can see coming, a constraint you have to design around.</span>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <span style="width: 100%; height: 1px; background: var(--boundary-1);"></span>
+        <span style="position: absolute; width: 6px; height: 6px; background: var(--text-dim);"></span>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">02</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700;">Document</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">State the challenge, commit a hypothesis, then show the architecture, the solution design, the build.</span>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <span style="width: 100%; height: 1px; background: var(--boundary-1);"></span>
+        <span style="position: absolute; width: 6px; height: 6px; background: var(--text-dim);"></span>
+      </div>
+      <div style="background: var(--surface-4); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); box-shadow: inset 0 10px 22px rgba(0,0,0,0.45); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">03</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700;">Submit to peer review</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Reviewers in your niche are summoned. They ask, they challenge, and then they render a verdict with a reason attached.</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 0; border-left: 1px solid var(--boundary-1); border-right: 1px solid var(--boundary-1); border-bottom: 1px solid var(--boundary-1); height: 34px; position: relative;">
+      <span style="position: absolute; left: 50%; transform: translate(-50%, 50%); bottom: 0; background: var(--surface-3); padding: 0 var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap;">A verdict teaches the next case</span>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 0 var(--space-6) var(--space-9);">
+    <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3); margin-bottom: var(--space-6);">
+      <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">What has been through review</h2>
+      <span style="flex: 1;"></span>
+      <a href="Case Index.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase;">All cases</a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+      <sc-for list="{{ cases }}" as="c" hint-placeholder-count="3">
+        <article style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-6); display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: var(--space-7); align-items: start; transition: background-color var(--dur-base) var(--ease-settle);" style-hover="background-color: #282621;">
+          <div style="display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;">
+            <div style="display: flex; align-items: center; gap: var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">
+              <span style="color: var(--text-label);">{{ c.track }}</span>
+              <span>/</span>
+              <span>{{ c.trackBasis }}</span>
+              <sc-if value="{{ ownMark }}" hint-placeholder-val="{{ true }}">
+                <span style="display: flex; align-items: center; gap: var(--space-3);">
+                  <span>·</span>
+                  <span>{{ c.provenance }}</span>
+                </span>
+              </sc-if>
+            </div>
+            <h3 style="margin: 0; max-width: 34ch;"><a href="Case Reader.dc.html" style="border: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em; color: var(--text-primary); text-wrap: pretty;" style-hover="color: #D9705C;">{{ c.title }}</a></h3>
+            <p style="margin: 0; max-width: 62ch; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ c.hypothesis }}</p>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-2);">
+              <span style="font-size: var(--text-body-sm); color: var(--text-primary); font-weight: 600;">Jay</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-dim); margin-right: var(--space-3);">@jays-space</span>
+              <sc-for list="{{ c.niches }}" as="n" hint-placeholder-count="2">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary); border: 1px solid var(--boundary-2); padding: 3px var(--space-3);">{{ n }}</span>
+              </sc-for>
+            </div>
+          </div>
+
+          <sc-if value="{{ ownMark }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: var(--space-3); background: var(--surface-4); background-image: var(--grain-3); border-top: 2px solid {{ c.markColor }}; box-shadow: inset 0 8px 18px rgba(0,0,0,0.40); padding: var(--space-5);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">{{ c.conclusionLabel }}</span>
+              <span style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="width: 12px; height: 12px; background: {{ c.markFill }}; border: 1px solid {{ c.markColor }};"></span>
+                <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; color: {{ c.conclusionColor }};">{{ c.conclusion }}</span>
+              </span>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ c.conclusionNote }}</span>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ paired }}">
+            <div style="border: 1px solid var(--boundary-1); background: var(--surface-4); background-image: var(--grain-2); display: flex; flex-direction: column;">
+              <span style="padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--boundary-2); display: flex; flex-direction: column; gap: var(--space-2);">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Provenance</span>
+                <span style="font-family: var(--font-heading); font-size: var(--text-body); line-height: var(--lh-body); font-weight: 700; color: var(--text-primary);">{{ c.provenance }}</span>
+              </span>
+              <span style="padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">{{ c.conclusionLabel }}</span>
+                <span style="display: flex; align-items: center; gap: var(--space-3);">
+                  <span style="width: 12px; height: 12px; background: {{ c.markFill }}; border: 1px solid {{ c.markColor }};"></span>
+                  <span style="font-family: var(--font-heading); font-size: var(--text-body); line-height: var(--lh-body); font-weight: 700; color: {{ c.conclusionColor }};">{{ c.conclusion }}</span>
+                </span>
+              </span>
+            </div>
+          </sc-if>
+        </article>
+      </sc-for>
+    </div>
+
+    <div style="margin-top: var(--space-6); display: flex; gap: var(--space-5); align-items: baseline; border-top: 1px solid var(--boundary-2); padding-top: var(--space-4);">
+      <span style="display: flex; align-items: center; gap: var(--space-3);">
+        <span style="width: 10px; height: 10px; background: #7C8A5E; border: 1px solid #7C8A5E;"></span>
+        <span style="font-size: var(--text-caption); color: var(--text-secondary);">Validated Pattern — held for the scope it claimed.</span>
+      </span>
+      <span style="display: flex; align-items: center; gap: var(--space-3);">
+        <span style="width: 10px; height: 10px; background: transparent; border: 1px solid #C08A4A;"></span>
+        <span style="font-size: var(--text-caption); color: var(--text-secondary);">Documented Trade-off — an honest account of where it breaks. Peers agreed the limit was real.</span>
+      </span>
+    </div>
+  </section>
+
+  <section style="max-width: 1280px; margin: 0 auto; padding: 0 var(--space-6) var(--space-9);">
+    <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3); margin-bottom: var(--space-6);">
+      <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">Browse</h2>
+      <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">Filter by discipline, level, review state or tag. No account needed to read.</span>
+      <span style="flex: 1;"></span>
+      <a href="Case Index.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase;">Open the index</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1px; background: var(--boundary-2);">
+      <sc-for list="{{ browse }}" as="b" hint-placeholder-count="6">
+        <a href="Case Index.dc.html" style="border: 0; text-decoration: none; background: var(--surface-2); background-image: var(--grain-2); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); transition: background-color var(--dur-base) var(--ease-settle);" style-hover="background-color: #242320;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">{{ b.kind }}</span>
+          <span style="font-size: var(--text-body); font-weight: 600; color: var(--text-primary);">{{ b.label }}</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-secondary);">{{ b.count }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <dc-import name="Footer" max-width="1280px" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;stampTreatment&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;own mark&quot;,&quot;paired&quot;],&quot;default&quot;:&quot;own mark&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Conclusion stamp&quot;},&quot;seniorTradeOff&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conclusion stamp&quot;}}">
+const READING = [
+  { label: 'Challenge', text: 'The problem and its constraints, stated before any solution.' },
+  { label: 'Hypothesis', text: 'The falsifiable thesis — why the proposed solution logically holds.' },
+  { label: 'The triad', text: 'Architecture, solution design, build. A case carries one or more; what it submits for a verdict can be narrower than what it contains.' },
+  { label: 'Two stamps', text: 'Provenance says how it passed. The conclusion says what kind of conclusion it reached. Both are set by reviewers, never by the author.' }
+];
+
+const CASES = [
+  {
+    title: 'Forward-compatible auth via an anti-corruption layer',
+    track: 'Engineer',
+    trackBasis: 'repo present',
+    provenance: 'Approved after revision',
+    conclusion: 'Validated Pattern',
+    conclusionNote: 'The adapter held once the claim-mapping was owned by User/Session.',
+    hypothesis: 'A thin lib/auth adapter exposing only sign-in/out, current session and a guard — mapping every IdP claim to app-owned User/Session — lets the implementation swap in the AWS phase with zero consumer change.',
+    niches: ['Frontend/Platform', 'Auth · Next.js', 'Senior+']
+  },
+  {
+    title: 'An accessible button that survives design-system drift',
+    track: 'Engineer',
+    trackBasis: 'repo present',
+    provenance: 'Approved first pass',
+    conclusion: 'Documented Trade-off',
+    conclusionNote: 'Focus-visible parity cannot be met on the legacy Safari target; the limit is stated, not hidden.',
+    hypothesis: 'Owning the button\u2019s focus and state styling inside the component — rather than inheriting from the token layer — keeps it accessible when the design system changes underneath it.',
+    niches: ['Frontend', 'Accessibility', 'Any level']
+  },
+  {
+    title: 'A read-model projection for the case index without a search service',
+    track: 'Architect',
+    trackBasis: 'diagram-backed',
+    provenance: 'In the workshop',
+    conclusion: 'Not yet stamped',
+    conclusionNote: 'A case is only stamped on approval. This one is still with its reviewers.',
+    hypothesis: 'A denormalised read model, rebuilt on publish, answers every filter the index offers — so the index needs no search service until volume demands one.',
+    niches: ['Backend/Platform', 'Data modelling', 'Senior+']
+  }
+];
+
+const BROWSE = [
+  { kind: 'Discipline', label: 'Frontend / Platform', count: '14 cases' },
+  { kind: 'Discipline', label: 'Backend / Platform', count: '11 cases' },
+  { kind: 'Review state', label: 'In the workshop', count: '5 cases' },
+  { kind: 'Conclusion', label: 'Validated Pattern', count: '9 cases' },
+  { kind: 'Conclusion', label: 'Documented Trade-off', count: '3 cases' },
+  { kind: 'Track', label: 'Architect · diagram-backed', count: '6 cases' }
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    const treatment = this.props.stampTreatment ?? 'own mark';
+    const senior = (this.props.seniorTradeOff ?? true);
+
+    const cases = CASES.map(c => {
+      const validated = c.conclusion === 'Validated Pattern';
+      const tradeoff = c.conclusion === 'Documented Trade-off';
+      const stamped = validated || tradeoff;
+      return {
+        ...c,
+        conclusionLabel: stamped ? 'Conclusion · peer-established' : 'Conclusion',
+        conclusionColor: stamped ? 'var(--text-primary)' : 'var(--text-label)',
+        markColor: validated ? '#7C8A5E' : tradeoff ? '#C08A4A' : 'var(--boundary-1)',
+        markFill: validated ? '#7C8A5E' : (tradeoff && senior) ? 'transparent' : tradeoff ? '#C08A4A' : 'transparent'
+      };
+    });
+
+    return {
+      readingParts: READING,
+      browse: BROWSE,
+      cases,
+      ownMark: treatment === 'own mark',
+      paired: treatment === 'paired'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

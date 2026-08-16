@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #0B0A0A; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Prototype walkthrough" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --shell-bg: #0B0A0A; --shell-line: #2A2724; --shell-text: #B5AEA4; --shell-dim: #847D74;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms;
+  background: var(--shell-bg); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh;
+">
+
+  <sc-if value="{{ noActor }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width: 1200px; margin: 0 auto; padding: var(--space-9) var(--space-6) var(--space-8); display: flex; flex-direction: column; gap: var(--space-8);">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.18em; text-transform: uppercase; color: var(--shell-dim);">StackFolio · prototype walkthrough</span>
+        <h1 style="margin: 0; max-width: 20ch; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em;">Whose hands are you in?</h1>
+        <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--shell-text); text-wrap: pretty;">One case study — an auth adapter submitted for review — seen from three sides. Each lane runs end to end. The dark bar is walkthrough scaffolding, not part of the product.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5);">
+        <button onClick="{{ pickAuthor }}" style="cursor: pointer; text-align: left; background: var(--surface-1); background-image: var(--grain-1); border: 0; border-top: 2px solid var(--accent); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); font-family: var(--font-body); transition: background var(--dur-base) var(--ease-settle);" style-hover="background: #2A2925;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-label);">Author</span>
+          <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700;">Jay</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Drafts the case, declares its niche and scope, submits it, takes a defer, revises, gets approved.</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--confirm); margin-top: auto;">4 steps</span>
+        </button>
+
+        <button onClick="{{ pickReviewer }}" style="cursor: pointer; text-align: left; background: var(--surface-1); background-image: var(--grain-1); border: 0; border-top: 2px solid var(--accent); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); font-family: var(--font-body); transition: background var(--dur-base) var(--ease-settle);" style-hover="background: #2A2925;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-label);">Reviewer</span>
+          <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700;">@nkosi.dev</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">The case summons him. He reads the case whole, then turns a comment into a verdict that closes his round.</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--confirm); margin-top: auto;">3 steps</span>
+        </button>
+
+        <button onClick="{{ pickParticipant }}" style="cursor: pointer; text-align: left; background: var(--surface-1); background-image: var(--grain-1); border: 0; border-top: 2px solid var(--accent); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); font-family: var(--font-body); transition: background var(--dur-base) var(--ease-settle);" style-hover="background: #2A2925;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-label);">Participant</span>
+          <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700;">@r.dlamini</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Reads without an account, hits the gate, signs in to track a case under review, comments once it concludes.</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--confirm); margin-top: auto;">3 steps</span>
+        </button>
+      </div>
+
+      <p style="max-width: 62ch; font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--shell-dim); border-top: 1px solid var(--shell-line); padding-top: var(--space-4); text-wrap: pretty;">The screens are the real specimens, mounted live — anything you change in one is the screen itself, not a copy.</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ hasActor }}">
+    <div style="display: flex; flex-direction: column; min-height: 100vh;">
+      <div style="position: sticky; top: 0; z-index: 20; background: var(--shell-bg); border-bottom: 1px solid var(--shell-line);">
+        <div style="max-width: 1440px; margin: 0 auto; padding: var(--space-3) var(--space-5); display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap;">
+          <button onClick="{{ reset }}" style="cursor: pointer; background: transparent; border: 1px solid var(--shell-line); padding: 4px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--shell-text); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">Switch actor</button>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--shell-dim);">{{ actorLabel }}</span>
+          <span style="flex: 1;"></span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; color: var(--shell-text);">{{ stepLabel }}</span>
+          <div style="display: flex; gap: var(--space-2);">
+            <button onClick="{{ prev }}" style="cursor: pointer; background: transparent; border: 1px solid var(--shell-line); padding: 4px var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--shell-text); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">Back</button>
+            <button onClick="{{ next }}" style="cursor: pointer; background: var(--accent); border: 0; padding: 4px var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ECE7DC; transition: background var(--dur-quick) var(--ease-settle);" style-hover="background: #7E2620;">Next</button>
+          </div>
+        </div>
+        <div style="max-width: 1440px; margin: 0 auto; padding: 0 var(--space-5) var(--space-3); display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;">
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--shell-text); max-width: 96ch;">{{ stepNote }}</span>
+        </div>
+      </div>
+
+      <div style="flex: 1; min-width: 0;">
+        <sc-if value="{{ scAuthorDraft }}">
+          <dc-import name="Authoring" start-stage="draft" hint-size="100%,900px"></dc-import>
+        </sc-if>
+        <sc-if value="{{ scAuthorRevision }}">
+          <dc-import name="Authoring" start-stage="revision" hint-size="100%,900px"></dc-import>
+        </sc-if>
+        <sc-if value="{{ scThreadLive }}">
+          <dc-import name="Review Thread" review-state="under-review" hint-size="100%,900px"></dc-import>
+        </sc-if>
+        <sc-if value="{{ scThreadDone }}">
+          <dc-import name="Review Thread" review-state="concluded" hint-size="100%,900px"></dc-import>
+        </sc-if>
+        <sc-if value="{{ scQueue }}">
+          <dc-import name="Reviewer Queue" hint-size="100%,900px"></dc-import>
+        </sc-if>
+        <sc-if value="{{ scVerdict }}">
+          <dc-import name="Verdict Panel" hint-size="100%,900px"></dc-import>
+        </sc-if>
+        <sc-if value="{{ scReader }}">
+          <dc-import name="Case Reader" hint-size="100%,900px"></dc-import>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1200}}">
+const LANES = {
+  author: {
+    label: 'Jay · author',
+    steps: [
+      { screen: 'authorDraft', name: 'Draft & submit', note: 'State the problem, design the solution, choose the toolset, declare the niche. Submitting is blocked until the case is well-formed — try Submit with the speciality unset.' },
+      { screen: 'threadLive', name: 'Under review', note: 'The case is locked and general comments are closed. Only Track and reactions remain. This is the one bit that gates everything: review concluded, yes or no.' },
+      { screen: 'authorRevision', name: 'Revise as v2', note: 'A defer arrived with a rationale and a stated remedy. The revision budget is 1 — spend it and stay deferred, and the case is rejected. Amending versions the case; v1 stays public.' },
+      { screen: 'threadDone', name: 'Approved after revision', note: 'Two approvals on v2. Provenance now says approved after revision, and the trajectory from disputed to endorsed is the readable part.' }
+    ]
+  },
+  reviewer: {
+    label: '@nkosi.dev · reviewer',
+    steps: [
+      { screen: 'queue', name: 'The case summons you', note: 'Push, not browse. The case declared a niche and the system routed it. The queue also shows what under-quota and terminal-rejected look like.' },
+      { screen: 'verdict', name: 'Comment becomes verdict', note: 'Clarify stays on the reading surface. Cast verdict sinks the panel into a darker, denser stratum — the interface changes ground when you move from reading to judging.' },
+      { screen: 'threadDone', name: 'What your round became', note: 'The defer sits in the trajectory permanently, attributed, with what it demanded. It is not erased by the approval that followed.' }
+    ]
+  },
+  participant: {
+    label: '@r.dlamini · participant',
+    steps: [
+      { screen: 'reader', name: 'Read the case whole', note: 'The outcome and tally are in the rail before you read a word; the verdicts are further down the same page. Track fails on the first attempt — it rolls back and offers a retry.' },
+      { screen: 'threadLive', name: 'Track a live review', note: 'Signed in, but the case is under review: comments are closed to everyone. Track and reactions are the only expression allowed.' },
+      { screen: 'threadDone', name: 'Comment once it concludes', note: 'Review concluded, comments reopen. Judgment and conversation stay separate objects, and the eligibility note says why a verdict is not yours to cast.' }
+    ]
+  }
+};
+
+class Component extends DCLogic {
+  state = { actor: null, step: 0 };
+
+  pick(a) { this.setState({ actor: a, step: 0 }); }
+
+  renderVals() {
+    const { actor, step } = this.state;
+    const lane = actor ? LANES[actor] : null;
+    const cur = lane ? lane.steps[step] : null;
+    const screen = cur ? cur.screen : '';
+
+    return {
+      noActor: !actor,
+      hasActor: !!actor,
+      pickAuthor: () => this.pick('author'),
+      pickReviewer: () => this.pick('reviewer'),
+      pickParticipant: () => this.pick('participant'),
+      reset: () => this.setState({ actor: null, step: 0 }),
+      next: () => this.setState(s => ({ step: Math.min(s.step + 1, LANES[s.actor].steps.length - 1) })),
+      prev: () => this.setState(s => ({ step: Math.max(s.step - 1, 0) })),
+
+      actorLabel: lane ? lane.label : '',
+      stepLabel: lane ? (step + 1) + ' / ' + lane.steps.length + ' · ' + cur.name : '',
+      stepNote: cur ? cur.note : '',
+
+      scAuthorDraft: screen === 'authorDraft',
+      scAuthorRevision: screen === 'authorRevision',
+      scThreadLive: screen === 'threadLive',
+      scThreadDone: screen === 'threadDone',
+      scQueue: screen === 'queue',
+      scVerdict: screen === 'verdict',
+      scReader: screen === 'reader'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

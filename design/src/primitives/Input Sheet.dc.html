@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  body { -webkit-font-smoothing: antialiased; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  input, textarea, button, select { font: inherit; color: inherit; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px solid #D9705C; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Input" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-code-sm: 12px; --lh-code-sm: 18px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-code: 14px; --lh-code: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-read: 17px; --lh-read: 27px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --text-h1: 49px; --lh-h1: 55px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-sunk: #0E0D0C;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --caution: #B87264; --caution-deep: #9C5B4E; --caution-quiet: rgba(184,114,100,0.14);
+  --control-h-sm: 28px; --control-h-md: 36px; --control-h-lg: 44px; --hit-min: 44px;
+  --focus-ring: #D9705C; --scrim: rgba(9,8,8,0.72);
+  --radius-1: 0px; --radius-2: 2px; --radius-3: 3px;
+  --op-disabled: 0.38; --op-muted: 0.62;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+
+  <header style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 2px solid var(--boundary-1); display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: var(--space-8); align-items: end;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Component · Input</span>
+      <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em;">A sunk box with a heavier rule at the bottom, so an empty field still reads as a place to write</h1>
+      <p style="margin: 0; max-width: 72ch; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-secondary); text-wrap: pretty;">Input covers both kinds — one line and many — under one label, one helper slot, one error slot. Comments, the authoring wizard and rationale all use it, so it has to hold a two-word title and a four-paragraph argument without changing its manners.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: var(--space-3); border-left: 2px solid var(--boundary-1); padding-left: var(--space-5);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Contents</span>
+      <div style="display: grid; gap: var(--space-1); font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-secondary);">
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">01</span><span>Anatomy</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">02</span><span>Two kinds</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">03</span><span>Sizes</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">04</span><span>States</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">05</span><span>Label, helper, error</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">06</span><span>Adornments</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">07</span><span>Rules &amp; accessibility</span></span>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-8);">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="01 Anatomy">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">01</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Anatomy</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Four parts stacked at 8px: label, control, and one line of text beneath — helper or error, never both. The control is the only part with a fill.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0,420px) minmax(0,1fr); gap: var(--space-7); align-items: start;">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5);">
+          <dc-import name="Input" label="Case title" placeholder="Short, plain title" helper="One line. The title is what a reviewer scans in the queue." required="{{ true }}" hint-size="100%,110px"></dc-import>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ anatomy }}" as="a" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 140px minmax(0,1fr); gap: var(--space-5); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ a.name }}</span>
+              <span style="display: flex; flex-direction: column; gap: var(--space-1);">
+                <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ a.body }}</span>
+                <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ a.tokens }}</span>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="02 Two kinds">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">02</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Two kinds</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">One component, one flag. The multi-line form keeps the same edge and padding and only changes how the box grows: it opens at four rows and the reader may drag it taller.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: var(--space-5);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Single-line · try it</span>
+          <dc-import name="Input" label="Case title" placeholder="Short, plain title" helper="Live — type into it." hint-size="100%,110px"></dc-import>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">height control-h-md · line-height matches height</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Multi-line · try it</span>
+          <dc-import name="Input" label="Rationale" multiline="{{ true }}" rows="{{ 4 }}" placeholder="What did you try, and what happened?" helper="Resizes vertically. Four rows is the floor, never the ceiling." max-length="{{ 400 }}" hint-size="100%,190px"></dc-import>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="03 Sizes">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">03</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Sizes</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Three, matched to the Button heights so a field and its submit sit on one line without shimming. Unlike Badge, the type size does move — a field the reader writes in is read at the size they typed.</span>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{ sizeRows }}" as="z" hint-placeholder-count="3">
+          <div style="display: grid; grid-template-columns: 110px repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-5); align-items: center; border-bottom: 1px solid var(--boundary-3); padding: var(--space-5) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">{{ z.name }}</span>
+            <dc-import name="Input" label="" size="{{ z.size }}" placeholder="{{ z.placeholder }}" hint-size="100%,40px"></dc-import>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ z.tokens }}</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ z.note }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="04 States">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">04</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">States</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Seven, shown forced so the whole set is visible at once. Every one of them changes at least two things — an edge and a fill, an edge and a mark — so none of them depends on colour alone.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-5);">
+        <sc-for list="{{ stateCards }}" as="s" hint-placeholder-count="7">
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+            <span style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ s.name }}</span>
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">{{ s.state }}</span>
+            </span>
+            <dc-import name="Input" label="Case title" state="{{ s.state }}" placeholder="Short, plain title" value="{{ s.value }}" error="{{ s.error }}" hint-size="100%,88px"></dc-import>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ s.body }}</span>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ s.tokens }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: var(--space-5);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">The same seven, multi-line</span>
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <dc-import name="Input" label="Rationale · read-only" multiline="{{ true }}" rows="{{ 3 }}" state="readonly" value="Merged after the third review. The adapter now retries on 401 once, then surfaces." hint-size="100%,120px"></dc-import>
+            <dc-import name="Input" label="Rationale · error" multiline="{{ true }}" rows="{{ 3 }}" state="error" error="Give a reason before requesting changes — the author only sees this field." hint-size="100%,140px"></dc-import>
+          </div>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Disabled vs read-only</span>
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <dc-import name="Input" label="Reviewer" state="disabled" value="Assigned on submit" helper="Disabled: dashed edge, sunk fill dropped to op-disabled, no focus stop." hint-size="100%,100px"></dc-import>
+            <dc-import name="Input" label="Submitted" state="readonly" value="14 Aug 2026, 09:12" helper="Read-only: no box at all, a single rule, full-contrast text, still focusable and selectable." hint-size="100%,100px"></dc-import>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">The two are told apart by shape, not tint: read-only loses the box and keeps its contrast, disabled keeps the box and loses it. The word <span style="font-family: var(--font-mono);">read only</span> sits in the trailing slot as text, not as a glyph.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="05 Label helper error">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">05</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Label, helper, error</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">The label is always there and always a real <span style="font-family: var(--font-mono); font-size: var(--text-code-sm);">&lt;label for&gt;</span>. Helper is the standing instruction; error replaces it, so the line beneath a field never doubles in height when validation fires.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-5);">
+        <sc-for list="{{ copyCards }}" as="c" hint-placeholder-count="4">
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ c.name }}</span>
+            <dc-import name="Input" label="{{ c.label }}" placeholder="{{ c.placeholder }}" helper="{{ c.helper }}" error="{{ c.error }}" state="{{ c.state }}" value="{{ c.value }}" required="{{ c.required }}" optional="{{ c.optional }}" hint-size="100%,110px"></dc-import>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ c.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: grid; grid-template-columns: minmax(0,420px) minmax(0,1fr); gap: var(--space-7); align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Validation · live</span>
+          <dc-import name="Input" label="Case title" placeholder="Short, plain title" value="{{ liveValue }}" onValueChange="{{ onLiveChange }}" helper="{{ liveHelper }}" error="{{ liveError }}" state="{{ liveState }}" required="{{ true }}" hint-size="100%,110px"></dc-import>
+          <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+            <button type="button" onClick="{{ submit }}" style="background: var(--accent); border: 0; border-radius: var(--radius-2); height: var(--control-h-md); padding: 0 var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); cursor: pointer;">Submit</button>
+            <button type="button" onClick="{{ reset }}" style="background: transparent; border: 1px solid var(--boundary-1); border-radius: var(--radius-2); height: var(--control-h-md); padding: 0 var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-label); cursor: pointer;">Reset</button>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Validation runs on submit, not on keystroke. The error takes the helper's place, the field gains <span style="font-family: var(--font-mono); font-size: var(--text-code-sm);">aria-invalid</span> and points at the message with <span style="font-family: var(--font-mono); font-size: var(--text-code-sm);">aria-describedby</span>, and the message is a live region — a screen reader hears it without moving.</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">The message says what to do, not that something is wrong: “Give the case a title” rather than “Invalid input”. It clears as soon as the field has a value again.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="06 Adornments">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">06</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Adornments</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Inside the box, one per side, never interactive. Anything the reader can press belongs outside the field as a Button — a control inside a text box has no hit target worth the name.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-5);">
+        <sc-for list="{{ adornCards }}" as="d" hint-placeholder-count="4">
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ d.name }}</span>
+            <dc-import name="Input" label="{{ d.label }}" placeholder="{{ d.placeholder }}" leading="{{ d.leading }}" trailing="{{ d.trailing }}" leading-text="{{ d.leadingText }}" trailing-text="{{ d.trailingText }}" max-length="{{ d.maxLength }}" multiline="{{ d.multiline }}" rows="{{ 3 }}" value="{{ d.value }}" hint-size="100%,90px"></dc-import>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ d.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">In place · authoring step two</span>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5) var(--space-6); border: 1px solid var(--boundary-1); padding: var(--space-5);">
+          <dc-import name="Input" label="Case title" placeholder="Short, plain title" required="{{ true }}" hint-size="100%,80px"></dc-import>
+          <dc-import name="Input" label="Source" leading-text="https://" placeholder="repo, thread or doc" optional="{{ true }}" hint-size="100%,80px"></dc-import>
+          <div style="grid-column: 1 / -1;">
+            <dc-import name="Input" label="What happened" multiline="{{ true }}" rows="{{ 4 }}" placeholder="What did you try, and what happened?" max-length="{{ 400 }}" helper="Plain account first. The argument goes in the next step." hint-size="100%,190px"></dc-import>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="07 Rules and accessibility">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">07</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Rules &amp; accessibility</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-5) var(--space-7);">
+        <sc-for list="{{ rules }}" as="r" hint-placeholder-count="7">
+          <div style="display: flex; flex-direction: column; gap: var(--space-2); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ r.name }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ r.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360}}">
+class Component extends DCLogic {
+  state = { liveValue: '', submitted: false };
+
+  renderVals() {
+    const invalid = this.state.submitted && !this.state.liveValue;
+
+    return {
+      anatomy: [
+        ['Label', 'Always present, always a real label element bound by id. Caption role, uppercase, tracked — the same treatment as a section eyebrow, so a form reads as a list of named things.', 'font-label · text-caption · text-label · 0.12em'],
+        ['Control', 'Sunk fill against the page, hairline box, and a 2px bottom rule that is the part that moves. Radius-2, matching every other control.', 'surface-sunk · boundary-1 · radius-2 · control-h-*'],
+        ['Value', 'Body role at the size the reader typed. Placeholder is text-dim and never carries the label.', 'font-body · text-primary / text-dim'],
+        ['Helper', 'One line under the control, caption role, secondary. The standing instruction: what a good answer looks like.', 'text-caption · text-secondary'],
+        ['Error', 'Replaces the helper. Caution ink, a 6px block before it, and role="alert".', 'text-caption · caution · role=alert']
+      ].map(a => ({ name: a[0], body: a[1], tokens: a[2] })),
+
+      sizeRows: [
+        ['sm · 28px', 'sm', 'Filter a queue', 'control-h-sm · pad 12px · body-sm 14px', 'Toolbars and filter rows, beside a sm Button. Not for anything the reader composes.'],
+        ['md · 36px', 'md', 'Short, plain title', 'control-h-md · pad 12px · body 16px', 'The default. Forms, the wizard, comment boxes — everything unless the page says otherwise.'],
+        ['lg · 44px', 'lg', 'Search cases', 'control-h-lg · pad 16px · read 17px', 'One field alone on a screen: sign-in, search, the first step of authoring. Also the touch size.']
+      ].map(z => ({ name: z[0], size: z[1], placeholder: z[2], tokens: z[3], note: z[4] })),
+
+      stateCards: [
+        ['Default', 'default', '', '', 'Empty and waiting. The bottom rule is the only thing heavier than a hairline.', 'fill surface-sunk · edge boundary-1'],
+        ['Hover', 'hover', '', '', 'The edge lifts to text-dim. Nothing else moves — a field is not a button.', 'edge text-dim'],
+        ['Focus', 'focus', '', '', 'Confirm on the bottom rule and a 2px ring at 2px offset, outside the box so it never crops.', 'rule confirm · ring focus-ring @ 2px'],
+        ['Filled', 'filled', 'Token refresh races the retry budget', '', 'A value at full contrast. Filled is not a style — it is the absence of the placeholder.', 'ink text-primary'],
+        ['Disabled', 'disabled', 'Assigned on submit', '', 'Dashed edge, surface-2 fill, op-disabled, out of the tab order. The shape says unavailable before the tint does.', 'op-disabled · dashed edge'],
+        ['Read-only', 'readonly', '14 Aug 2026, 09:12', '', 'No box, one rule, full-contrast text, and the words read only in the trailing slot. Focusable and selectable.', 'fill none · rule boundary-2'],
+        ['Error', 'error', '', 'Give the case a title before submitting.', 'Caution edge, caution-quiet fill, a block at the right of the box, and a message with a block before it.', 'edge caution · fill caution-quiet']
+      ].map(s => ({ name: s[0], state: s[1], value: s[2], error: s[3], body: s[4], tokens: s[5] })),
+
+      copyCards: [
+        { name: 'Label only', label: 'Case title', placeholder: 'Short, plain title', helper: '', error: '', state: 'default', value: '', required: false, optional: false, body: 'The minimum. A label with no helper means the field needs no explaining — most fields.' },
+        { name: 'Required', label: 'Case title', placeholder: 'Short, plain title', helper: 'Marked in words, not with an asterisk.', error: '', state: 'default', value: '', required: true, optional: false, body: 'Required is spelled out beside the label in confirm ink and carried on the element too, so it is announced.' },
+        { name: 'Optional', label: 'Source', placeholder: 'repo, thread or doc', helper: 'Mark the exception, whichever it is.', error: '', state: 'default', value: '', required: false, optional: true, body: 'When most fields in a form are required, mark the few that are not — never mark every field.' },
+        { name: 'Error replaces helper', label: 'Case title', placeholder: 'Short, plain title', helper: 'One line. Reviewers scan it in the queue.', error: 'Give the case a title before submitting.', state: 'error', value: '', required: true, optional: false, body: 'The helper is gone while the error stands. The block of space under the field never changes height.' }
+      ],
+
+      liveValue: this.state.liveValue,
+      liveState: invalid ? 'error' : 'default',
+      liveHelper: 'One line. Reviewers scan it in the queue.',
+      liveError: 'Give the case a title before submitting.',
+      onLiveChange: (v) => this.setState({ liveValue: v }),
+      submit: () => this.setState({ submitted: true }),
+      reset: () => this.setState({ liveValue: '', submitted: false }),
+
+      adornCards: [
+        { name: 'Leading text', label: 'Source', placeholder: 'repo, thread or doc', leading: '', trailing: '', leadingText: 'https://', trailingText: '', maxLength: 0, multiline: false, value: '', body: 'Mono, text-dim, part of the value the reader does not have to type. It is not editable and not selected on focus.' },
+        { name: 'Leading mark', label: 'Search cases', placeholder: 'Title, author or niche', leading: 'circle', trailing: '', leadingText: '', trailingText: '', maxLength: 0, multiline: false, value: '', body: 'One shape from the system set, at cap height, in text-dim until focus lifts it to confirm. Decorative — aria-hidden.' },
+        { name: 'Trailing unit', label: 'Time to reproduce', placeholder: '0', leading: '', trailing: '', leadingText: '', trailingText: 'minutes', maxLength: 0, multiline: false, value: '12', body: 'A unit sits after the value rather than in the label, so the label stays a name and the value stays a number.' },
+        { name: 'Counter', label: 'Summary', placeholder: 'One paragraph', leading: '', trailing: '', leadingText: '', trailingText: '', maxLength: 240, multiline: true, value: 'Refresh and retry both hold the same budget, so the retry never fires.', body: 'Counts up to the limit and turns caution past it. It is announced as text, not as an error, until submit.' }
+      ],
+
+      rules: [
+        ['The label is not the placeholder', 'A placeholder disappears the moment the reader types, so it can never be the only name a field has. Every Input has a visible label bound with for/id.'],
+        ['One message slot', 'Helper or error, never stacked. A field that needs two lines of explanation needs a shorter question.'],
+        ['Error is shape and words', 'Caution ink is the third signal, not the first: the box gains a fill, the message gains a block, and the text says what to do. The state survives a greyscale print.'],
+        ['Announced without moving', 'aria-invalid on the field, aria-describedby pointing at the message, role="alert" on the message. Validation on submit, and focus goes to the first field that failed.'],
+        ['Disabled and read-only are different', 'Disabled means not yet or not yours — dashed, dimmed, skipped by the keyboard. Read-only means settled — full contrast, still reachable, still copyable.'],
+        ['Focus is never removed', 'The ring is 2px of focus-ring at 2px offset, outside the box. Fields sit on sunk fills where a border change alone would be too quiet to find.'],
+        ['Nothing pressable inside the box', 'No clear button, no eye toggle, no inline submit. Adornments are static; actions live beside the field where they can be 44px.']
+      ].map(r => ({ name: r[0], body: r[1] }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

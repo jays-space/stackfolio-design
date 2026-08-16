@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible, [tabindex]:focus-visible, input:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Case reader (consume)" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-read: 18px; --lh-read: 30px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --v-approve: #7C8A5E; --v-defer: #C08A4A; --v-reject: #B87264;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="cases" max-width="1360px" hint-size="100%,72px"></dc-import>
+
+  <header style="max-width: 1360px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-5); border-bottom: 2px solid var(--boundary-1);">
+    <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+      <div style="display: flex; align-items: center; gap: var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">
+        <span>Case study</span><span style="color: var(--text-dim);">/</span><span>Frontend platform</span>
+      </div>
+      <h1 style="margin: 0; max-width: 22ch; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em; text-wrap: pretty;">Forward-compatible auth via an anti-corruption layer</h1>
+    </div>
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap; margin-top: var(--space-5);">
+      <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); font-size: var(--text-body-sm); color: var(--text-secondary);">
+          <span style="color: var(--text-primary); font-weight: 600;">Jay</span>
+          <span style="font-family: var(--font-label); color: var(--text-dim);">@jays-space</span>
+          <span style="color: var(--text-dim);">·</span>
+          <span>Published 6 August 2026</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary); border: 1px solid var(--boundary-2); padding: 3px var(--space-3);">Frontend/Platform</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary); border: 1px solid var(--boundary-2); padding: 3px var(--space-3);">Auth · Next.js</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary); border: 1px solid var(--boundary-2); padding: 3px var(--space-3);">Senior+</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: var(--space-5);">
+        <div style="display: flex; align-items: center; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Version</span>
+          <button onClick="{{ goV1 }}" style="position: relative; cursor: pointer; background: transparent; border: 0; padding: 0 0 var(--space-2) 0; font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary);" style-hover="color: #ECE7DC;">v1
+            <sc-if value="{{ isV1 }}"><span style="position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--accent);"></span></sc-if>
+          </button>
+          <button onClick="{{ goV2 }}" style="position: relative; cursor: pointer; background: transparent; border: 0; padding: 0 0 var(--space-2) 0; font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary);" style-hover="color: #ECE7DC;">v2
+            <sc-if value="{{ isV2 }}" hint-placeholder-val="{{ true }}"><span style="position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--accent);"></span></sc-if>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div style="max-width: 1360px; margin: 0 auto; padding: 0 var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: flex-start;">
+
+    <main style="flex: 1 1 480px; min-width: 0; padding-top: var(--space-6); display: flex; flex-direction: column; gap: var(--space-6);">
+
+      <section style="display: flex; flex-direction: column; gap: var(--space-5); max-width: 68ch;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); border-left: 2px solid var(--accent); padding-left: var(--space-5);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-label);">The problem</span>
+          <p style="margin: 0; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-primary); text-wrap: pretty;">{{ problemBody }}</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700;">Solution design</h2>
+            <p style="margin: 0; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-primary); text-wrap: pretty;">{{ designBody }}</p>
+            <sc-if value="{{ isV2 }}" hint-placeholder-val="{{ true }}">
+              <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Session shape — v2</span>
+                <span style="font-family: var(--font-label); font-size: var(--text-body-sm); line-height: 24px; color: var(--text-primary);">Session { user: User; expiresAt: Date; roles: Role[] }</span>
+                <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">v1 carried <span style="font-family: var(--font-label); font-size: 13px;">groups: CognitoGroup[]</span>. That was the deferred defect: a vendor type crossing the boundary the design exists to hold.</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isV1 }}">
+              <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); border-left: 2px solid var(--text-secondary); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Session shape — v1 · disputed</span>
+                <span style="font-family: var(--font-label); font-size: var(--text-body-sm); line-height: 24px; color: var(--text-primary);">Session { user: User; expiresAt: Date; groups: CognitoGroup[] }</span>
+                <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">@nkosi.dev deferred on exactly this line: a Cognito type in the app-owned session is the vendor leak the adapter exists to prevent. Amended in v2.</span>
+              </div>
+            </sc-if>
+            <p style="margin: 0; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-secondary); text-wrap: pretty;">{{ designBody2 }}</p>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-3); border-top: 1px solid var(--boundary-2); padding-top: var(--space-4);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Toolset chosen</span>
+              <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-label); border: 1px solid var(--boundary-1); padding: 3px var(--space-3);">Next.js</span>
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-label); border: 1px solid var(--boundary-1); padding: 3px var(--space-3);">Auth.js</span>
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-label); border: 1px solid var(--boundary-1); padding: 3px var(--space-3);">Cognito</span>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: var(--space-3); border-top: 1px solid var(--boundary-2); padding-top: var(--space-4);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Alternatives rejected</span>
+              <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">{{ alternativesBody }}</p>
+            </div>
+
+            <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-label);">What would prove this wrong</span>
+              <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); text-wrap: pretty;">{{ falsifierBody }}</p>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">The author's own test. It is what the verdicts are measured against.</span>
+            </div>
+          </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; color: var(--text-secondary);">Build</h2>
+            <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); border-left: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-label);">Not built — and why</span>
+              <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); text-wrap: pretty;">The AWS phase has not started. The second implementation cannot exist yet, so the claim that the interface survives a provider swap is untested against a real swap.</p>
+              <p style="margin: 0; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">A design that names what would falsify it is a deliverable. A silent gap is not.</p>
+            </div>
+          </div>
+      </section>
+
+      <div id="review" style="display: flex; align-items: center; gap: var(--space-4); padding-top: var(--space-6);">
+        <span style="height: 2px; flex: 1; background: var(--boundary-1);"></span>
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-label);">The review</span>
+        <span style="height: 2px; flex: 1; background: var(--boundary-1);"></span>
+      </div>
+
+      <section style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-5);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;">
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 62ch; text-wrap: pretty;">Independent, attributed judgments on the case as a whole. The author's voice ends here.</span>
+          <a href="Review Thread.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; white-space: nowrap;">Full history, both versions →</a>
+        </div>
+
+        <article style="display: grid; grid-template-columns: 8px minmax(0,1fr); background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3);">
+          <span style="background: var(--text-primary);"></span>
+          <div style="padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;">
+              <span style="display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap;">
+                <span style="font-family: var(--font-label); font-size: var(--text-body); color: var(--text-primary);">@sanele.k</span>
+                <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">SME · Identity/Auth</span>
+              </span>
+              <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--v-approve); white-space: nowrap;">Approve</span>
+            </div>
+            <p style="margin: 0; max-width: 68ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); text-wrap: pretty;">Anti-corruption layer is applied correctly once the claim-mapping is owned by <span style="font-family: var(--font-label); font-size: 15px;">User</span>/<span style="font-family: var(--font-label); font-size: 15px;">Session</span>. This is how it should be done.</p>
+            <button onClick="{{ toggleEndorse }}" style="cursor: pointer; align-self: flex-start; background: transparent; border: 1px solid {{ endorseBorder }}; padding: 5px var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: {{ endorseColor }}; transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">{{ endorseLabel }}</button>
+          </div>
+        </article>
+
+        <article style="display: grid; grid-template-columns: 8px minmax(0,1fr); background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3);">
+          <span style="background: var(--text-primary);"></span>
+          <div style="padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;">
+              <span style="display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap;">
+                <span style="font-family: var(--font-label); font-size: var(--text-body); color: var(--text-primary);">@t.molefe</span>
+                <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">Intermediate · Frontend/Next.js</span>
+              </span>
+              <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--v-approve); white-space: nowrap;">Approve</span>
+            </div>
+            <p style="margin: 0; max-width: 68ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); text-wrap: pretty;">Direction was right in v1 and the clarification settled it: <span style="font-family: var(--font-label); font-size: 15px;">middleware.ts</span> goes through the adapter's guard, not Auth.js.</p>
+          </div>
+        </article>
+
+        <div style="border-left: 2px solid var(--boundary-1); padding: var(--space-2) var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">v1 · superseded</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch; text-wrap: pretty;">@nkosi.dev deferred the first version over a Cognito claim crossing the boundary. That round is what produced v2.</span>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column; gap: var(--space-4); padding-top: var(--space-5);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;">
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">General comments</h2>
+          <span style="font-size: var(--text-caption); color: var(--text-secondary);">Conversation, not judgment. Open because the review has concluded.</span>
+        </div>
+        <div style="border-left: 1px solid var(--boundary-2); padding: var(--space-1) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="display: flex; align-items: baseline; gap: var(--space-3);"><span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-label);">@r.dlamini</span><span style="font-size: var(--text-caption); color: var(--text-dim);">2 days ago</span></span>
+          <p style="margin: 0; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch;">Copying the adapter shape into our Cognito migration this week. The v1 defer is the part worth reading first.</p>
+        </div>
+        <div style="display: flex; gap: var(--space-3); align-items: center; background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-4) var(--space-5);">
+          <input placeholder="Add a general comment" style="flex: 1; min-width: 0; background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: var(--space-2) 0; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary);">
+          <button style="cursor: pointer; background: var(--accent); border: 0; padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ECE7DC; transition: background var(--dur-quick) var(--ease-settle);" style-hover="background: #7E2620;">Post</button>
+        </div>
+      </section>
+    </main>
+
+    <aside style="flex: 1 1 280px; max-width: 320px; min-width: 0; position: sticky; top: var(--space-5); padding-top: var(--space-6); display: flex; flex-direction: column; gap: var(--space-5);">
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Review · {{ reviewState }}</span>
+          <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; color: {{ outcomeColor }};">{{ outcome }}</span>
+        </div>
+        <div style="display: flex; gap: var(--space-5); border-top: 1px solid var(--boundary-2); padding-top: var(--space-4);">
+          <span style="display: flex; align-items: center; gap: var(--space-3);">
+            <span style="width: 8px; height: 28px; background: var(--text-primary);"></span>
+            <span style="display: flex; flex-direction: column;"><span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: 1; font-weight: {{ apWeight }}; color: {{ apColor }};">{{ apCount }}</span><span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-top: 5px;">Appr</span></span>
+          </span>
+          <span style="display: flex; align-items: center; gap: var(--space-3);">
+            <span style="width: 8px; height: 28px; border: 1px solid var(--text-secondary); background: transparent;"></span>
+            <span style="display: flex; flex-direction: column;"><span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: 1; font-weight: {{ dfWeight }}; color: {{ dfColor }};">{{ dfCount }}</span><span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-top: 5px;">Defer</span></span>
+          </span>
+          <span style="display: flex; align-items: center; gap: var(--space-3);">
+            <span style="width: 8px; height: 28px; background: var(--text-dim);"></span>
+            <span style="display: flex; flex-direction: column;"><span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: 1; font-weight: 400; color: var(--text-secondary);">0</span><span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); margin-top: 5px;">Rej</span></span>
+          </span>
+        </div>
+        <a href="#review" style="border-bottom: 0; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--confirm);">Read the verdicts ↓</a>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-3);">Lineage</span>
+        <div style="display: flex; flex-direction: column;">
+          <div style="position: relative; background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); border-left: 2px solid var(--boundary-2); padding: var(--space-3) var(--space-4); display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3);"><sc-if value="{{ isV1 }}"><span style="position: absolute; left: -2px; top: 0; bottom: 0; width: 2px; background: var(--accent);"></span></sc-if>
+            <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-secondary);">v1</span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Disputed</span>
+          </div>
+          <div style="border-right: 1px solid var(--boundary-1); border-bottom: 1px solid var(--boundary-1); height: var(--space-5); width: 20px; margin-left: var(--space-4);"></div>
+          <div style="position: relative; background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); border-left: 2px solid var(--boundary-2); padding: var(--space-3) var(--space-4); margin-left: var(--space-5); display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3);"><sc-if value="{{ isV2 }}" hint-placeholder-val="{{ true }}"><span style="position: absolute; left: -2px; top: 0; bottom: 0; width: 2px; background: var(--accent);"></span></sc-if>
+            <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary);">v2</span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Endorsed</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-3); border-top: 1px solid var(--boundary-2); padding-top: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">React</span>
+        <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+          <button onClick="{{ toggleUp }}" style="cursor: pointer; background: {{ upBg }}; border: 1px solid {{ upBorder }}; padding: var(--space-2) var(--space-3); font-size: var(--text-body-sm); color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">↑ {{ upCount }}</button>
+          <button onClick="{{ toggleSharp }}" style="cursor: pointer; background: {{ sharpBg }}; border: 1px solid {{ sharpBorder }}; padding: var(--space-2) var(--space-3); font-size: var(--text-body-sm); color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">◆ {{ sharpCount }}</button>
+        </div>
+        <button onClick="{{ toggleTrack }}" disabled="{{ trackPending }}" style="cursor: pointer; text-align: left; background: transparent; border: 1px solid {{ trackBorder }}; padding: var(--space-3) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: {{ trackColor }}; transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">{{ trackLabel }}</button>
+        <sc-if value="{{ trackFailed }}">
+          <div style="background: var(--surface-3); background-image: var(--grain-3); border-left: 2px solid var(--confirm); padding: var(--space-3) var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-primary); text-wrap: pretty;">Not tracked — the request didn't reach the server. Nothing was saved.</span>
+            <button onClick="{{ retryTrack }}" style="cursor: pointer; align-self: flex-start; background: transparent; border: 0; padding: 0; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--confirm);">Try again</button>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-2); border-top: 1px solid var(--boundary-2); padding-top: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Your eligibility</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Verdicts on this case bind from <span style="color: var(--text-label);">Frontend/Platform · Auth</span> reviewers. Your niche is AWS/Backend, so you can comment, react and track here — not judge.</span>
+      </div>
+
+      <div style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3); text-wrap: pretty;">Case content is versioned in git. Reviews, verdicts and endorsements live in StackFolio.</div>
+    </aside>
+  </div>
+
+  <dc-import name="Footer" max-width="1360px" hint-size="100%,300px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1180}}">
+// What the contract parsed. In the app these arrive from problem.md and design.md.
+const FILES = {
+  problem: 'Auth is the part of the system most likely to be replaced, and the part most likely to be coupled to. Every consumer that reads a provider-shaped session becomes a site of churn when the provider changes.',
+  design: 'Wrap the IdP behind a thin `lib/auth` adapter: sign-in, sign-out, current session, and a guard. The MVP implementation is **Auth.js** with the Cognito provider. In the AWS phase the adapter’s implementation swaps to the AWS SDK against Cognito — the interface is unchanged and consumers are untouched.',
+  designDetail: 'Claim mapping is owned by the adapter. Provider claims are translated on the way in, once, and nothing downstream knows which provider produced them.',
+  alternatives: 'Calling **Auth.js** directly everywhere: fewer moving parts, but the provider shape reaches every consumer.\n\nA generated client from the provider SDK: types stay accurate and the coupling gets worse.',
+  falsifier: 'A provider swap that requires editing any file outside `lib/auth`.'
+};
+
+class Component extends DCLogic {
+  // Inline markdown: bold, italic, code. Enough for a case body.
+  inline(text, k) {
+    const out = [];
+    const re = /(\*\*[^*]+\*\*|_[^_]+_|`[^`]+`)/g;
+    let last = 0, m, i = 0;
+    while ((m = re.exec(text))) {
+      if (m.index > last) out.push(text.slice(last, m.index));
+      const tok = m[0];
+      if (tok.startsWith('**')) out.push(React.createElement('strong', { key: k + i, style: { fontWeight: 700, color: '#ECE7DC' } }, tok.slice(2, -2)));
+      else if (tok.startsWith('_')) out.push(React.createElement('em', { key: k + i }, tok.slice(1, -1)));
+      else out.push(React.createElement('span', { key: k + i, style: { fontFamily: "'Space Grotesk', ui-monospace, monospace", fontSize: '0.94em', color: '#B9AFA0' } }, tok.slice(1, -1)));
+      last = m.index + tok.length; i++;
+    }
+    if (last < text.length) out.push(text.slice(last));
+    return out;
+  }
+
+  md(src) {
+    const blocks = (src || '').split(/\n{2,}/).filter(b => b.trim());
+    return blocks.map((b, i) => {
+      const t = b.trim();
+      if (/^[-*]\s/.test(t)) {
+        const items = t.split('\n').map(l => l.replace(/^[-*]\s*/, ''));
+        return React.createElement('ul', { key: i, style: { margin: i ? '12px 0 0' : 0, paddingLeft: '20px' } },
+          items.map((it, j) => React.createElement('li', { key: j, style: { marginBottom: '4px' } }, this.inline(it, i + '-' + j + '-'))));
+      }
+      return React.createElement('span', { key: i, style: { display: 'block', marginTop: i ? '0.85em' : 0 } }, this.inline(t, i + '-'));
+    });
+  }
+
+  state = { version: 'v2', up: false, sharp: false, track: false, endorsed: false, trackPending: false, trackFailed: false, trackAttempts: 0 };
+
+  componentWillUnmount() { clearTimeout(this.t); }
+
+  // Optimistic: the UI commits first, then the write settles or rolls back.
+  commitTrack = () => {
+    if (this.state.trackPending) return;
+    const wanted = !this.state.track;
+    const attempt = this.state.trackAttempts + 1;
+    this.setState({ track: wanted, trackPending: true, trackFailed: false, trackAttempts: attempt });
+    clearTimeout(this.t);
+    this.t = setTimeout(() => {
+      if (attempt === 1) this.setState({ track: !wanted, trackPending: false, trackFailed: true });
+      else this.setState({ trackPending: false, trackFailed: false });
+    }, 900);
+  };
+
+  renderVals() {
+    const { version, up, sharp, track, endorsed, trackPending, trackFailed } = this.state;
+    return {
+      isV1: version === 'v1',
+      isV2: version === 'v2',
+      goV1: () => this.setState({ version: 'v1' }),
+      goV2: () => this.setState({ version: 'v2' }),
+      problemBody: this.md(FILES.problem),
+      designBody: this.md(FILES.design),
+      designBody2: this.md(FILES.designDetail),
+      alternativesBody: this.md(FILES.alternatives),
+      falsifierBody: this.md(FILES.falsifier),
+
+      reviewState: version === 'v2' ? 'concluded' : 'superseded',
+      outcome: version === 'v2' ? 'Approved after revision' : 'Deferred, then revised',
+      outcomeColor: version === 'v2' ? 'var(--text-primary)' : 'var(--text-secondary)',
+      apCount: version === 'v2' ? 2 : 0,
+      apWeight: version === 'v2' ? 700 : 400,
+      apColor: version === 'v2' ? 'var(--text-primary)' : 'var(--text-secondary)',
+      dfCount: version === 'v2' ? 0 : 1,
+      dfWeight: version === 'v2' ? 400 : 700,
+      dfColor: version === 'v2' ? 'var(--text-secondary)' : 'var(--text-primary)',
+      endorseLabel: endorsed ? 'Endorsed · rescind' : 'Endorse this review',
+      endorseBorder: endorsed ? 'var(--accent)' : 'var(--boundary-1)',
+      endorseColor: endorsed ? 'var(--text-primary)' : 'var(--text-secondary)',
+      toggleEndorse: () => this.setState(s => ({ endorsed: !s.endorsed })),
+
+      upCount: up ? 13 : 12,
+      upBg: up ? 'var(--accent-quiet)' : 'transparent',
+      upBorder: up ? 'var(--accent)' : 'var(--boundary-1)',
+      toggleUp: () => this.setState(s => ({ up: !s.up })),
+      sharpCount: sharp ? 5 : 4,
+      sharpBg: sharp ? 'var(--accent-quiet)' : 'transparent',
+      sharpBorder: sharp ? 'var(--accent)' : 'var(--boundary-1)',
+      toggleSharp: () => this.setState(s => ({ sharp: !s.sharp })),
+      trackLabel: trackPending ? (track ? 'Tracking…' : 'Untracking…') : (track ? 'Tracking · stop' : 'Track this case'),
+      trackBorder: track ? 'var(--accent)' : 'var(--boundary-1)',
+      trackColor: trackPending ? 'var(--text-dim)' : (track ? 'var(--text-primary)' : 'var(--text-secondary)'),
+      trackPending,
+      trackFailed,
+      toggleTrack: this.commitTrack,
+      retryTrack: this.commitTrack
+    };
+  }
+}
+
+</script>
+</body>
+</html>

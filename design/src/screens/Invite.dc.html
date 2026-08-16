@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes sfSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Invite acceptance" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-body-lg: 18px; --lh-body-lg: 30px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-4: #0D0C0B;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" signed-in="{{ false }}" max-width="1080px" hint-size="100%,72px"></dc-import>
+
+  <main style="max-width: 1080px; margin: 0 auto; padding: var(--space-9) var(--space-6) 0; display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: var(--space-8); align-items: start;">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-6); animation: sfSettle var(--dur-slow) var(--ease-settle) both;">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim);">Invitation · {{ inviteRef }}</span>
+        <h1 style="margin: 0; max-width: 26ch; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.022em; text-wrap: pretty;">Nkosi thought your work belonged here.</h1>
+      </div>
+
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-7) var(--space-7) var(--space-6); display: flex; flex-direction: column; gap: var(--space-5);">
+        <p style="margin: 0; max-width: 62ch; font-size: var(--text-body-lg); line-height: var(--lh-body-lg); color: var(--text-primary); text-wrap: pretty;">Thandi —</p>
+        <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">I read your write-up on the focus-state work you did after the design system moved underneath you. You wrote down what you tried, what broke, and where you decided to stop. That is the whole skill, and most people never write it down.</p>
+        <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">StackFolio is small and members arrive by invitation, so I'll say plainly what you're walking into. You publish the reasoning behind your work and peers in your niche review it — they ask questions first, then they commit to a verdict with a reason attached. Sometimes the answer is "come back with a revision." That isn't a rejection of you; it's how the work gets better in public.</p>
+        <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">A first case doesn't need to be large. A button that had to survive a system migration is a real experiment. Bring that one.</p>
+        <div style="display: flex; flex-direction: column; gap: var(--space-1); padding-top: var(--space-3);">
+          <span style="font-size: var(--text-body); color: var(--text-primary); font-weight: 600;">Nkosi</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim);">@nkosi.dev · AWS/Backend · Identity</span>
+        </div>
+      </div>
+
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-6) var(--space-7); display: flex; flex-direction: column; gap: var(--space-5);">
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">What you're agreeing to</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 62ch; text-wrap: pretty;">Three directives. They hold whether you're writing a case or reviewing one.</span>
+        </div>
+        <sc-for list="{{ directives }}" as="d" hint-placeholder-count="3">
+          <div style="display: grid; grid-template-columns: 32px minmax(0,1fr); gap: var(--space-4); align-items: baseline; padding-bottom: var(--space-4); border-bottom: 1px solid var(--boundary-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; color: var(--text-label);">{{ d.n }}</span>
+            <span style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">{{ d.title }}</span>
+              <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 58ch; text-wrap: pretty;">{{ d.text }}</span>
+            </span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="background: var(--surface-4); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); box-shadow: inset 0 10px 22px rgba(0,0,0,0.45); padding: var(--space-6) var(--space-7); display: flex; flex-direction: column; gap: var(--space-5);">
+        <sc-if value="{{ notAccepted }}" hint-placeholder-val="{{ true }}">
+          <span style="display: flex; flex-direction: column; gap: var(--space-5);">
+            <span style="display: flex; align-items: flex-start; gap: var(--space-4);">
+              <button onClick="{{ toggleAgree }}" style="cursor: pointer; flex: 0 0 auto; width: 22px; height: 22px; margin-top: 2px; background: {{ agreeFill }}; border: 1px solid {{ agreeBorder }}; transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;"></button>
+              <span onClick="{{ toggleAgree }}" style="cursor: pointer; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 58ch; text-wrap: pretty;">I've read the three directives and I'll hold to them — in my own cases and in the reviews I give others.</span>
+            </span>
+            <span style="display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap;">
+              <button onClick="{{ accept }}" disabled="{{ acceptDisabled }}" style="cursor: {{ acceptCursor }}; background: {{ acceptBg }}; border: 0; padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{ acceptColor }}; transition: background var(--dur-base) var(--ease-settle);">Accept the invitation</button>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); max-width: 34ch; text-wrap: pretty;">{{ acceptHint }}</span>
+            </span>
+          </span>
+        </sc-if>
+
+        <sc-if value="{{ accepted }}">
+          <span style="display: flex; flex-direction: column; gap: var(--space-4); animation: sfSettle var(--dur-slow) var(--ease-settle) both;">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Accepted · 12 August 2026</span>
+            <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700;">You're a member, Thandi.</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 58ch; text-wrap: pretty;">Your niche is set from this invite — Frontend · Accessibility. Verdicts you cast bind on cases in that niche; everywhere else you can read, track and ask questions.</span>
+            <span style="display: flex; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-2);">
+              <a href="Authoring.dc.html?new=1" style="border: 0; text-decoration: none; background: var(--accent); padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ECE7DC;">Write your first case</a>
+              <a href="Home.dc.html" style="border: 1px solid var(--boundary-1); text-decoration: none; padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary);">Read first</a>
+            </span>
+          </span>
+        </sc-if>
+      </div>
+    </section>
+
+    <aside style="display: flex; flex-direction: column; gap: var(--space-5); position: sticky; top: var(--space-6);">
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">This invitation</span>
+        <sc-for list="{{ facts }}" as="f" hint-placeholder-count="4">
+          <span style="display: flex; flex-direction: column; gap: 2px; padding-bottom: var(--space-3); border-bottom: 1px solid var(--boundary-2);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; color: var(--text-dim);">{{ f.k }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary);">{{ f.v }}</span>
+          </span>
+        </sc-for>
+      </div>
+      <p style="margin: 0; font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); text-wrap: pretty;">Nothing here is public until you publish something. Accepting creates an account and nothing else.</p>
+    </aside>
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const DIRECTIVES = [
+  { n: '01', title: 'Separate the work from the maker', text: 'Critique attaches to the artifact — a section, a decision, a metric. Never to the person, their seniority or where they came from.' },
+  { n: '02', title: 'Proof over opinion', text: 'A challenge brings a counter-example, a metric or an alternative. Not "this feels wrong."' },
+  { n: '03', title: 'Mentorship is a duty', text: 'Seniors elevate juniors. An unclear case earns a structural pointer, not a dismissal.' }
+];
+
+const FACTS = [
+  { k: 'Invited by', v: '@nkosi.dev' },
+  { k: 'For', v: 'thandi.m@…' },
+  { k: 'Niche on entry', v: 'Frontend · Accessibility' },
+  { k: 'Expires', v: '26 August 2026' }
+];
+
+class Component extends DCLogic {
+  state = { agreed: false, accepted: false };
+
+  renderVals() {
+    const { agreed, accepted } = this.state;
+    return {
+      inviteRef: 'SF-4471',
+      directives: DIRECTIVES,
+      facts: FACTS,
+      accepted,
+      notAccepted: !accepted,
+      agreeFill: agreed ? 'var(--accent)' : 'transparent',
+      agreeBorder: agreed ? 'var(--accent)' : 'var(--boundary-1)',
+      acceptDisabled: !agreed,
+      acceptCursor: agreed ? 'pointer' : 'not-allowed',
+      acceptBg: agreed ? 'var(--accent)' : 'transparent',
+      acceptColor: agreed ? '#ECE7DC' : 'var(--text-dim)',
+      acceptHint: agreed ? 'Sign-in is handled by Cognito. You will land back here.' : 'Tick the directives first — they are the terms, not a formality.',
+      toggleAgree: () => this.setState(p => ({ agreed: !p.agreed })),
+      accept: () => { if (this.state.agreed) this.setState({ accepted: true }); }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

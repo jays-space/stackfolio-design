@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+</helmet>
+
+<sc-if value="{{ isAnchor }}" hint-placeholder-val="{{ true }}">
+  <a ref="{{ nodeRef }}" href="{{ href }}" target="{{ target }}" rel="{{ rel }}" style="{{ rootStyle }}" onMouseEnter="{{ onEnter }}" onMouseLeave="{{ onLeave }}" onMouseDown="{{ onDown }}" onMouseUp="{{ onUp }}" onFocus="{{ onFocus }}" onBlur="{{ onBlur }}"><span style="{{ labelStyle }}">{{ text }}</span><sc-if value="{{ isExternal }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ markStyle }}"></span></sc-if><sc-if value="{{ hasHint }}" hint-placeholder-val="{{ false }}"><span style="{{ hintStyle }}">{{ hintText }}</span></sc-if></a>
+</sc-if>
+<sc-if value="{{ isDead }}" hint-placeholder-val="{{ false }}">
+  <span ref="{{ nodeRef }}" role="link" aria-disabled="true" style="{{ rootStyle }}"><span style="{{ labelStyle }}">{{ text }}</span><sc-if value="{{ isExternal }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ markStyle }}"></span></sc-if></span>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:360,&quot;height&quot;:88},&quot;text&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;the case reader&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;href&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;placement&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;inline&quot;,&quot;standalone&quot;],&quot;default&quot;:&quot;inline&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;external&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;default&quot;,&quot;hover&quot;,&quot;focus&quot;,&quot;active&quot;,&quot;visited&quot;,&quot;disabled&quot;],&quot;default&quot;:&quot;default&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;States&quot;},&quot;visited&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;},&quot;disabled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;},&quot;role&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;inherit&quot;,&quot;read&quot;,&quot;body&quot;,&quot;body-sm&quot;],&quot;default&quot;:&quot;inherit&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Type&quot;},&quot;hint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;(opens in a new tab)&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Accessibility&quot;}}">
+const T = (name, fallback) => 'var(--' + name + ', ' + fallback + ')';
+const TP = T('text-primary', '#ECE7DC');
+const TL = T('text-label', '#B9AFA0');
+const TD = T('text-dim', '#918A7F');
+const CONFIRM = T('confirm', '#D9705C');
+const PRESS = T('caution', '#B87264');
+const RING = T('focus-ring', '#D9705C');
+const FONT_BODY = T('font-body', "'Manrope', system-ui, sans-serif");
+const DUR = T('dur-quick', '180ms');
+const EASE = T('ease-settle', 'cubic-bezier(0.22, 0.68, 0.12, 1)');
+
+// Type comes from the Foundations roles only; `inherit` is the inline case, where the
+// link takes the size and leading of the sentence it sits in.
+const ROLES = {
+  inherit:   null,
+  read:      { fs: T('text-read', '17px'),    lh: T('lh-read', '27px') },
+  body:      { fs: T('text-body', '16px'),    lh: T('lh-body', '26px') },
+  'body-sm': { fs: T('text-body-sm', '14px'), lh: T('lh-body-sm', '22px') }
+};
+
+class Component extends DCLogic {
+  state = { hover: false, press: false, focus: false };
+  ref = React.createRef();
+
+  // The mount wrapper is block by default; an inline link must not break its sentence.
+  syncHost() {
+    const el = this.ref.current;
+    if (!el) return;
+    const host = el.closest('.sc-host');
+    if (host) host.style.display = this.props.placement === 'standalone' ? 'inline-flex' : 'inline';
+  }
+  componentDidMount() { this.syncHost(); }
+  componentDidUpdate() { this.syncHost(); }
+
+  renderVals() {
+    const p = this.props;
+    const placement = p.placement === 'standalone' ? 'standalone' : 'inline';
+    const external = !!p.external;
+    const forced = p.state && p.state !== 'default' ? p.state : null;
+
+    const disabled = forced === 'disabled' || !!p.disabled;
+    const visited = forced === 'visited' || (!!p.visited && !disabled);
+    const hover = forced === 'hover' || (!forced && this.state.hover && !disabled);
+    const press = forced === 'active' || (!forced && this.state.press && !disabled);
+    const focus = forced === 'focus' || (!forced && this.state.focus && !disabled);
+
+    let colour = visited ? TL : CONFIRM;
+    if (hover) colour = TP;
+    if (press) colour = PRESS;
+    if (focus && !hover) colour = TP;
+    if (disabled) colour = TD;
+
+    const roleName = Object.prototype.hasOwnProperty.call(ROLES, p.role) ? p.role : (placement === 'standalone' ? 'body-sm' : 'inherit');
+    const r = ROLES[roleName];
+
+    const root = {
+      display: placement === 'standalone' ? 'inline-flex' : 'inline',
+      alignItems: 'baseline',
+      gap: T('space-2', '8px'),
+      color: colour,
+      background: 'transparent',
+      // The underline is the non-colour signal, so it is present in every state.
+      textDecorationLine: 'underline',
+      textDecorationStyle: disabled ? 'dashed' : 'solid',
+      textDecorationThickness: hover || press || focus ? '2px' : '1px',
+      textUnderlineOffset: placement === 'standalone' ? '4px' : '3px',
+      textDecorationColor: disabled ? TD : (hover || press || focus ? 'currentColor' : (visited ? 'rgba(185,175,160,0.55)' : 'rgba(217,112,92,0.55)')),
+      cursor: disabled ? 'not-allowed' : 'pointer',
+      transition: 'color ' + DUR + ' ' + EASE + ', text-decoration-color ' + DUR + ' ' + EASE
+    };
+
+    if (placement === 'standalone') {
+      root.fontFamily = FONT_BODY;
+      root.fontWeight = 600;
+      root.minHeight = T('control-h-sm', '28px');
+      root.paddingBlock = T('space-1', '4px');
+      root.alignItems = 'center';
+    }
+    if (r) { root.fontSize = r.fs; root.lineHeight = r.lh; }
+    if (focus) { root.outline = '2px solid ' + RING; root.outlineOffset = '3px'; root.borderRadius = T('radius-2', '2px'); }
+    // Dim colour + dashed underline carry the disabled state; no opacity on top of it.
+
+    // North-east arrow drawn from two borders — no icon font, no hand-drawn SVG.
+    const arrow = 10;
+    const markStyle = {
+      flex: '0 0 auto',
+      display: 'inline-block',
+      width: arrow + 'px', height: arrow + 'px',
+      borderTop: '1.5px solid currentColor',
+      borderRight: '1.5px solid currentColor',
+      transform: 'translateY(-0.08em)',
+      marginLeft: placement === 'standalone' ? '0' : T('space-1', '4px'),
+      verticalAlign: 'baseline'
+    };
+
+    const target = external && !disabled ? '_blank' : undefined;
+
+    return {
+      nodeRef: this.ref,
+      isAnchor: !disabled,
+      isDead: disabled,
+      href: disabled ? undefined : (p.href || '#'),
+      target,
+      rel: target ? 'noopener noreferrer' : undefined,
+      text: p.text ?? 'the case reader',
+      isExternal: external,
+      hasHint: external && !disabled,
+      hintText: p.hint ?? '(opens in a new tab)',
+      hintStyle: { position: 'absolute', width: '1px', height: '1px', margin: '-1px', padding: '0', overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap', border: '0' },
+      labelStyle: { display: 'inline' },
+      markStyle,
+      rootStyle: root,
+      onEnter: () => this.setState({ hover: true }),
+      onLeave: () => this.setState({ hover: false, press: false }),
+      onDown: () => this.setState({ press: true }),
+      onUp: () => this.setState({ press: false }),
+      onFocus: (e) => { try { if (e.target.matches(':focus-visible')) this.setState({ focus: true }); } catch (err) { this.setState({ focus: true }); } },
+      onBlur: () => this.setState({ focus: false, press: false })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

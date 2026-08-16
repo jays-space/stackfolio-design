@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes sfSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Sign-in interrupted" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-4: #0D0C0B;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh;
+">
+
+  <dc-import name="Header" signed-in="{{ false }}" max-width="1080px" hint-size="100%,72px"></dc-import>
+
+  <main style="max-width: 1080px; margin: 0 auto; padding: var(--space-9) var(--space-6) var(--space-9); display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: var(--space-8); align-items: start;">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-6); animation: sfSettle var(--dur-slow) var(--ease-settle) both;">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim);">Sign-in {{ modeLabel }}</span>
+        <h1 style="margin: 0; max-width: 24ch; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.022em; text-wrap: pretty;">{{ heading }}</h1>
+        <p style="margin: 0; max-width: 56ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">{{ body }}</p>
+      </div>
+
+      <div style="background: var(--surface-4); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); box-shadow: inset 0 10px 22px rgba(0,0,0,0.45); padding: var(--space-6) var(--space-7); display: flex; flex-direction: column; gap: var(--space-5);">
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Where you were going</span>
+          <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Endorse @sanele.k's verdict</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 56ch; text-wrap: pretty;">on <span style="color: var(--text-label);">Forward-compatible auth via an anti-corruption layer</span> · v2 · solution-design. Held, unsent.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap;">
+          <button onClick="{{ retry }}" style="cursor: pointer; background: var(--accent); border: 0; padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ECE7DC; transition: background var(--dur-base) var(--ease-settle);" style-hover="background: #7E2620;">{{ retryLabel }}</button>
+          <a href="Review Thread.dc.html" style="border: 1px solid var(--boundary-1); text-decoration: none; padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary);">Back to the case</a>
+        </div>
+        <sc-if value="{{ retrying }}">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Handing you to Cognito — settling, not spinning.</span>
+        </sc-if>
+      </div>
+
+      <p style="margin: 0; max-width: 56ch; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-dim); text-wrap: pretty;">Nothing was written. Reading never needs an account, so you can keep going without signing in at all — only taking part does.</p>
+    </section>
+
+    <aside style="display: flex; flex-direction: column; gap: var(--space-5); position: sticky; top: var(--space-6);">
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">If it keeps happening</span>
+        <sc-for list="{{ hints }}" as="h" hint-placeholder-count="3">
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); padding-bottom: var(--space-3); border-bottom: 1px solid var(--boundary-2); text-wrap: pretty;">{{ h }}</span>
+        </sc-for>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">No account yet?</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Members are invited by other members. If someone sent you one, open it from that mail.</span>
+        <a href="Invite.dc.html" style="font-size: var(--text-body-sm);">See what an invitation looks like</a>
+      </div>
+    </aside>
+  </main>
+
+  <dc-import name="Footer" max-width="1080px" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cancelled&quot;,&quot;failed&quot;],&quot;default&quot;:&quot;cancelled&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;State&quot;}}">
+const HINTS = [
+  'A blocked third-party cookie will stop the hand-off silently. Allow cookies for the identity domain and try once more.',
+  'If you cancelled by accident, nothing is held against the attempt — the action above is still waiting.',
+  'Still stuck? Ask the member who invited you; invites carry the account they were issued for.'
+];
+
+class Component extends DCLogic {
+  state = { retrying: false };
+
+  renderVals() {
+    const mode = this.props.mode ?? 'cancelled';
+    const cancelled = mode === 'cancelled';
+    return {
+      modeLabel: cancelled ? 'cancelled' : 'failed',
+      heading: cancelled
+        ? 'You stopped short of signing in.'
+        : 'Sign-in did not complete.',
+      body: cancelled
+        ? 'That is fine — the action you were taking is still here, un-taken. Nothing was submitted and nothing was lost.'
+        : 'The hand-off to the identity provider came back without a session. Nothing was submitted and nothing was lost; the action you were taking is still here, un-taken.',
+      hints: HINTS,
+      retrying: this.state.retrying,
+      retryLabel: this.state.retrying ? 'Signing in…' : 'Try signing in again',
+      retry: () => {
+        this.setState({ retrying: true });
+        setTimeout(() => this.setState({ retrying: false }), 2200);
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

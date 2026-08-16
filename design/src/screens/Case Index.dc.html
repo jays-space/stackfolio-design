@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes qBreathe { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.85; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Browse case studies" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-read: 17px; --lh-read: 27px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --v-approve: #7C8A5E; --v-defer: #C08A4A; --v-reject: #B87264; --v-reject-mark: #9C5B4E;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="cases" max-width="1280px" hint-size="100%,72px"></dc-import>
+
+  <sc-if value="{{ isSkeleton }}">
+    <div style="max-width: 1280px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-6);">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="width: 260px; max-width: 100%; height: 34px; background: var(--surface-1); animation: qBreathe 1.8s var(--ease-settle) infinite;"></span>
+        <span style="width: 620px; max-width: 100%; height: 14px; background: var(--surface-2); animation: qBreathe 1.8s var(--ease-settle) 0.1s infinite;"></span>
+      </div>
+      <span style="height: 48px; background: var(--surface-2); animation: qBreathe 1.8s var(--ease-settle) 0.15s infinite;"></span>
+      <div style="display: grid; grid-template-columns: 232px minmax(0,1fr); gap: var(--space-7); align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="height: 12px; width: 60%; background: var(--surface-2); animation: qBreathe 1.8s var(--ease-settle) 0.2s infinite;"></span>
+          <span style="height: 12px; width: 80%; background: var(--surface-2); animation: qBreathe 1.8s var(--ease-settle) 0.25s infinite;"></span>
+          <span style="height: 12px; width: 70%; background: var(--surface-2); animation: qBreathe 1.8s var(--ease-settle) 0.3s infinite;"></span>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ skeletonRows }}" as="r" hint-placeholder-count="4">
+            <div style="border-top: 1px solid var(--boundary-2); padding: var(--space-5) 0; display: flex; flex-direction: column; gap: var(--space-3); animation: qBreathe 1.8s var(--ease-settle) infinite; animation-delay: {{ r.delay }};">
+              <span style="width: {{ r.title }}; height: 22px; background: var(--surface-1);"></span>
+              <span style="width: 100%; height: 14px; background: var(--surface-2);"></span>
+              <span style="width: {{ r.line }}; height: 14px; background: var(--surface-2);"></span>
+              <span style="width: 220px; height: 12px; background: var(--surface-2);"></span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Loading — settling, not spinning</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isError }}">
+    <div style="max-width: 1280px; margin: 0 auto; padding: var(--space-9) var(--space-6) 0;">
+      <div style="max-width: 68ch; display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start;">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--confirm);">Could not load</span>
+        <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em; text-wrap: pretty;">The case index did not come back</h1>
+        <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">The request timed out after ten seconds. Nothing was lost and nothing was written — this is a read. Try again, or come back in a moment.</p>
+        <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;">
+          <button onClick="{{ retry }}" style="cursor: pointer; background: var(--accent); border: 0; padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ECE7DC; transition: background var(--dur-quick) var(--ease-settle);" style-hover="background: #7E2620;">Retry</button>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; color: var(--text-secondary);">Attempt 2 · 10s timeout</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isGone }}">
+    <div style="max-width: 1280px; margin: 0 auto; padding: var(--space-9) var(--space-6) 0;">
+      <div style="max-width: 68ch; display: flex; flex-direction: column; gap: var(--space-5); align-items: flex-start;">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Not here</span>
+        <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em; text-wrap: pretty;">This case is not published</h1>
+        <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Either it was never submitted, or it was rejected and never published. There is no draft page to look at — drafts are author-only by definition.</p>
+        <button onClick="{{ backToIndex }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">Back to the case index</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isLoaded }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width: 1280px; margin: 0 auto; padding: var(--space-6) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-4);">
+
+    <div style="display: flex; align-items: baseline; gap: var(--space-3); flex-wrap: wrap;">
+      <a href="Home - signed in.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--confirm);">← Home</a>
+      <h1 style="margin: 0; font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; color: var(--text-dim);">{{ headingLabel }}</h1>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: var(--space-3);">
+      <input onInput="{{ onSearch }}" value="{{ query }}" placeholder="Search titles, theses, authors, tags" style="flex: 1; min-width: 0; background: var(--surface-2); border: 0; border-bottom: 2px solid var(--boundary-1); padding: var(--space-4) var(--space-5); font-family: var(--font-body); font-size: var(--text-read); color: var(--text-primary);">
+      <select onChange="{{ onSort }}" style="background: var(--surface-2); border: 0; border-bottom: 1px solid var(--boundary-1); padding: var(--space-3) var(--space-4); font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary);">
+        <option value="recent">Most recent</option>
+        <option value="scrutiny">Most reviewed</option>
+        <option value="title">Title A–Z</option>
+      </select>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 232px minmax(0,1fr); gap: var(--space-7); align-items: start;">
+
+      <aside style="position: sticky; top: var(--space-5); display: flex; flex-direction: column; gap: var(--space-6);">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Discipline</span>
+          <sc-for list="{{ disciplineFacets }}" as="f" hint-placeholder-count="3">
+            <button onClick="{{ f.toggle }}" style="cursor: pointer; text-align: left; display: grid; grid-template-columns: 12px minmax(0,1fr) auto; gap: var(--space-3); align-items: center; background: transparent; border: 0; padding: var(--space-2) 0; font-family: var(--font-body);">
+              <span style="width: 12px; height: 12px; border: 1px solid var(--text-secondary); background: {{ f.fill }};"></span>
+              <span style="font-size: var(--text-body-sm); color: var(--text-primary); text-align: left;">{{ f.label }}</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-dim);">{{ f.count }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Level</span>
+          <sc-for list="{{ scopeFacets }}" as="f" hint-placeholder-count="3">
+            <button onClick="{{ f.toggle }}" style="cursor: pointer; text-align: left; display: grid; grid-template-columns: 12px minmax(0,1fr) auto; gap: var(--space-3); align-items: center; background: transparent; border: 0; padding: var(--space-2) 0; font-family: var(--font-body);">
+              <span style="width: 12px; height: 12px; border: 1px solid var(--text-secondary); background: {{ f.fill }};"></span>
+              <span style="font-size: var(--text-body-sm); color: var(--text-primary); text-align: left;">{{ f.label }}</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-dim);">{{ f.count }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Review state</span>
+          <sc-for list="{{ statusFacets }}" as="f" hint-placeholder-count="4">
+            <button onClick="{{ f.toggle }}" style="cursor: pointer; text-align: left; display: grid; grid-template-columns: 12px minmax(0,1fr) auto; gap: var(--space-3); align-items: center; background: transparent; border: 0; padding: var(--space-2) 0; font-family: var(--font-body);">
+              <span style="width: 12px; height: 12px; border: 1px solid {{ f.edge }}; background: {{ f.fill }};"></span>
+              <span style="font-size: var(--text-body-sm); color: var(--text-primary); text-align: left;">{{ f.label }}</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-dim);">{{ f.count }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Conclusion</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); text-wrap: pretty;">Set by reviewers on approval. Unapproved cases carry none.</span>
+          <sc-for list="{{ conclusionFacets }}" as="f" hint-placeholder-count="2">
+            <button onClick="{{ f.toggle }}" style="cursor: pointer; text-align: left; display: grid; grid-template-columns: 12px minmax(0,1fr) auto; gap: var(--space-3); align-items: center; background: transparent; border: 0; padding: var(--space-1) 0; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); transition: color var(--dur-quick) var(--ease-settle);" style-hover="color: #ECE7DC;">
+              <span style="width: 12px; height: 12px; border: 1px solid {{ f.edge }}; background: {{ f.fill }};"></span>
+              <span style="min-width: 0;">{{ f.label }}</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-dim);">{{ f.count }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Tags</span>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+            <sc-for list="{{ tagFacets }}" as="t" hint-placeholder-count="8">
+              <button onClick="{{ t.toggle }}" style="cursor: pointer; background: {{ t.bg }}; border: 1px solid {{ t.border }}; padding: 3px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: {{ t.color }}; transition: all var(--dur-quick) var(--ease-settle);">{{ t.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </aside>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-4); min-width: 0;">
+
+        <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; min-height: 28px;">
+          <span style="font-family: var(--font-label); font-size: var(--text-body-sm); letter-spacing: 0.06em; color: var(--text-secondary);">{{ resultLabel }}</span>
+          <sc-if value="{{ hasFilters }}">
+            <span style="display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap;">
+              <span style="color: var(--text-dim);">·</span>
+              <sc-for list="{{ activeFilters }}" as="f" hint-placeholder-count="2">
+                <button onClick="{{ f.clear }}" style="cursor: pointer; background: var(--accent); border: 0; padding: 3px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: #ECE7DC;">{{ f.label }} ✕</button>
+              </sc-for>
+              <button onClick="{{ clearAll }}" style="cursor: pointer; background: transparent; border: 0; padding: 0 var(--space-2); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--confirm);" style-hover="color: #ECE7DC;">Clear all</button>
+            </span>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column;">
+            <sc-for list="{{ rows }}" as="c" hint-placeholder-count="6">
+              <article style="border-top: 1px solid var(--boundary-2); padding: var(--space-5) 0; display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-5); align-items: baseline;">
+                  <a href="{{ c.href }}" style="min-width: 0; font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; color: {{ c.titleColor }}; letter-spacing: -0.008em; text-wrap: pretty;">{{ c.title }}</a>
+                  <span style="display: flex; align-items: center; gap: var(--space-3); white-space: nowrap;">
+                    <span style="display: flex; gap: 3px;">
+                      <sc-for list="{{ c.pips }}" as="p" hint-placeholder-count="2">
+                        <span style="width: 7px; height: 13px; background: {{ p.fill }}; border: {{ p.border }};"></span>
+                      </sc-for>
+                    </span>
+                    <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; font-weight: {{ c.statusWeight }}; color: {{ c.statusColor }};">{{ c.status }}</span>
+                  </span>
+                </div>
+
+                <p style="margin: 0; max-width: 76ch; font-size: var(--text-read); line-height: var(--lh-read); color: {{ c.excerptColor }}; text-wrap: pretty;">{{ c.excerpt }}</p>
+
+                <sc-if value="{{ c.stamped }}">
+                  <span style="display: flex; align-items: center; gap: var(--space-3);">
+                    <span style="width: 10px; height: 10px; background: {{ c.markFill }}; border: 1px solid {{ c.markColor }};"></span>
+                    <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary);">{{ c.conclusion }}</span>
+                  </span>
+                </sc-if>
+
+                <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;">
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-label);">{{ c.author }}</span>
+                  <span style="color: var(--text-dim);">·</span>
+                  <span style="font-size: var(--text-caption); color: var(--text-secondary);">{{ c.scope }}</span>
+                  <span style="color: var(--text-dim);">·</span>
+                  <span style="font-size: var(--text-caption); color: var(--text-secondary);">{{ c.when }}</span>
+                  <span style="display: flex; gap: var(--space-2); flex-wrap: wrap; margin-left: var(--space-2);">
+                    <sc-for list="{{ c.tags }}" as="t" hint-placeholder-count="3">
+                      <button onClick="{{ t.pick }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: 2px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">{{ t.label }}</button>
+                    </sc-for>
+                  </span>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; border-top: 2px solid var(--boundary-1); padding-top: var(--space-4);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary);">{{ pageLabel }}</span>
+            <div style="display: flex; gap: var(--space-2);">
+              <button onClick="{{ prevPage }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">Previous</button>
+              <button onClick="{{ nextPage }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">Next</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ noResults }}">
+          <div style="border-left: 2px solid var(--boundary-1); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-start;">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Nothing matches</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">No case fits that combination. The narrowest filter is usually the tag.</span>
+            <button onClick="{{ clearAll }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">Clear everything</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <dc-import name="Footer" max-width="1280px" hint-size="100%,300px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1000},&quot;loadState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;loaded&quot;,&quot;skeleton&quot;,&quot;error&quot;,&quot;gone&quot;],&quot;default&quot;:&quot;loaded&quot;,&quot;tsType&quot;:&quot;'loaded' | 'skeleton' | 'error' | 'gone'&quot;,&quot;section&quot;:&quot;Resilience&quot;}}">
+const CASES = [
+  { t: 'Webhook replay keyed on payload, not attempt', a: '@p.mbatha', d: 'Backend', sc: 'Solution design', st: 'approved-first', ap: 3, df: 0, rj: 0, cn: 'validated', day: 19, tags: ['events', 'reliability'], href: 'Case Reader.dc.html',
+    ex: 'Derive the replay key from what the message says, not from the attempt that delivered it. Reviewers called this the part most implementations get backwards.' },
+  { t: 'Session storage moved to a signed cookie', a: '@r.dlamini', d: 'Backend', sc: 'Solution design', st: 'rejected', ap: 0, df: 1, rj: 2, day: 31, tags: ['auth', 'state'], href: 'Case Reader.dc.html',
+    ex: 'Rejected on the alternatives: the design called the approach standard without addressing what happens when the cookie exceeds the header budget under load.' },
+  { t: 'Read-through cache with a single-writer invalidation path', a: '@sanele.k', d: 'Backend', sc: 'Solution design', st: 'approved-first', ap: 2, df: 0, rj: 0, cn: 'tradeoff', day: 38, tags: ['reliability', 'postgres'], href: 'Case Reader.dc.html',
+    ex: 'One writer owns invalidation, so a stale read is bounded by the write path rather than by a timer. A reviewer asked whether the writer stays single under deploy overlap; it does.' },
+  { t: 'Draining a stateful queue consumer during cutover', a: '@t.mabaso', d: 'Backend', sc: 'Solution design', st: 'awaiting', ap: 0, df: 0, rj: 0, day: 0, tags: ['events', 'reliability', 'aws'], href: 'Case Reader.dc.html',
+    ex: 'Drain, then promote: the old consumer finishes the leases it holds and the new one starts only once the lease table is empty. Promotion is gated on state rather than on a timer.' },
+  { t: 'Forward-compatible auth via an anti-corruption layer', a: '@jays-space', d: 'Frontend/Platform', sc: 'Solution design', st: 'approved-revised', ap: 2, df: 0, rj: 0, cn: 'validated', day: 2, tags: ['auth', 'next.js', 'boundaries'], href: 'Case Reader.dc.html',
+    ex: 'Wrap the identity provider behind a thin adapter — sign-in, sign-out, session, guard — so the vendor can be swapped without touching a single consumer. No vendor type crosses the boundary.' },
+  { t: 'Route-level data loading with server components', a: '@t.molefe', d: 'Frontend/Platform', sc: 'Architecture', st: 'under-review', ap: 1, df: 0, rj: 0, day: 1, tags: ['next.js', 'rendering'],
+    ex: 'Move the fetch to the route boundary and let the component tree stay ignorant of where data came from. The cost is a less obvious data path; the return is one place to change.' },
+  { t: 'Idempotent webhook delivery without a queue', a: '@p.mbatha', d: 'Backend', sc: 'Solution design', st: 'awaiting', ap: 0, df: 0, rj: 0, day: 4, tags: ['events', 'reliability'],
+    ex: 'A dedupe key and a short-lived lock get you most of what a broker would, at a fraction of the operational cost — until throughput makes the lock the bottleneck.' },
+  { t: 'Session state in a React context provider', a: '@p.mbatha', d: 'Frontend/Platform', sc: 'Solution design', st: 'rejected', ap: 0, df: 2, rj: 1, day: 21, tags: ['react', 'state', 'auth'],
+    ex: 'Deferred twice on the same defect: the provider re-renders the entire tree on every token refresh. The revision budget ran out before the defect did.' },
+  { t: 'Least-privilege IAM for a single-tenant service', a: '@sanele.k', d: 'Infrastructure', sc: 'Architecture', st: 'approved-first', ap: 3, df: 0, rj: 0, cn: 'validated', day: 6, tags: ['iam', 'aws', 'security'],
+    ex: 'One role per workload, no shared policies, and a deploy that fails closed if a permission widens. Reviewers called the failing deploy the part worth copying.' },
+  { t: 'Optimistic writes with a rollback contract', a: '@r.dlamini', d: 'Frontend/Platform', sc: 'Solution design', st: 'under-review', ap: 1, df: 1, rj: 0, day: 3, tags: ['react', 'state'],
+    ex: 'If the server rejects, the interface must return to a state the user recognises. That is a contract the component owes, not a catch block bolted on afterwards.' },
+  { t: 'Edge middleware as an authorisation boundary', a: '@t.molefe', d: 'Frontend/Platform', sc: 'Architecture', st: 'approved-revised', ap: 2, df: 0, rj: 0, cn: 'tradeoff', day: 9, tags: ['edge', 'auth', 'boundaries'],
+    ex: 'Authorisation at the edge is cheap and fast, and wrong the moment it becomes the only check. v2 added the server-side assertion the reviewers insisted on.' },
+  { t: 'Schema migrations without a maintenance window', a: '@sanele.k', d: 'Backend', sc: 'Build', st: 'approved-first', ap: 2, df: 0, rj: 0, cn: 'tradeoff', day: 12, tags: ['postgres', 'deploys'],
+    ex: 'Expand, backfill, contract. The application reads both shapes for exactly one release, and the contract step is the one everyone forgets to schedule.' },
+  { t: 'Typed error channels across a service boundary', a: '@p.mbatha', d: 'Backend', sc: 'Solution design', st: 'under-review', ap: 0, df: 1, rj: 0, day: 1, tags: ['contracts', 'reliability'],
+    ex: 'Errors are part of the interface. If they are not typed, every consumer invents its own taxonomy and the boundary leaks by a thousand string comparisons.' },
+  { t: 'Token refresh that survives a tab sleeping', a: '@jays-space', d: 'Frontend/Platform', sc: 'Build', st: 'approved-revised', ap: 2, df: 0, rj: 0, cn: 'validated', day: 15, tags: ['auth', 'next.js'],
+    ex: 'The refresh timer is not the source of truth — the token expiry is. Wake, compare, then decide, because a sleeping tab has no idea how long it was gone.' },
+  { t: 'Blue-green deploys on a single load balancer', a: '@sanele.k', d: 'Infrastructure', sc: 'Architecture', st: 'awaiting', ap: 0, df: 0, rj: 0, day: 7, tags: ['aws', 'deploys'],
+    ex: 'Two target groups and a weighted shift buy you a rollback measured in seconds, without a second cluster to pay for or keep warm.' },
+  { t: 'Component catalogues that survive a rewrite', a: '@r.dlamini', d: 'Frontend/Platform', sc: 'Solution design', st: 'rejected', ap: 0, df: 2, rj: 1, day: 30, tags: ['design systems', 'contracts'],
+    ex: 'Rejected: the catalogue documented components nobody had agreed to keep, so it aged into a museum of decisions the team had already reversed.' }
+];
+
+const STATUS = {
+  'approved-first':   { label: 'Approved',        weight: 700, color: 'var(--text-primary)',   title: 'var(--text-primary)',   ex: 'var(--text-secondary)' },
+  'approved-revised': { label: 'Approved · rev',  weight: 700, color: 'var(--text-primary)',   title: 'var(--text-primary)',   ex: 'var(--text-secondary)' },
+  'under-review':     { label: 'Under review',    weight: 500, color: 'var(--text-label)',     title: 'var(--text-primary)',   ex: 'var(--text-secondary)' },
+  'awaiting':         { label: 'Awaiting',        weight: 500, color: 'var(--text-label)',     title: 'var(--text-primary)',   ex: 'var(--text-secondary)' },
+  'rejected':         { label: 'Rejected',        weight: 700, color: 'var(--text-secondary)', title: 'var(--text-secondary)', ex: 'var(--text-secondary)' }
+};
+
+// Peer-established on approval, orthogonal to the approve/defer/reject gate.
+// Trade-off is the rarer, more senior signal: same weight, hollow mark.
+const CONCLUSION = {
+  validated: { label: 'Validated Pattern',    markFill: 'var(--v-approve)', markColor: 'var(--v-approve)' },
+  tradeoff:  { label: 'Documented Trade-off', markFill: 'transparent',      markColor: 'var(--v-defer)' }
+};
+
+const PER_PAGE = 6;
+
+class Component extends DCLogic {
+  state = { q: '', sort: 'recent', discipline: [], scope: [], status: [], conclusion: [], tags: [], page: 0, load: null };
+
+  componentDidMount() {
+    const l = this.props.loadState;
+    if (l && l !== 'loaded') this.setState({ load: l });
+    try {
+      const p = new URLSearchParams(window.location.search);
+      const q = p.get('q');
+      if (q) this.setState({ q: q });
+    } catch (e) {}
+  }
+
+  toggle(key, val) {
+    this.setState(s => ({
+      [key]: s[key].includes(val) ? s[key].filter(x => x !== val) : s[key].concat(val),
+      page: 0
+    }));
+  }
+
+  matched(c, ignore) {
+    const s = this.state, q = s.q.trim().toLowerCase();
+    if (q && !(c.t + ' ' + c.ex + ' ' + c.a + ' ' + c.d + ' ' + c.tags.join(' ') + ' ' + (CONCLUSION[c.cn] ? CONCLUSION[c.cn].label : '')).toLowerCase().includes(q)) return false;
+    if (ignore !== 'discipline' && s.discipline.length && !s.discipline.includes(c.d)) return false;
+    if (ignore !== 'scope' && s.scope.length && !s.scope.includes(c.sc)) return false;
+    if (ignore !== 'status' && s.status.length && !s.status.includes(c.st)) return false;
+    if (ignore !== 'conclusion' && s.conclusion.length && !s.conclusion.includes(c.cn)) return false;
+    if (ignore !== 'tags' && s.tags.length && !s.tags.some(t => c.tags.includes(t))) return false;
+    return true;
+  }
+
+  renderVals() {
+    const s = this.state;
+
+    let list = CASES.filter(c => this.matched(c));
+    const sorters = {
+      recent: (a, b) => a.day - b.day,
+      scrutiny: (a, b) => (b.ap + b.df + b.rj) - (a.ap + a.df + a.rj),
+      title: (a, b) => a.t.localeCompare(b.t)
+    };
+    list = list.slice().sort(sorters[s.sort] || sorters.recent);
+
+    const pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+    const page = Math.min(s.page, pages - 1);
+    const shown = list.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
+
+    const facet = (key, field, val, label, mark) => {
+      const on = s[key].includes(val);
+      return {
+        label,
+        count: CASES.filter(c => c[field] === val && this.matched(c, key)).length,
+        fill: on ? (mark || 'var(--accent)') : 'transparent',
+        edge: mark || 'var(--text-secondary)',
+        toggle: () => this.toggle(key, val)
+      };
+    };
+
+    const allTags = [];
+    CASES.forEach(c => c.tags.forEach(t => { if (!allTags.includes(t)) allTags.push(t); }));
+
+    const active = [];
+    s.discipline.forEach(v => active.push({ label: v, clear: () => this.toggle('discipline', v) }));
+    s.scope.forEach(v => active.push({ label: v, clear: () => this.toggle('scope', v) }));
+    s.status.forEach(v => active.push({ label: STATUS[v].label, clear: () => this.toggle('status', v) }));
+    s.conclusion.forEach(v => active.push({ label: CONCLUSION[v].label, clear: () => this.toggle('conclusion', v) }));
+    s.tags.forEach(v => active.push({ label: v, clear: () => this.toggle('tags', v) }));
+
+    const pips = (c) => {
+      const out = [];
+      for (let i = 0; i < c.ap; i++) out.push({ fill: 'var(--v-approve)', border: '0' });
+      for (let i = 0; i < c.df; i++) out.push({ fill: 'transparent', border: '1px solid var(--v-defer)' });
+      for (let i = 0; i < c.rj; i++) out.push({ fill: 'var(--v-reject-mark)', border: '0' });
+      return out.length ? out : [{ fill: 'transparent', border: '1px dashed var(--boundary-1)' }];
+    };
+
+    const load = s.load ?? (this.props.loadState ?? 'loaded');
+
+    return {
+      isLoaded: load === 'loaded',
+      isSkeleton: load === 'skeleton',
+      isError: load === 'error',
+      isGone: load === 'gone',
+      retry: () => this.setState({ load: 'loaded' }),
+      backToIndex: () => this.setState({ load: 'loaded' }),
+      skeletonRows: [
+        { title: '70%', line: '62%', delay: '0s' },
+        { title: '54%', line: '48%', delay: '0.12s' },
+        { title: '66%', line: '58%', delay: '0.24s' },
+        { title: '48%', line: '40%', delay: '0.36s' }
+      ],
+
+      headingLabel: s.q.trim() ? 'Results for “' + s.q.trim() + '”' : 'All cases',
+      query: s.q,
+      onSearch: (e) => this.setState({ q: e.target.value, page: 0 }),
+      onSort: (e) => this.setState({ sort: e.target.value, page: 0 }),
+
+      disciplineFacets: [
+        facet('discipline', 'd', 'Frontend/Platform', 'Frontend/Platform'),
+        facet('discipline', 'd', 'Backend', 'Backend'),
+        facet('discipline', 'd', 'Infrastructure', 'Infrastructure')
+      ],
+      scopeFacets: [
+        facet('scope', 'sc', 'Architecture', 'Architecture'),
+        facet('scope', 'sc', 'Solution design', 'Solution design'),
+        facet('scope', 'sc', 'Build', 'Build')
+      ],
+      statusFacets: [
+        facet('status', 'st', 'approved-first', 'Approved', 'var(--v-approve)'),
+        facet('status', 'st', 'approved-revised', 'Approved after revision', 'var(--v-approve)'),
+        facet('status', 'st', 'under-review', 'Under review', 'var(--confirm)'),
+        facet('status', 'st', 'awaiting', 'Awaiting reviewers', 'var(--v-defer)'),
+        facet('status', 'st', 'rejected', 'Rejected', 'var(--v-reject)')
+      ],
+      conclusionFacets: [
+        facet('conclusion', 'cn', 'validated', 'Validated Pattern', 'var(--v-approve)'),
+        facet('conclusion', 'cn', 'tradeoff', 'Documented Trade-off', 'var(--v-defer)')
+      ],
+      tagFacets: allTags.map(t => {
+        const on = s.tags.includes(t);
+        return {
+          label: t,
+          bg: on ? 'var(--accent)' : 'transparent',
+          border: on ? 'var(--accent)' : 'var(--boundary-1)',
+          color: on ? '#ECE7DC' : 'var(--text-secondary)',
+          toggle: () => this.toggle('tags', t)
+        };
+      }),
+
+      activeFilters: active,
+      hasFilters: active.length > 0,
+      clearAll: () => this.setState({ q: '', discipline: [], scope: [], status: [], conclusion: [], tags: [], page: 0 }),
+
+      resultLabel: list.length + (list.length === 1 ? ' case' : ' cases'),
+      pageLabel: 'Page ' + (page + 1) + ' of ' + pages,
+      nextPage: () => this.setState(p => ({ page: Math.min(p.page + 1, pages - 1) })),
+      prevPage: () => this.setState(p => ({ page: Math.max(p.page - 1, 0) })),
+      hasResults: shown.length > 0,
+      noResults: shown.length === 0,
+
+      rows: shown.map(c => {
+        const st = STATUS[c.st];
+        const cc = CONCLUSION[c.cn];
+        return {
+          stamped: !!cc,
+          conclusion: cc ? cc.label : '',
+          markFill: cc ? cc.markFill : 'transparent',
+          markColor: cc ? cc.markColor : 'var(--boundary-1)',
+          title: c.t, author: c.a, excerpt: c.ex, scope: c.sc,
+          href: c.href || '#',
+          titleColor: st.title, excerptColor: st.ex,
+          status: st.label, statusWeight: st.weight, statusColor: st.color,
+          when: c.day === 0 ? 'today' : c.day === 1 ? 'yesterday' : c.day + ' days ago',
+          pips: pips(c),
+          tags: c.tags.map(t => ({ label: t, pick: () => this.toggle('tags', t) }))
+        };
+      })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

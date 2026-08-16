@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Manrope:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+  [data-sf-field]::placeholder { color: var(--text-dim, #918A7F); opacity: 1; }
+  [data-sf-field] { font: inherit; color: inherit; }
+  [data-sf-field]:focus { outline: none; }
+  [data-sf-field]:-webkit-autofill { -webkit-text-fill-color: var(--text-primary, #ECE7DC); }
+</style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+  <sc-if value="{{ hasLabel }}" hint-placeholder-val="{{ true }}">
+    <label for="{{ fieldId }}" style="{{ labelStyle }}">
+      <span>{{ label }}</span>
+      <sc-if value="{{ isRequired }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ reqStyle }}">required</span></sc-if>
+      <sc-if value="{{ isOptional }}" hint-placeholder-val="{{ false }}"><span style="{{ optStyle }}">optional</span></sc-if>
+    </label>
+  </sc-if>
+
+  <div style="{{ shellStyle }}">
+    <sc-if value="{{ hasLeadText }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ adornTextStyle }}">{{ leadingText }}</span></sc-if>
+    <sc-if value="{{ hasLeadMark }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ leadMarkStyle }}"></span></sc-if>
+
+    <sc-if value="{{ isSingle }}" hint-placeholder-val="{{ true }}">
+      <input data-sf-field="1" id="{{ fieldId }}" type="{{ type }}" value="{{ value }}" placeholder="{{ placeholder }}" disabled="{{ isDisabled }}" readOnly="{{ isReadOnly }}" required="{{ isRequired }}" aria-invalid="{{ ariaInvalid }}" aria-describedby="{{ describedBy }}" style="{{ fieldStyle }}" onChange="{{ onChange }}" onFocus="{{ onFocus }}" onBlur="{{ onBlur }}" onMouseEnter="{{ onEnter }}" onMouseLeave="{{ onLeave }}">
+    </sc-if>
+    <sc-if value="{{ isMulti }}" hint-placeholder-val="{{ false }}">
+      <textarea data-sf-field="1" id="{{ fieldId }}" rows="{{ rows }}" value="{{ value }}" placeholder="{{ placeholder }}" disabled="{{ isDisabled }}" readOnly="{{ isReadOnly }}" required="{{ isRequired }}" aria-invalid="{{ ariaInvalid }}" aria-describedby="{{ describedBy }}" style="{{ fieldStyle }}" onChange="{{ onChange }}" onFocus="{{ onFocus }}" onBlur="{{ onBlur }}" onMouseEnter="{{ onEnter }}" onMouseLeave="{{ onLeave }}"></textarea>
+    </sc-if>
+
+    <sc-if value="{{ hasTrailMark }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ trailMarkStyle }}"></span></sc-if>
+    <sc-if value="{{ hasTrailText }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ adornTextStyle }}">{{ trailingText }}</span></sc-if>
+    <sc-if value="{{ hasCounter }}" hint-placeholder-val="{{ false }}"><span style="{{ counterStyle }}">{{ counterText }}</span></sc-if>
+    <sc-if value="{{ showErrorMark }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ errMarkStyle }}"></span></sc-if>
+    <sc-if value="{{ showLockMark }}" hint-placeholder-val="{{ false }}"><span style="{{ lockStyle }}">read only</span></sc-if>
+  </div>
+
+  <sc-if value="{{ hasHelper }}" hint-placeholder-val="{{ false }}">
+    <span id="{{ helperId }}" style="{{ helperStyle }}">{{ helper }}</span>
+  </sc-if>
+  <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+    <span id="{{ errorId }}" role="alert" style="{{ errorStyle }}">
+      <span aria-hidden="true" style="{{ errorDotStyle }}"></span>
+      <span>{{ error }}</span>
+    </span>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:120},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Case title&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;placeholder&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Short, plain title&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;helper&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;error&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;multiline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;rows&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:4,&quot;min&quot;:2,&quot;max&quot;:12,&quot;tsType&quot;:&quot;number&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sm&quot;,&quot;md&quot;,&quot;lg&quot;],&quot;default&quot;:&quot;md&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;default&quot;,&quot;hover&quot;,&quot;focus&quot;,&quot;filled&quot;,&quot;disabled&quot;,&quot;readonly&quot;,&quot;error&quot;],&quot;default&quot;:&quot;default&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;States&quot;},&quot;required&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;},&quot;optional&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;},&quot;leading&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;square&quot;,&quot;circle&quot;,&quot;diamond&quot;,&quot;bar&quot;,&quot;chevron&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Adornments&quot;},&quot;trailing&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;square&quot;,&quot;circle&quot;,&quot;diamond&quot;,&quot;bar&quot;,&quot;chevron&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Adornments&quot;},&quot;leadingText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Adornments&quot;},&quot;trailingText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Adornments&quot;},&quot;maxLength&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:500,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Adornments&quot;},&quot;value&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;type&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;text&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;width&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const T = (n, f) => 'var(--' + n + ', ' + f + ')';
+const TP = T('text-primary', '#ECE7DC');
+const TS = T('text-secondary', '#9B948A');
+const TD = T('text-dim', '#918A7F');
+const TL = T('text-label', '#B9AFA0');
+const S1 = T('surface-1', '#242320');
+const S2 = T('surface-2', '#1B1A18');
+const SUNK = T('surface-sunk', '#0E0D0C');
+const B1 = T('boundary-1', '#37342D');
+const B2 = T('boundary-2', '#26241F');
+const CONFIRM = T('confirm', '#D9705C');
+const RING = T('focus-ring', '#D9705C');
+const CAUTION = T('caution', '#B87264');
+const CAUTION_D = T('caution-deep', '#9C5B4E');
+const CAUTION_Q = T('caution-quiet', 'rgba(184,114,100,0.14)');
+const R2 = T('radius-2', '2px');
+const FONT_LABEL = T('font-label', "'Space Grotesk', ui-monospace, monospace");
+const FONT_BODY = T('font-body', "'Manrope', system-ui, sans-serif");
+const FONT_MONO = T('font-mono', "'Geist Mono', ui-monospace, monospace");
+const DUR = T('dur-quick', '180ms');
+const EASE = T('ease-settle', 'cubic-bezier(0.22, 0.68, 0.12, 1)');
+
+const SIZES = {
+  sm: { h: T('control-h-sm', '28px'), padX: T('space-3', '12px'), padY: '6px', fs: T('text-body-sm', '14px'), lh: T('lh-body-sm', '22px'), gap: T('space-2', '8px'), mark: 12, labelFs: T('text-caption', '12px') },
+  md: { h: T('control-h-md', '36px'), padX: T('space-3', '12px'), padY: '8px', fs: T('text-body', '16px'), lh: T('lh-body', '26px'), gap: T('space-3', '12px'), mark: 14, labelFs: T('text-caption', '12px') },
+  lg: { h: T('control-h-lg', '44px'), padX: T('space-4', '16px'), padY: '11px', fs: T('text-read', '17px'), lh: T('lh-read', '27px'), gap: T('space-3', '12px'), mark: 16, labelFs: T('text-body-sm', '14px') }
+};
+
+let uid = 0;
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    uid += 1;
+    this.uid = 'sf-field-' + uid;
+    this.state = { hover: false, focus: false, value: props.value ?? '' };
+  }
+
+  componentDidUpdate(prev) {
+    if (prev.value !== this.props.value) this.setState({ value: this.props.value ?? '' });
+  }
+
+  mark(kind, px, color) {
+    const base = { flex: '0 0 auto', display: 'block', boxSizing: 'border-box', color: color };
+    if (kind === 'circle') return Object.assign(base, { width: px + 'px', height: px + 'px', border: '1.5px solid currentColor', borderRadius: '50%' });
+    if (kind === 'diamond') return Object.assign(base, { width: Math.round(px * 0.72) + 'px', height: Math.round(px * 0.72) + 'px', border: '1.5px solid currentColor', transform: 'rotate(45deg)' });
+    if (kind === 'bar') return Object.assign(base, { width: px + 'px', height: '1.5px', background: 'currentColor' });
+    if (kind === 'chevron') return Object.assign(base, { width: Math.round(px * 0.5) + 'px', height: Math.round(px * 0.5) + 'px', borderRight: '1.5px solid currentColor', borderBottom: '1.5px solid currentColor', transform: 'rotate(-45deg)' });
+    return Object.assign(base, { width: px + 'px', height: px + 'px', border: '1.5px solid currentColor' });
+  }
+
+  renderVals() {
+    const p = this.props;
+    const size = SIZES[p.size] ? p.size : 'md';
+    const sz = SIZES[size];
+    const multiline = !!p.multiline;
+    const forced = p.state && p.state !== 'default' ? p.state : null;
+
+    const disabled = forced === 'disabled' || !!p.disabled;
+    const readOnly = forced === 'readonly' || !!p.readOnly;
+    const invalid = forced === 'error' || !!p.invalid;
+    const hover = forced === 'hover' || (!forced && this.state.hover && !disabled);
+    const focus = forced === 'focus' || (!forced && this.state.focus && !disabled);
+
+    const forcedFilled = forced === 'filled';
+    const value = forcedFilled && !this.state.value
+      ? (multiline ? 'The retry budget is consumed by the refresh itself, so the second call never gets a token.' : 'Token refresh races the retry budget')
+      : this.state.value;
+    const filled = !!value;
+
+    // Edge: quiet by default, warmed on hover, accent on focus, caution when invalid.
+    let edge = B1;
+    if (readOnly) edge = B2;
+    if (filled && !readOnly) edge = B1;
+    if (hover && !disabled && !readOnly) edge = TD;
+    if (invalid) edge = CAUTION;
+    if (focus) edge = invalid ? CAUTION : CONFIRM;
+
+    let fill = SUNK;
+    if (readOnly) fill = 'transparent';
+    if (invalid) fill = CAUTION_Q;
+
+    const shell = {
+      display: 'flex',
+      alignItems: multiline ? 'flex-start' : 'center',
+      gap: sz.gap,
+      background: fill,
+      border: '1px solid ' + edge,
+      borderRadius: R2,
+      // The bottom rule is the field's tell: heavier than the box, and it is what changes on focus.
+      borderBottom: '2px solid ' + (focus ? (invalid ? CAUTION : CONFIRM) : (invalid ? CAUTION_D : edge)),
+      padding: multiline ? sz.padY + ' ' + sz.padX : '0 ' + sz.padX,
+      minHeight: multiline ? 'auto' : sz.h,
+      transition: 'background ' + DUR + ' ' + EASE + ', border-color ' + DUR + ' ' + EASE,
+      cursor: disabled ? 'not-allowed' : 'text'
+    };
+    if (focus) { shell.outline = '2px solid ' + RING; shell.outlineOffset = '2px'; }
+    if (disabled) { shell.opacity = T('op-disabled', '0.38'); shell.background = S2; shell.borderStyle = 'dashed'; }
+    if (readOnly) { shell.borderStyle = 'none none solid none'; shell.borderBottom = '1px solid ' + B2; shell.paddingLeft = '0'; }
+
+    const field = {
+      flex: '1 1 auto', minWidth: 0, width: '100%',
+      background: 'transparent', border: '0', padding: '0', margin: '0',
+      fontFamily: FONT_BODY, fontSize: sz.fs, lineHeight: multiline ? sz.lh : sz.h,
+      color: readOnly ? TS : TP,
+      height: multiline ? 'auto' : sz.h,
+      resize: multiline ? 'vertical' : undefined,
+      cursor: disabled ? 'not-allowed' : (readOnly ? 'default' : 'text')
+    };
+
+    const helperId = this.uid + '-help';
+    const errorId = this.uid + '-err';
+    const hasHelper = !!p.helper && !invalid;
+    const hasError = invalid && !!(p.error ?? 'This field needs a value before the case can be submitted.');
+    const describedBy = [hasHelper ? helperId : null, hasError ? errorId : null].filter(Boolean).join(' ') || undefined;
+
+    const max = p.maxLength ? Number(p.maxLength) : 0;
+
+    return {
+      fieldId: this.uid,
+      type: p.type || 'text',
+      rows: multiline ? (p.rows ?? 4) : undefined,
+      isSingle: !multiline, isMulti: multiline,
+      value,
+      placeholder: p.placeholder ?? (multiline ? 'What did you try, and what happened?' : 'Short, plain title'),
+      isDisabled: disabled || undefined,
+      isReadOnly: readOnly || undefined,
+      isRequired: !!p.required,
+      isOptional: !p.required && !!p.optional,
+      ariaInvalid: invalid ? 'true' : undefined,
+      describedBy,
+
+      hasLabel: p.label !== '',
+      label: p.label ?? 'Case title',
+      labelStyle: {
+        display: 'flex', alignItems: 'baseline', gap: T('space-2', '8px'),
+        fontFamily: FONT_LABEL, fontSize: sz.labelFs, fontWeight: 500,
+        letterSpacing: '0.12em', textTransform: 'uppercase',
+        color: disabled ? TD : TL, cursor: disabled ? 'not-allowed' : 'pointer'
+      },
+      reqStyle: { fontFamily: FONT_MONO, fontSize: T('text-code-sm', '12px'), letterSpacing: '0.04em', textTransform: 'none', color: CONFIRM },
+      optStyle: { fontFamily: FONT_MONO, fontSize: T('text-code-sm', '12px'), letterSpacing: '0.04em', textTransform: 'none', color: TD },
+
+      rootStyle: { display: 'flex', flexDirection: 'column', gap: T('space-2', '8px'), width: p.width || '100%', fontFamily: FONT_BODY },
+      shellStyle: shell,
+      fieldStyle: field,
+
+      hasLeadText: !!p.leadingText,
+      leadingText: p.leadingText,
+      hasTrailText: !!p.trailingText,
+      trailingText: p.trailingText,
+      adornTextStyle: {
+        flex: '0 0 auto', fontFamily: FONT_MONO, fontSize: T('text-code-sm', '12px'),
+        color: TD, whiteSpace: 'nowrap', lineHeight: multiline ? sz.lh : sz.h
+      },
+      hasLeadMark: !!p.leading,
+      leadMarkStyle: Object.assign(this.mark(p.leading, sz.mark, focus ? CONFIRM : TD), multiline ? { marginTop: '6px' } : null),
+      hasTrailMark: !!p.trailing,
+      trailMarkStyle: this.mark(p.trailing, sz.mark, TD),
+
+      hasCounter: max > 0,
+      counterText: value.length + '/' + max,
+      counterStyle: {
+        flex: '0 0 auto', alignSelf: multiline ? 'flex-end' : 'center',
+        fontFamily: FONT_MONO, fontSize: T('text-code-sm', '12px'),
+        color: max && value.length > max ? CAUTION : TD
+      },
+      showErrorMark: invalid,
+      errMarkStyle: { flex: '0 0 auto', width: '6px', height: sz.mark + 'px', background: CAUTION, marginTop: multiline ? '6px' : '0' },
+      showLockMark: readOnly,
+      lockStyle: { flex: '0 0 auto', fontFamily: FONT_LABEL, fontSize: T('text-caption', '12px'), letterSpacing: '0.1em', textTransform: 'uppercase', color: TD },
+
+      hasHelper,
+      helper: p.helper,
+      helperStyle: { fontSize: T('text-caption', '12px'), lineHeight: T('lh-caption', '16px'), color: TS, textWrap: 'pretty' },
+
+      hasError,
+      error: p.error ?? 'This field needs a value before the case can be submitted.',
+      errorStyle: { display: 'flex', alignItems: 'flex-start', gap: T('space-2', '8px'), fontSize: T('text-caption', '12px'), lineHeight: T('lh-caption', '16px'), color: CAUTION, textWrap: 'pretty' },
+      errorDotStyle: { flex: '0 0 auto', width: '6px', height: '6px', background: CAUTION, marginTop: '5px' },
+
+      onChange: (e) => { const v = e.target.value; this.setState({ value: v }); if (this.props.onValueChange) this.props.onValueChange(v); },
+      onFocus: () => this.setState({ focus: true }),
+      onBlur: () => this.setState({ focus: false }),
+      onEnter: () => this.setState({ hover: true }),
+      onLeave: () => this.setState({ hover: false })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

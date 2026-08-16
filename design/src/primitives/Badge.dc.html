@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+</helmet>
+
+<span ref="{{ nodeRef }}" title="{{ titleText }}" style="{{ rootStyle }}">
+  <sc-if value="{{ showDot }}" hint-placeholder-val="{{ false }}">
+    <span aria-hidden="true" style="{{ dotStyle }}"></span>
+  </sc-if>
+  <sc-if value="{{ showIcon }}" hint-placeholder-val="{{ false }}">
+    <span aria-hidden="true" style="{{ iconStyle }}"></span>
+  </sc-if>
+  <span style="{{ labelStyle }}">{{ label }}</span>
+  <sc-if value="{{ showRemove }}" hint-placeholder-val="{{ false }}">
+    <button type="button" aria-label="{{ removeLabel }}" onClick="{{ onRemove }}" onMouseEnter="{{ onRemoveEnter }}" onMouseLeave="{{ onRemoveLeave }}" style="{{ removeStyle }}"><span aria-hidden="true" style="{{ removeBarA }}"></span><span aria-hidden="true" style="{{ removeBarB }}"></span></button>
+  </sc-if>
+</span>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:260,&quot;height&quot;:100},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Tracked&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;emphasis&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;solid&quot;,&quot;subtle&quot;,&quot;outline&quot;],&quot;default&quot;:&quot;subtle&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sm&quot;,&quot;md&quot;],&quot;default&quot;:&quot;sm&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;marker&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;dot&quot;,&quot;icon&quot;],&quot;default&quot;:&quot;none&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;neutral&quot;,&quot;accent&quot;,&quot;caution&quot;],&quot;default&quot;:&quot;neutral&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theming&quot;},&quot;fill&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theming&quot;},&quot;ink&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theming&quot;},&quot;edge&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theming&quot;},&quot;markColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theming&quot;},&quot;removable&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;},&quot;onRemove&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;,&quot;section&quot;:&quot;States&quot;},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Accessibility&quot;}}">
+const T = (name, fallback) => 'var(--' + name + ', ' + fallback + ')';
+const SURFACE_1 = T('surface-1', '#242320');
+const SURFACE_2 = T('surface-2', '#1B1A18');
+const BOUNDARY_1 = T('boundary-1', '#37342D');
+const BOUNDARY_2 = T('boundary-2', '#26241F');
+const TEXT_PRIMARY = T('text-primary', '#ECE7DC');
+const TEXT_LABEL = T('text-label', '#B9AFA0');
+const TEXT_DIM = T('text-dim', '#918A7F');
+const ACCENT = T('accent', '#A8342B');
+const ACCENT_QUIET = T('accent-quiet', 'rgba(168,52,43,0.12)');
+const CONFIRM = T('confirm', '#D9705C');
+const CAUTION = T('caution', '#B87264');
+const CAUTION_DEEP = T('caution-deep', '#9C5B4E');
+const CAUTION_QUIET = T('caution-quiet', 'rgba(184,114,100,0.14)');
+const FONT_LABEL = T('font-label', "'Space Grotesk', ui-monospace, monospace");
+const GRAIN_1 = T('grain-1', 'repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px)');
+
+// Two sizes. Type comes from the Foundations caption role; the box is set by padding, not a control height.
+const SIZES = {
+  sm: { padY: 1, padX: 6, gap: 5, fs: T('text-caption', '12px'), track: '0.10em', dot: 5, icon: 8, close: 14, lh: 16 },
+  md: { padY: 3, padX: 9, gap: 7, fs: T('text-caption', '12px'), track: '0.12em', dot: 6, icon: 10, close: 16, lh: 18 }
+};
+
+// Tone is the only thing a domain badge overrides. Generic Badge ships neutral;
+// `ink` / `fill` / `edge` props take precedence over the named tone for one-off theming.
+const TONES = {
+  neutral: { solidFill: SURFACE_1, solidInk: TEXT_PRIMARY, solidEdge: BOUNDARY_1,
+             subtleFill: SURFACE_2, subtleInk: TEXT_LABEL,
+             outlineEdge: BOUNDARY_1, outlineInk: TEXT_LABEL, mark: TEXT_DIM },
+  accent:  { solidFill: ACCENT, solidInk: TEXT_PRIMARY, solidEdge: ACCENT,
+             subtleFill: ACCENT_QUIET, subtleInk: CONFIRM,
+             outlineEdge: ACCENT, outlineInk: CONFIRM, mark: CONFIRM },
+  caution: { solidFill: CAUTION_DEEP, solidInk: TEXT_PRIMARY, solidEdge: CAUTION_DEEP,
+             subtleFill: CAUTION_QUIET, subtleInk: CAUTION,
+             outlineEdge: CAUTION, outlineInk: CAUTION, mark: CAUTION }
+};
+
+class Component extends DCLogic {
+  state = { closeHover: false };
+
+  renderVals() {
+    const p = this.props;
+    const s = SIZES[p.size] || SIZES.sm;
+    const t = TONES[p.tone] || TONES.neutral;
+    const emphasis = ['solid', 'subtle', 'outline'].indexOf(p.emphasis) >= 0 ? p.emphasis : 'subtle';
+    const marker = ['none', 'dot', 'icon'].indexOf(p.marker) >= 0 ? p.marker : 'none';
+    const label = p.label ?? 'Label';
+
+    let fill, ink, edge, grain;
+    if (emphasis === 'solid') { fill = t.solidFill; ink = t.solidInk; edge = t.solidEdge; grain = 'none'; }
+    else if (emphasis === 'subtle') { fill = t.subtleFill; ink = t.subtleInk; edge = 'transparent'; grain = GRAIN_1; }
+    else { fill = 'transparent'; ink = t.outlineInk; edge = t.outlineEdge; grain = 'none'; }
+
+    // Explicit overrides let a domain badge theme without a new tone entry.
+    if (p.fill) fill = p.fill;
+    if (p.ink) ink = p.ink;
+    if (p.edge) edge = p.edge;
+    const markColor = p.markColor || (emphasis === 'solid' ? ink : t.mark);
+
+    return {
+      nodeRef: React.createRef(),
+      label,
+      titleText: p.title || undefined,
+
+      rootStyle: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: s.gap + 'px',
+        maxWidth: '100%',
+        flex: '0 0 auto',
+        padding: s.padY + 'px ' + (p.removable ? Math.round(s.padX * 0.55) : s.padX) + 'px ' + s.padY + 'px ' + s.padX + 'px',
+        background: fill,
+        backgroundImage: grain,
+        border: '1px solid ' + edge,
+        borderRadius: T('radius-1', '0px'),
+        color: ink,
+        userSelect: 'none',
+        verticalAlign: 'baseline'
+      },
+
+      labelStyle: {
+        fontFamily: FONT_LABEL,
+        fontSize: s.fs,
+        lineHeight: s.lh + 'px',
+        fontWeight: 500,
+        letterSpacing: s.track,
+        textTransform: 'uppercase',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        color: 'inherit'
+      },
+
+      showDot: marker === 'dot',
+      dotStyle: { width: s.dot + 'px', height: s.dot + 'px', background: markColor, flex: '0 0 auto' },
+
+      showIcon: marker === 'icon',
+      iconStyle: {
+        width: s.icon + 'px', height: s.icon + 'px', flex: '0 0 auto',
+        border: '1.5px solid ' + markColor, transform: 'rotate(45deg)'
+      },
+
+      showRemove: !!p.removable,
+      removeLabel: 'Remove ' + label,
+      onRemove: p.onRemove || (() => {}),
+      onRemoveEnter: () => this.setState({ closeHover: true }),
+      onRemoveLeave: () => this.setState({ closeHover: false }),
+      removeStyle: {
+        position: 'relative',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: s.close + 'px',
+        height: s.close + 'px',
+        flex: '0 0 auto',
+        margin: 0,
+        padding: 0,
+        border: 0,
+        background: this.state.closeHover ? (emphasis === 'solid' ? 'rgba(9,8,8,0.28)' : BOUNDARY_2) : 'transparent',
+        color: this.state.closeHover ? TEXT_PRIMARY : ink,
+        cursor: 'pointer',
+        borderRadius: T('radius-1', '0px'),
+        transition: 'background ' + T('dur-quick', '180ms') + ' ' + T('ease-settle', 'cubic-bezier(0.22, 0.68, 0.12, 1)')
+      },
+      removeBarA: { position: 'absolute', width: Math.round(s.close * 0.52) + 'px', height: '1px', background: 'currentColor', transform: 'rotate(45deg)' },
+      removeBarB: { position: 'absolute', width: Math.round(s.close * 0.52) + 'px', height: '1px', background: 'currentColor', transform: 'rotate(-45deg)' }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

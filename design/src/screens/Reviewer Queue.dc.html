@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Reviewer's queue" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="queue" max-width="1080px" hint-size="100%,72px"></dc-import>
+
+  <header style="max-width: 1080px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1);">
+    <h1 style="margin: 0; max-width: 20ch; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">Cases that summoned you</h1>
+    <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Nothing here was browsed for. A case declares a niche and the system pushes it to everyone whose niche matches — open or private makes no difference to routing.</p>
+  </header>
+
+  <main style="max-width: 1080px; margin: 0 auto; padding: var(--space-6) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-6);">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Awaiting your verdict — 1</span>
+
+      <article style="position: relative; background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); border-left: 2px solid var(--accent); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Arrived 2 hours ago · v1</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Open review</span>
+        </div>
+        <h2 style="margin: 0; max-width: 24ch; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.015em; text-wrap: pretty;">Draining a stateful queue consumer during cutover</h2>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); font-size: var(--text-body-sm); color: var(--text-secondary);">
+          <span style="color: var(--text-primary); font-weight: 600;">Thandi</span>
+          <span style="font-family: var(--font-label); color: var(--text-dim);">@t.mabaso</span>
+          <span style="color: var(--text-dim);">·</span>
+          <span>Asking for a verdict ·</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--boundary-1); padding: 3px var(--space-3);">Whole case</span>
+        </div>
+        <div style="background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Why you</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary);">Your niche <span style="color: var(--confirm);">AWS/Backend</span> matches the case's declared discipline. Your verdict binds.</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; border-top: 1px solid var(--boundary-1); padding-top: var(--space-4);">
+          <a href="Verdict Panel.dc.html" style="background: var(--accent); border: 0; border-bottom: 0; padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ECE7DC;">Open the case</a>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Quorum 0 of 2 · you would be the first verdict on this version.</span>
+        </div>
+      </article>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Elsewhere in your niche</span>
+
+      <article style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); border-left: 2px solid var(--text-secondary); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-3);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Awaiting eligible reviewers</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Under quota · 4 days</span>
+        </div>
+        <h3 style="margin: 0; max-width: 30ch; font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; text-wrap: pretty;">Idempotent webhook delivery without a queue</h3>
+        <p style="margin: 0; max-width: 62ch; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">One binding verdict short of quorum. The niche — <span style="color: var(--text-primary);">Backend · Event delivery · SME</span> — has fewer eligible members than the counting rule needs. A curator has been notified; it is not stalling silently.</p>
+        <span style="font-size: var(--text-caption); color: var(--text-secondary);">You are not eligible for this one — speciality does not match.</span>
+      </article>
+
+      <article style="background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); border-left: 2px solid var(--text-dim); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-3);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary);">Rejected · terminal</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">v3 · revision budget spent</span>
+        </div>
+        <h3 style="margin: 0; max-width: 30ch; font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; color: var(--text-secondary); text-wrap: pretty;">Session state in a React context provider</h3>
+        <p style="margin: 0; max-width: 62ch; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Deferred twice on the same defect, amended twice, still deferred. The budget ran out and the case closed as rejected. It is not published — but the trajectory that led there stays readable.</p>
+        <a href="#" style="font-family: var(--font-label); font-size: var(--text-body-sm); letter-spacing: 0.06em; align-self: flex-start;">Read the trajectory</a>
+      </article>
+    </section>
+
+    <p style="max-width: 62ch; font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); border-top: 1px solid var(--boundary-2); padding-top: var(--space-4); text-wrap: pretty;">A queue, not a wall. There is no browse-open-cases surface — if you can see a case here, it matched you.</p>
+  </main>
+
+  <dc-import name="Footer" max-width="1080px" hint-size="100%,300px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:1100}}"></script>
+</body>
+</html>

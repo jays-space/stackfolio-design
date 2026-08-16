@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes sfSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Home (signed in)" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-4: #0D0C0B;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --confirm: #D9705C;
+  --v-approve: #7C8A5E; --v-defer: #C08A4A; --v-reject: #B87264;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh;
+">
+
+  <dc-import name="Header" signed-in="{{ true }}" handle="@nkosi.dev" niche="AWS/Backend · Identity" initials="NK" queue-count="{{ 2 }}" max-width="1280px" hint-size="100%,72px"></dc-import>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: var(--space-7) var(--space-6) var(--space-9); display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: var(--space-8); align-items: start;">
+
+    <div style="display: flex; flex-direction: column; gap: var(--space-8); min-width: 0;">
+
+      <section style="display: flex; flex-direction: column; gap: var(--space-4); animation: sfSettle var(--dur-slow) var(--ease-settle) both;">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim);">Monday, 12 August</span>
+        <h1 style="margin: 0; max-width: 30ch; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.022em; text-wrap: pretty;">{{ greeting }}</h1>
+        <p style="margin: 0; max-width: 58ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">{{ greetingSub }}</p>
+      </section>
+
+      <section style="display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3); margin-bottom: var(--space-5);">
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Waiting on your verdict</h2>
+          <span style="flex: 1;"></span>
+          <a href="Reviewer Queue.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase;">Full queue</a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <sc-for list="{{ queue }}" as="q" hint-placeholder-count="2">
+            <article style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); transition: background-color var(--dur-base) var(--ease-settle);" style-hover="background-color: #282621;">
+              <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">
+                <span style="color: var(--text-label);">{{ q.version }}</span>
+                <span>·</span>
+                <span>Scope: {{ q.scope }}</span>
+                <span>·</span>
+                <span>{{ q.age }}</span>
+              </div>
+              <a href="{{ q.href }}" style="border: 0; max-width: 40ch; font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; color: var(--text-primary); letter-spacing: -0.014em; text-wrap: pretty;" style-hover="color: #D9705C;">{{ q.title }}</a>
+              <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 60ch; text-wrap: pretty;">{{ q.why }}</span>
+              <div style="display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-2); flex-wrap: wrap;">
+                <a href="Verdict Panel.dc.html" style="border: 0; text-decoration: none; background: var(--accent); padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ECE7DC;">Open verdict panel</a>
+                <span style="font-size: var(--text-caption); color: var(--text-dim);">{{ q.state }}</span>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3); margin-bottom: var(--space-5);">
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Moved since you were last here</h2>
+          <span style="flex: 1;"></span>
+          <a href="Tracked.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase;">Tracked</a>
+        </div>
+
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ moved }}" as="m" hint-placeholder-count="3">
+            <div style="background: {{ m.bg }}; background-image: {{ m.grain }}; border-top: 1px solid var(--boundary-2); padding: var(--space-5) var(--space-6); display: grid; grid-template-columns: minmax(0,1fr) 200px; gap: var(--space-6); align-items: center;">
+              <span style="display: flex; flex-direction: column; gap: var(--space-2); min-width: 0;">
+                <a href="{{ m.href }}" style="border: 0; max-width: 46ch; font-size: var(--text-body); line-height: var(--lh-body); font-weight: 600; color: var(--text-primary); text-wrap: pretty;" style-hover="color: #D9705C;">{{ m.title }}</a>
+                <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 58ch; text-wrap: pretty;">{{ m.change }}</span>
+              </span>
+              <span style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <span style="display: flex; align-items: center; gap: var(--space-3);">
+                  <span style="width: 10px; height: 10px; background: {{ m.markFill }}; border: 1px solid {{ m.markColor }};"></span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary);">{{ m.mark }}</span>
+                </span>
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim);">{{ m.when }}</span>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3); margin-bottom: var(--space-5);">
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Browse</h2>
+          <span style="flex: 1;"></span>
+          <a href="Case Index.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase;">All cases</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1px; background: var(--boundary-2);">
+          <sc-for list="{{ browse }}" as="b" hint-placeholder-count="6">
+            <a href="Case Index.dc.html" style="border: 0; text-decoration: none; background: var(--surface-2); background-image: var(--grain-2); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); transition: background-color var(--dur-base) var(--ease-settle);" style-hover="background-color: #242320;">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">{{ b.kind }}</span>
+              <span style="font-size: var(--text-body); font-weight: 600; color: var(--text-primary);">{{ b.label }}</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-secondary);">{{ b.count }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+
+    <aside style="display: flex; flex-direction: column; gap: var(--space-5); position: sticky; top: var(--space-6);">
+      <div style="background: var(--surface-4); background-image: var(--grain-3); border-top: 2px solid var(--boundary-1); box-shadow: inset 0 8px 18px rgba(0,0,0,0.40); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Your niche</span>
+        <span style="font-size: var(--text-body); line-height: var(--lh-body); font-weight: 600; color: var(--text-primary);">AWS/Backend · Identity</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Cases in this niche are pushed to you. Verdicts you cast elsewhere don't bind — you can still read, track and ask.</span>
+      </div>
+
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Your own work</span>
+        <sc-for list="{{ own }}" as="o" hint-placeholder-count="2">
+          <span style="display: flex; flex-direction: column; gap: var(--space-2); padding-bottom: var(--space-3); border-bottom: 1px solid var(--boundary-2);">
+            <a href="{{ o.href }}" style="border: 0; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); font-weight: 600; color: var(--text-primary); text-wrap: pretty;" style-hover="color: #D9705C;">{{ o.title }}</a>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim);">{{ o.state }}</span>
+          </span>
+        </sc-for>
+        <a href="Authoring.dc.html?new=1" style="border: 0; text-decoration: none; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-3) var(--space-4); text-align: center; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary);">Start a case</a>
+      </div>
+
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">The directives</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Separate the work from the maker. Proof over opinion. Mentorship is a duty.</span>
+        <a href="Invite.dc.html" style="font-size: var(--text-caption);">Read them in full</a>
+      </div>
+    </aside>
+  </main>
+
+  <dc-import name="Footer" max-width="1280px" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const QUEUE = [
+  {
+    title: 'Forward-compatible auth via an anti-corruption layer',
+    version: 'v2',
+    scope: 'Solution Design',
+    age: 'Submitted 3 days ago',
+    why: 'You deferred v1 over the Cognito groups claim leaking into the app-owned Session. The author has revised and re-submitted the same scope.',
+    state: 'Your v1 verdict: deferred for update',
+    href: 'Review Thread.dc.html'
+  },
+  {
+    title: 'Idempotent webhook ingestion without a queue',
+    version: 'v1',
+    scope: 'Architecture · Solution Design',
+    age: 'Submitted yesterday',
+    why: 'Routed to you because the declared niche is AWS/Backend · Senior+. Two more reviewers were summoned; quorum is not met yet.',
+    state: 'No verdict cast yet',
+    href: 'Case Reader.dc.html'
+  }
+];
+
+const MOVED = [
+  {
+    title: 'An accessible button that survives design-system drift',
+    change: 'Concluded while you were away. Two approvals converged on a documented limit, so it published as a trade-off rather than a pattern.',
+    mark: 'Documented Trade-off',
+    when: 'Friday',
+    markColor: '#C08A4A', markFill: 'transparent',
+    bg: 'var(--surface-1)', grain: 'var(--grain-1)',
+    href: 'Case Reader.dc.html'
+  },
+  {
+    title: 'A read-model projection for the case index without a search service',
+    change: '@t.molefe asked whether the projection is rebuilt on publish or on read. The author has not answered yet.',
+    mark: 'In the workshop',
+    when: 'Saturday',
+    markColor: 'var(--boundary-1)', markFill: 'transparent',
+    bg: 'var(--surface-2)', grain: 'var(--grain-2)',
+    href: 'Review Thread.dc.html'
+  },
+  {
+    title: 'Server-rendered pagination that keeps the filter state in the URL',
+    change: 'Reached quorum and approved first pass. The claim held for the scope it stated.',
+    mark: 'Validated Pattern',
+    when: 'Thursday',
+    markColor: '#7C8A5E', markFill: '#7C8A5E',
+    bg: 'var(--surface-4)', grain: 'var(--grain-3)',
+    href: 'Case Reader.dc.html'
+  }
+];
+
+const BROWSE = [
+  { kind: 'Discipline', label: 'Frontend / Platform', count: '14 cases' },
+  { kind: 'Discipline', label: 'Backend / Platform', count: '11 cases' },
+  { kind: 'Review state', label: 'In the workshop', count: '5 cases' },
+  { kind: 'Conclusion', label: 'Validated Pattern', count: '9 cases' },
+  { kind: 'Conclusion', label: 'Documented Trade-off', count: '3 cases' },
+  { kind: 'Track', label: 'Architect · diagram-backed', count: '6 cases' }
+];
+
+const OWN = [
+  { title: 'Least-privilege IAM for a single-table design', state: 'Draft · autosaved 2 days ago', href: 'Authoring.dc.html' },
+  { title: 'Cutting a cold start by owning the token exchange', state: 'In the workshop · 1 approve, awaiting quorum', href: 'Review Thread.dc.html' }
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    const n = QUEUE.length;
+    return {
+      greeting: n === 1
+        ? 'One case is waiting on your verdict, Nkosi.'
+        : n + ' cases are waiting on your verdict, Nkosi.',
+      greetingSub: 'Both were routed to you because their declared niche matches yours. A verdict needs a target section and a rationale — take the time it needs.',
+      queue: QUEUE,
+      moved: MOVED,
+      browse: BROWSE,
+      own: OWN
+    };
+  }
+}
+
+</script>
+</body>
+</html>

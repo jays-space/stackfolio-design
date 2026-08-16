@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Notifications" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="none" handle="{{ handle }}" niche="{{ niche }}" queue-count="{{ queueCount }}" max-width="1000px" hint-size="100%,72px"></dc-import>
+
+  <header style="max-width: 1000px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-5); border-bottom: 2px solid var(--boundary-1); display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Inbox</span>
+      <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">{{ headline }}</h1>
+      <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">{{ lead }}</p>
+    </div>
+    <sc-if value="{{ hasAny }}" hint-placeholder-val="{{ true }}">
+      <button onClick="{{ markAll }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-3) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">{{ markLabel }}</button>
+    </sc-if>
+  </header>
+
+  <main style="max-width: 1000px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-7);">
+
+    <sc-if value="{{ hasSummons }}" hint-placeholder-val="{{ true }}">
+      <section style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">{{ summonsTitle }}</h2>
+          <span style="font-size: var(--text-caption); color: var(--text-secondary);">{{ summonsNote }}</span>
+        </div>
+        <sc-for list="{{ summons }}" as="n" hint-placeholder-count="2">
+          <article style="display: grid; grid-template-columns: 8px minmax(0,1fr); background: var(--surface-1); background-image: var(--grain-1);">
+            <span style="background: var(--accent);"></span>
+            <div style="padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--confirm);">{{ n.kind }}</span>
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim); white-space: nowrap;">{{ n.when }}</span>
+              </div>
+              <a href="{{ n.href }}" style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; border-bottom: 0;">{{ n.case }}</a>
+              <p style="margin: 0; max-width: 68ch; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ n.why }}</p>
+              <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+                <a href="{{ n.href }}" style="border-bottom: 0; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">{{ n.action }} →</a>
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim);">{{ n.meta }}</span>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ hasLog }}">
+      <section style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">What happened</h2>
+          <span style="font-size: var(--text-caption); color: var(--text-secondary);">Nothing here needs you.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <sc-for list="{{ log }}" as="l" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 8px minmax(0,1fr) auto; gap: var(--space-4); align-items: baseline; background: {{ l.bg }}; border-left: 2px solid {{ l.mark }}; padding: var(--space-4) var(--space-5);">
+              <span style="width: 8px; height: 8px; background: {{ l.dot }}; align-self: center;"></span>
+              <div style="display: flex; flex-direction: column; gap: var(--space-2); min-width: 0;">
+                <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); text-wrap: pretty;">{{ l.text }}</span>
+                <a href="{{ l.href }}" style="align-self: flex-start; font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em;">{{ l.case }}</a>
+              </div>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim); white-space: nowrap;">{{ l.when }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isEmpty }}">
+      <section style="border-left: 2px solid var(--boundary-1); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); max-width: 68ch;">
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Nothing waiting</span>
+        <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Cases arrive here when they match your niche. There is no queue to browse and nothing to volunteer for — the case summons you, or it does not.</p>
+        <a href="Case Index.dc.html" style="align-self: flex-start; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Read something instead →</a>
+      </section>
+    </sc-if>
+
+  </main>
+
+  <dc-import name="Footer" max-width="1000px" hint-size="100%,300px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;member&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;@nkosi.dev&quot;,&quot;@jays-space&quot;],&quot;default&quot;:&quot;@nkosi.dev&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;empty&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const INBOX = {
+  '@nkosi.dev': {
+    niche: 'AWS/Backend · Senior',
+    headline: 'One case wants a verdict',
+    lead: 'Routing is push. This one matched your niche and was sent to you — nobody chose you from a list, and you cannot browse for more.',
+    summonsTitle: 'Needs a verdict from you',
+    summonsNote: 'Your round closes when you cast.',
+    summons: [
+      {
+        kind: 'New · matched your niche',
+        when: '2 hours ago',
+        case: 'Draining a stateful queue consumer during cutover',
+        why: 'Thandi declared AWS/Backend · Senior, which is your niche, so the case was routed to you. Quorum is 0 of 2 — yours would be the first verdict on this version.',
+        action: 'Open the case',
+        meta: 'v1 · open review',
+        href: 'Verdict Panel.dc.html'
+      }
+    ],
+    log: [
+      { text: '@jays-space endorsed your review — “the defer was right and the revision was better for it.”', case: 'Forward-compatible auth', when: '2 days', unread: true },
+      { text: 'Review concluded: approved after revision. Comments are open again.', case: 'Forward-compatible auth', when: '2 days', unread: true },
+      { text: 'The case you rejected is terminal. The trajectory stays published.', case: 'Session storage moved to a signed cookie', when: '4 weeks', unread: false },
+      { text: 'Your clarification was answered before you cast.', case: 'Read-through cache', when: '5 weeks', unread: false }
+    ]
+  },
+  '@jays-space': {
+    niche: 'Frontend/Platform · Senior',
+    headline: 'Your review concluded',
+    lead: 'What has happened to the cases you published. Nothing is waiting on you.',
+    summonsTitle: 'Waiting on you',
+    summonsNote: '',
+    summons: [],
+    log: [
+      { text: '@sanele.k approved v2 — “this is how it should be done.”', case: 'Forward-compatible auth', when: '2 days', unread: true },
+      { text: 'Approved after revision. The trajectory shows the defer that produced v2.', case: 'Token refresh that survives a tab sleeping', when: '15 days', unread: true },
+      { text: '@t.molefe asked a clarification before casting.', case: 'Forward-compatible auth', when: '5 days', unread: false }
+    ]
+  }
+};
+
+class Component extends DCLogic {
+  state = { read: false };
+
+  renderVals() {
+    const handle = this.props.member ?? '@nkosi.dev';
+    const box = INBOX[handle] ?? INBOX['@nkosi.dev'];
+    const empty = this.props.empty ?? false;
+    const summons = empty ? [] : box.summons;
+    const log = empty ? [] : box.log;
+    const unreadCount = log.filter(l => l.unread && !this.state.read).length;
+
+    return {
+      handle,
+      niche: box.niche,
+      queueCount: summons.length,
+      headline: empty ? 'Nothing waiting' : box.headline,
+      lead: empty ? 'Your inbox is where cases arrive. It fills when one matches you.' : box.lead,
+      summonsTitle: box.summonsTitle,
+      summonsNote: box.summonsNote,
+      summons,
+      log: log.map(l => {
+        const unread = l.unread && !this.state.read;
+        return {
+          text: l.text,
+          case: l.case,
+          when: l.when,
+          href: 'Case Reader.dc.html',
+          bg: unread ? 'var(--surface-2)' : 'transparent',
+          mark: unread ? 'var(--boundary-1)' : 'var(--boundary-2)',
+          dot: unread ? 'var(--confirm)' : 'transparent'
+        };
+      }),
+      hasSummons: summons.length > 0,
+      hasLog: log.length > 0,
+      hasAny: !empty,
+      isEmpty: empty,
+      markLabel: unreadCount ? 'Mark ' + unreadCount + ' read' : 'All read',
+      markAll: () => this.setState({ read: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

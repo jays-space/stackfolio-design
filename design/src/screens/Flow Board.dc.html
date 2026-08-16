@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #0B0A0A; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Flow board" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --shell-bg: #0B0A0A; --shell-line: #2A2724; --shell-dim: #847D74;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  background: var(--shell-bg); color: var(--text-primary); font-family: var(--font-body);
+  width: 2560px; padding: var(--space-9) var(--space-8);
+">
+
+  <header style="display: flex; flex-direction: column; gap: var(--space-4); max-width: 90ch; margin-bottom: var(--space-8);">
+    <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.18em; text-transform: uppercase; color: var(--shell-dim);">StackFolio · flow board</span>
+    <h1 style="margin: 0; max-width: 24ch; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em;">One case study, three lanes, one loop</h1>
+    <p style="margin: 0; max-width: 76ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Every box is a screen that exists. Solid arrows are the happy path. The rules under each box are the ones the screen enforces — not decoration, the actual gates.</p>
+    <div style="display: flex; gap: var(--space-6); flex-wrap: wrap; font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary); border-top: 1px solid var(--shell-line); padding-top: var(--space-4);">
+      <span style="display: flex; align-items: center; gap: var(--space-3);"><span style="width: 24px; height: 2px; background: var(--accent);"></span>Happy path</span>
+      <span style="display: flex; align-items: center; gap: var(--space-3);"><span style="width: 24px; height: 2px; background: var(--text-secondary);"></span>Branch</span>
+      <span style="display: flex; align-items: center; gap: var(--space-3);"><span style="width: 24px; height: 2px; background: var(--text-dim); opacity: 0.6;"></span>Unhappy path</span>
+      <span style="display: flex; align-items: center; gap: var(--space-3);"><span style="width: 12px; height: 12px; border: 1px solid var(--text-dim);"></span>Not yet built</span>
+    </div>
+  </header>
+
+  <section style="display: flex; flex-direction: column; gap: var(--space-5); margin-bottom: var(--space-8);">
+    <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--confirm);">Lane C — Author</span>
+      <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">Jay · draft → submit → deferred → revise → approved</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 300px 60px 300px 60px 300px 60px 300px 60px 300px; align-items: stretch;">
+
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Draft editor</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Compose the case</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Problem and solution design are required. A build is optional.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">A level marked not-buildable needs a stated reason. Blank is a gap; stated is a deliverable.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--accent);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">declare</span>
+      </div>
+
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Niche · toolset · visibility</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Submit, or be blocked</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Niche is the routing key. The toolset you chose is part of the claim.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">No problem, design, toolset or speciality → blocked with a specific reason. Visibility ≠ routing.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--accent);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">push</span>
+      </div>
+
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--text-secondary); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Thread · under review</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Locked, comments closed</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Track and reactions only. The author cannot edit while judgment is pending.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-2); padding-top: var(--space-2);">One bit decides it: review concluded, yes or no.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--text-secondary);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">defer</span>
+      </div>
+
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Revision editor</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Amend → v2</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">The defer sits at the top with what must change. What you changed is captured for the lineage.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">Budget 1. Loop re-fires to the same reviewers plus any newly eligible.</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--accent);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">re-review</span>
+      </div>
+
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Thread · concluded</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Approved after revision</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Aggregate tally, attributed verdicts, endorse primitive, comments reopened.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">v1 is not deleted. The trajectory is the teaching content.</span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 300px 60px 300px 60px 300px; align-items: stretch; margin-left: 720px;">
+      <div style="grid-column: 1 / 2; display: flex; align-items: center; gap: var(--space-3); padding-left: var(--space-3);">
+        <span style="width: 2px; height: var(--space-6); background: var(--text-dim); opacity: 0.6;"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">unhappy paths</span>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 300px 60px 300px 60px 300px; gap: 0; margin-left: 720px;">
+      <div style="background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); border-left: 2px solid var(--text-dim); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);">Awaiting eligible reviewers</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Under quota. A curator is notified — it does not stall silently.</span>
+      </div>
+      <span></span>
+      <div style="background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); border-left: 2px solid var(--text-dim); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);">Rejected · terminal</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Budget spent and still deferred. Not published; the trajectory stays readable.</span>
+      </div>
+      <span></span>
+      <div style="background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); border-left: 2px solid var(--text-dim); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);">Autosave failed</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Explicit “not saved” warning, never silent loss. <span style="color: var(--text-dim);">Not yet built.</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: var(--space-5); margin-bottom: var(--space-8);">
+    <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--confirm);">Lane — Reviewer</span>
+      <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">@nkosi.dev · summoned → judges → the round closes</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 300px 60px 300px 60px 300px 60px 300px; align-items: stretch;">
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Review queue</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Push, not browse</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">The case declared a niche; the system routed it. No open-cases wall exists.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">Same for open and private reviews. Discovery never routes through visibility.</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--accent);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">open</span>
+      </div>
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Verdict panel · clarify</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Ask, without judging</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Open, repeatable, editable. Stays on the reading surface.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">MVP may fold this into the thread — it is one deletion, not a redesign.</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--accent);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">commit</span>
+      </div>
+      <div style="background: var(--surface-3); background-image: var(--grain-3); border-top: 2px solid var(--accent); box-shadow: inset 0 12px 24px rgba(0,0,0,0.45); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Verdict panel · cast</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">The committal act</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Value + required rationale, on the whole case. The panel sinks — reading becomes judging.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-2); padding-top: var(--space-2);">Casting closes the round. No edits after.</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--accent);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">tally</span>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--text-secondary); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Aggregate</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">N independent verdicts</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Not a shared thread. Each verdict is attributed and stands alone.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-2); padding-top: var(--space-2);">Resolution is a counting rule in config. The screen renders it, never decides it.</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: var(--space-5);">
+    <div style="display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 2px solid var(--boundary-1); padding-bottom: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--confirm);">Lane B — Participant</span>
+      <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">@r.dlamini · signs in → reads → tracks → comments when it concludes</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 300px 60px 300px 60px 300px 60px 300px; align-items: stretch;">
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Sign in</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Members only</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Auth.js + Cognito. Members are handpicked, so there is no anonymous tier.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">Reading is a member act. The gate is at the door, not around each action.</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--text-secondary);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">browse</span>
+      </div>
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Case reader</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Read the case whole</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Problem, design, toolset, alternatives, falsifier, then any build. One read, no tabs.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">Outcome and tally sit in the rail. The verdicts are on the same page, further down.</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--accent);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">track</span>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--text-secondary); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Thread · under review</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Watch, don't speak</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Track and emoji only. Comments closed to everyone, not just to you.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-2); padding-top: var(--space-2);">Earned reverence for the process — the gate is what makes passing mean something.</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: 0 var(--space-2);">
+        <span style="width: 100%; height: 2px; background: var(--accent);"></span>
+        <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center;">concludes</span>
+      </div>
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Comments + endorse</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Speak, and endorse</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">General comments reopen. A review can be endorsed with a reason, rescindably.</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); border-top: 1px solid var(--boundary-1); padding-top: var(--space-2);">Primitive in, ranking out. No count, no score, no leaderboard.</span>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top: var(--space-8); border-top: 1px solid var(--shell-line); padding-top: var(--space-5); display: flex; gap: var(--space-8); flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-2); max-width: 60ch;">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--shell-dim);">Still undrawn</span>
+<span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Quoting a passage inside a rationale, so a whole-case verdict can still point precisely. Endorsement reasons on hover. Neither changes the loop; the first would sharpen every defer.</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: var(--space-2); max-width: 40ch;">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--shell-dim);">Walk it</span>
+      <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);"><a href="Prototype.dc.html">Prototype</a> runs these lanes as live screens.</span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:2560,&quot;height&quot;:1900}}"></script>
+</body>
+</html>

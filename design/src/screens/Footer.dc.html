@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+</helmet>
+
+<div style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  width: 100%; margin-top: var(--space-8); background: var(--surface-3); background-image: var(--grain-3);
+  border-top: 1px solid var(--boundary-2); font-family: var(--font-body);
+">
+  <div style="max-width: {{ maxWidth }}; margin: 0 auto; padding: var(--space-7) var(--space-6) var(--space-6); display: grid; grid-template-columns: minmax(0,1.4fr) repeat(3, minmax(0,1fr)); gap: var(--space-7);">
+
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 800; letter-spacing: -0.01em; color: var(--text-primary);">StackFolio</span>
+      <p style="margin: 0; max-width: 40ch; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">A case study is an experiment. Peer review is the journal process. A verdict is a conclusion that survived scrutiny.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Read</span>
+      <a href="Case Index.dc.html" style="text-decoration: none; border: 0; font-size: var(--text-body-sm); color: var(--text-secondary);">All cases</a>
+      <a href="Case Index.dc.html" style="text-decoration: none; border: 0; font-size: var(--text-body-sm); color: var(--text-secondary);">In the workshop</a>
+      <a href="Case Index.dc.html" style="text-decoration: none; border: 0; font-size: var(--text-body-sm); color: var(--text-secondary);">Approved</a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Participate</span>
+      <a href="Reviewer Queue.dc.html" style="text-decoration: none; border: 0; font-size: var(--text-body-sm); color: var(--text-secondary);">Review queue</a>
+      <a href="Authoring.dc.html" style="text-decoration: none; border: 0; font-size: var(--text-body-sm); color: var(--text-secondary);">Write a case</a>
+      <a href="#" style="text-decoration: none; border: 0; font-size: var(--text-body-sm); color: var(--text-secondary);">How review works</a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Membership</span>
+      <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Members are invited, not signed up.</span>
+      <a href="Invite.dc.html" style="text-decoration: none; border: 0; font-size: var(--text-body-sm); color: var(--confirm);">See an invitation</a>
+    </div>
+  </div>
+
+  <div style="max-width: {{ maxWidth }}; margin: 0 auto; padding: var(--space-4) var(--space-6) var(--space-7); border-top: 1px solid var(--boundary-3); display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;">
+    <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim);">Case content is versioned in git. Reviews, verdicts, conclusions and endorsements live in StackFolio.</span>
+    <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim);">© 2026 StackFolio</span>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:320},&quot;maxWidth&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;1280px&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { maxWidth: this.props.maxWidth ?? '1280px' };
+  }
+}
+
+</script>
+</body>
+</html>

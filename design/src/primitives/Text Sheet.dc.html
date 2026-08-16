@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  body { -webkit-font-smoothing: antialiased; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  input, textarea, button, select { font: inherit; color: inherit; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px solid #D9705C; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Text" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-code-sm: 12px; --lh-code-sm: 18px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-code: 14px; --lh-code: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-read: 17px; --lh-read: 27px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --text-h1: 49px; --lh-h1: 55px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-sunk: #0E0D0C;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --caution: #B87264; --caution-deep: #9C5B4E; --caution-quiet: rgba(184,114,100,0.14);
+  --v-approve: #7C8A5E; --v-defer: #C08A4A; --v-reject: #B87264;
+  --control-h-sm: 28px; --control-h-md: 36px; --control-h-lg: 44px; --hit-min: 44px;
+  --focus-ring: #D9705C; --scrim: rgba(9,8,8,0.72);
+  --stroke-hair: 1px; --stroke-edge: 2px;
+  --radius-1: 0px; --radius-2: 2px; --radius-3: 3px;
+  --op-disabled: 0.38; --op-muted: 0.62;
+  --icon-1: 12px; --icon-2: 14px; --icon-3: 16px; --icon-4: 20px; --icon-5: 24px;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+
+  <header style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 2px solid var(--boundary-1); display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: var(--space-8); align-items: end;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Component · Text</span>
+      <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em;">Eleven roles, and the element is a separate question</h1>
+      <p style="margin: 0; max-width: 72ch; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-secondary); text-wrap: pretty;">Text is the only component permitted to set a font size. It carries the Foundations scale as named roles and nothing else: a role picks family, size, line height, weight, tracking and a default colour together, and the HTML element is chosen independently for document structure.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: var(--space-3); border-left: 2px solid var(--boundary-1); padding-left: var(--space-5);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Contents</span>
+      <div style="display: grid; gap: var(--space-1); font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-secondary);">
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">01</span><span>Role specimens</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">02</span><span>Role vs element</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">03</span><span>Inline treatments</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">04</span><span>Overflow &amp; alignment</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">05</span><span>Tone &amp; muted copy</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">06</span><span>Rules &amp; accessibility</span></span>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-8);">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="01 Role specimens">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">01</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Role specimens</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Every role the component accepts, rendered by it. Five heading steps, three prose sizes, one label, two code steps — the Foundations scale exactly, with no step added for this sheet.</span>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{ roleRows }}" as="r" hint-placeholder-count="11">
+          <div style="display: grid; grid-template-columns: 148px minmax(0,1fr) 180px; gap: var(--space-5); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-4) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-primary);">{{ r.role }}</span>
+            <div style="min-width: 0;">
+              <dc-import name="Text" role="{{ r.role }}" element="{{ r.element }}" text="{{ r.sample }}" hint-size="100%,40px"></dc-import>
+            </div>
+            <span style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim);">{{ r.metrics }}</span>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ r.use }}</span>
+            </span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-left: 2px solid var(--accent); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">One size source</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 96ch; text-wrap: pretty;">A component that needs type sets a role on Text; it does not set <span style="font-family: var(--font-mono); color: var(--text-primary);">font-size</span> itself. If a needed step is not on the table above, the step is added to Foundations and then appears here — it is never defined locally, and a role is never approximated by nudging a neighbouring one.</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="02 Role vs element">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">02</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Role vs element</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">The role is the look; the element is the document. Both columns below are the same role on four different elements, and the rendering is identical.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: var(--space-6) var(--space-7);">
+        <sc-for list="{{ crossGroups }}" as="g" hint-placeholder-count="2">
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-2);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">role {{ g.role }}</span>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ g.note }}</span>
+            </div>
+            <sc-for list="{{ g.rows }}" as="row" hint-placeholder-count="4">
+              <div style="display: grid; grid-template-columns: 92px minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+                <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--confirm);">{{ row.tag }}</span>
+                <div style="min-width: 0;">
+                  <dc-import name="Text" role="{{ row.role }}" element="{{ row.element }}" text="{{ row.sample }}" hint-size="100%,32px"></dc-import>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Do</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Pick the element from the outline of the page — one <span style="font-family: var(--font-mono); color: var(--text-primary);">h1</span> per screen, then <span style="font-family: var(--font-mono); color: var(--text-primary);">h2</span>, <span style="font-family: var(--font-mono); color: var(--text-primary);">h3</span> with no level skipped — and pick the role from how loud the line should be. A card title that is fourth in the outline is <span style="font-family: var(--font-mono); color: var(--text-primary);">element h4, role h5</span>.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--caution); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--caution);">Don't</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Don't reach for a heading element to get a bigger size, and don't demote a real heading to a <span style="font-family: var(--font-mono); color: var(--text-primary);">span</span> to make it quieter. Both are available as roles, and a screen reader reads the element.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="03 Inline treatments">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">03</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Inline treatments</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Four things are allowed to interrupt a run of prose. Each one changes exactly one property, so two can meet in a sentence without the line coming apart.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,420px); gap: var(--space-7); align-items: start;">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-6) var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <p style="margin: 0; max-width: 70ch; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-secondary); text-wrap: pretty;">The adapter was accepted on the third pass, once the port boundary moved. <strong style="font-weight: 700; color: var(--text-primary);">The claim under review was narrow</strong>: that a session lookup crossing a network is a detail the domain should never see. Reviewers asked for the failing case, not the abstraction — <em style="font-style: italic;">what breaks if this stays where it is</em> — and the answer was the refresh path, where <code style="font-family: var(--font-mono); font-size: var(--text-code-sm); background: var(--surface-sunk); border-radius: var(--radius-2); padding: 1px var(--space-2); color: var(--text-primary);">SessionPort.guard()</code> was being called twice per request. The trade-off is written up in <a href="Case Reader.dc.html">the case reader</a>, with the two rejected alternatives kept alongside it.</p>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim);">Set in role read at a 70-character measure.</span>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ inlineRules }}" as="i" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 104px minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--confirm);">{{ i.tag }}</span>
+              <span style="display: flex; flex-direction: column; gap: var(--space-1);">
+                <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); text-wrap: pretty;">{{ i.rule }}</span>
+                <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ i.tokens }}</span>
+              </span>
+            </div>
+          </sc-for>
+          <span style="padding-top: var(--space-4); font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Inline code drops a step to <span style="font-family: var(--font-mono); color: var(--text-primary);">--text-code-sm</span> so the mono x-height matches the prose around it, and sits on <span style="font-family: var(--font-mono); color: var(--text-primary);">--surface-sunk</span> — the same "cut into the page" reading as a code block.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="04 Overflow and alignment">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">04</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Overflow &amp; alignment</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Three behaviours in a container too narrow for the copy. All three specimens hold the same sentence in the same width — drag the width to watch them differ.</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Container width</span>
+          <input type="range" min="200" max="560" step="4" value="{{ widthValue }}" onChange="{{ setWidth }}" onInput="{{ setWidth }}" style="width: 260px; accent-color: var(--confirm);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">{{ widthLabel }}</span>
+        </div>
+        <div style="display: flex; gap: var(--space-5); flex-wrap: wrap; align-items: start;">
+          <sc-for list="{{ overflowCases }}" as="o" hint-placeholder-count="3">
+            <div style="display: flex; flex-direction: column; gap: var(--space-3); background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-4); width: {{ boxWidth }};">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">{{ o.name }}</span>
+              <div style="min-width: 0; border-left: 1px solid var(--boundary-2); padding-left: var(--space-3);">
+                <dc-import name="Text" role="body-sm" element="p" tone="primary" overflow="{{ o.overflow }}" clamp-lines="{{ o.lines }}" text="{{ overflowSample }}" hint-size="100%,44px"></dc-import>
+              </div>
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ o.css }}</span>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ o.use }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); border-top: 1px solid var(--boundary-2); padding-top: var(--space-5);">
+        <sc-for list="{{ alignCases }}" as="a" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: var(--space-3); background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-4);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">align {{ a.align }}</span>
+            <dc-import name="Text" role="body-sm" element="p" tone="primary" align="{{ a.align }}" measure="none" text="{{ a.sample }}" hint-size="100%,44px"></dc-import>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ a.use }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="05 Tone and muted copy">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">05</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Tone &amp; muted copy</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Each role arrives with a colour already chosen. Tone overrides it from the Foundations text roles only — there is no free colour on this component.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,420px); gap: var(--space-7); align-items: start;">
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ toneRows }}" as="t" hint-placeholder-count="6">
+            <div style="display: grid; grid-template-columns: 116px minmax(0,1fr) minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">{{ t.tone }}</span>
+              <div style="min-width: 0;">
+                <dc-import name="Text" role="body-sm" element="span" tone="{{ t.tone }}" text="{{ t.sample }}" hint-size="100%,24px"></dc-import>
+              </div>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ t.use }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Muted in place</span>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="display: flex; flex-direction: column; gap: var(--space-1); background: var(--surface-1); border-left: 2px solid var(--boundary-1); padding: var(--space-3) var(--space-4);">
+              <dc-import name="Text" role="body-sm" element="span" tone="primary" text="Session lookup belongs behind a port" hint-size="100%,24px"></dc-import>
+              <dc-import name="Text" role="label" element="span" text="Current · v3" hint-size="100%,18px"></dc-import>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-1); background: var(--surface-1); border-left: 2px solid var(--boundary-1); padding: var(--space-3) var(--space-4);">
+              <dc-import name="Text" role="body-sm" element="span" tone="muted" text="Session lookup belongs in the service layer" hint-size="100%,24px"></dc-import>
+              <dc-import name="Text" role="label" element="span" text="Superseded · v1" hint-size="100%,18px"></dc-import>
+            </div>
+          </div>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Muted is primary text at <span style="font-family: var(--font-mono); color: var(--text-primary);">--op-muted</span>, for a line that has been superseded but must stay on the record. It is not a substitute for secondary, and it is never applied to text already set in <span style="font-family: var(--font-mono); color: var(--text-primary);">dim</span>.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="06 Rules and accessibility">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">06</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Rules &amp; accessibility</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-5) var(--space-7);">
+        <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: var(--space-2); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ r.name }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ r.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360}}">
+class Component extends DCLogic {
+  state = { width: 320 };
+
+  renderVals() {
+    const overflowSample = 'Auth adapter as an anti-corruption layer between the session service and the domain';
+    const w = this.state.width;
+
+    return {
+      widthValue: w,
+      widthLabel: w + 'px',
+      boxWidth: w + 'px',
+      setWidth: (e) => this.setState({ width: Number(e.target.value) }),
+      overflowSample,
+
+      roleRows: [
+        ['h1', 'h1', 'A case is a claim with its reasoning attached', 'Epilogue 800 · 49/55 · -0.026em', 'One per screen: the case title, the page title.'],
+        ['h2', 'h2', 'What every component draws from', 'Epilogue 700 · 39/47 · -0.022em', 'Screen-level section heading.'],
+        ['h3', 'h3', 'Foundations, and where they stop', 'Epilogue 700 · 31/40 · -0.02em', 'Sub-section inside a long read.'],
+        ['h4', 'h4', 'Section heading on a reading surface', 'Epilogue 700 · 25/33 · -0.018em', 'Sheet and panel sections.'],
+        ['h5', 'h5', 'Card and block heading', 'Epilogue 700 · 20/28 · -0.01em', 'Cards, dialogs, list group headings.'],
+        ['read', 'p', 'Reading size, used only in the case reader and the standfirst: one step up from body, at a measure of 70 characters or less.', 'Manrope 400 · 17/27 · measure 70ch', 'Long-form prose. Nowhere else.'],
+        ['body', 'p', 'Body copy. The default for prose anywhere outside the reader.', 'Manrope 400 · 16/26 · measure 80ch', 'The default prose role.'],
+        ['body-sm', 'p', 'Dense contexts: rows, notes, control labels, helper text.', 'Manrope 400 · 14/22', 'Rows, notes, helper text.'],
+        ['label', 'span', 'Labels, meta, facet names', 'Space Grotesk 500 · 12/16 · 0.12em · uppercase', 'Micro-labels only. Never a sentence.'],
+        ['code', 'code', 'const port = adapter.session()', 'Geist Mono 400 · 14/22', 'Code blocks and source lines.'],
+        ['code-sm', 'code', 'lib/auth/adapter.ts · v1', 'Geist Mono 400 · 12/18', 'Inline code, paths, token names.']
+      ].map(r => ({ role: r[0], element: r[1], sample: r[2], metrics: r[3], use: r[4] })),
+
+      crossGroups: [
+        { role: 'h4', note: 'the same heading look, four elements',
+          rows: ['h2', 'h4', 'p', 'span'].map(el => ({ tag: '<' + el + '>', role: 'h4', element: el, sample: 'Where the port boundary sits' })) },
+        { role: 'body-sm', note: 'prose look on structural and inline elements',
+          rows: ['p', 'div', 'span', 'label'].map(el => ({ tag: '<' + el + '>', role: 'body-sm', element: el, sample: 'Reviewers asked for the failing case, not the abstraction.' })) }
+      ],
+
+      inlineRules: [
+        ['<strong>', 'Emphasis: weight to 700 and colour to primary. One phrase per paragraph — a whole sentence in bold emphasises nothing.', 'font-weight 700 · --text-primary'],
+        ['<em>', 'Italic, at the same weight and colour. For a quoted question or a term being introduced.', 'font-style italic'],
+        ['<code>', 'Inline code steps down to code-sm on a sunk ground, with a 2px radius and 8px of side padding.', '--text-code-sm · --surface-sunk · --radius-2'],
+        ['<a>', 'Links are confirm with a 40%-opacity underline, going to primary on hover. The underline is never removed.', '--confirm · border-bottom 1px']
+      ].map(i => ({ tag: i[0], rule: i[1], tokens: i[2] })),
+
+      overflowCases: [
+        { name: 'wrap', overflow: 'wrap', lines: 2, css: 'text-wrap: pretty', use: 'The default. Prose grows downward; nothing is ever hidden.' },
+        { name: 'truncate · 1 line', overflow: 'truncate', lines: 1, css: 'white-space: nowrap; text-overflow: ellipsis', use: 'One-line rows where the height is fixed. The full string must be reachable elsewhere — a title, a tooltip, the row itself.' },
+        { name: 'clamp · 2 lines', overflow: 'clamp', lines: 2, css: '-webkit-line-clamp: 2', use: 'Card summaries and list previews, where a uniform card height matters more than the last clause.' }
+      ],
+
+      alignCases: [
+        { align: 'left', sample: 'Left is the default and the only alignment for prose.', use: 'Everything that is read.' },
+        { align: 'center', sample: 'Empty states and one-line notices.', use: 'Short, standalone lines only — never more than two.' },
+        { align: 'right', sample: '14 open · 3 deferred', use: 'Numeric columns aligning to a right edge.' }
+      ],
+
+      toneRows: [
+        ['primary', 'Headings, prose, control labels', 'The default for anything that carries the point.'],
+        ['secondary', 'Supporting prose, notes, descriptions', 'The default tone of the prose roles.'],
+        ['dim', 'Uppercase micro-labels and metadata', 'Micro-type only; a sentence never sets in dim.'],
+        ['label', 'Section labels on a lighter surface', 'When dim would not hold against surface-1.'],
+        ['confirm', 'Committal words and links', 'Links, focus, and the word that commits an action.'],
+        ['muted', 'Withdrawn review · kept for the record', 'Primary at --op-muted: superseded, still readable.']
+      ].map(t => ({ tone: t[0], sample: t[1], use: t[2] })),
+
+      rules: [
+        ['Sizes live in Foundations', 'Text is the only place a font size is set, and every size it can set is a named role. A component asking for a size that is not a role is asking for a change to Foundations.'],
+        ['One h1 per screen', 'Element order follows the document outline with no level skipped. Role and element are set separately, so a quiet heading never has to become a span.'],
+        ['Measure before size', 'Prose roles carry a max measure — 70ch for read, 80ch for body. A wider column is harder to read than a smaller size would have been.'],
+        ['Truncation needs an escape', 'A truncated or clamped string must be reachable in full somewhere: the row it opens, a title attribute, the reader. Copy that only exists in a clamp is lost copy.'],
+        ['Never colour by hand', 'Tone picks from the Foundations text roles. Status hues belong to status components; an accent fill never carries text.'],
+        ['Zoom and reflow', 'Every specimen here is set in px on a page that reflows: at 200% zoom the layout stacks and no role is clipped. Line height is never set below the role\u2019s paired value.']
+      ].map(r => ({ name: r[0], body: r[1] }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

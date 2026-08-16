@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  body { -webkit-font-smoothing: antialiased; }
+  a { color: #D9705C; text-decoration: none; }
+  a:hover { color: #ECE7DC; }
+  input, textarea, button, select { font: inherit; color: inherit; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Button" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-code-sm: 12px; --lh-code-sm: 18px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-code: 14px; --lh-code: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-read: 17px; --lh-read: 27px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-sunk: #0E0D0C;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --caution: #B87264; --caution-deep: #9C5B4E; --caution-quiet: rgba(184,114,100,0.14);
+  --control-h-sm: 28px; --control-h-md: 36px; --control-h-lg: 44px; --hit-min: 44px;
+  --focus-ring: #D9705C; --scrim: rgba(9,8,8,0.72);
+  --stroke-hair: 1px; --stroke-edge: 2px;
+  --radius-1: 0px; --radius-2: 2px; --radius-3: 3px;
+  --op-disabled: 0.38; --op-muted: 0.62;
+  --icon-1: 12px; --icon-2: 14px; --icon-3: 16px; --icon-4: 20px; --icon-5: 24px;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+
+  <header style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 2px solid var(--boundary-1); display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: var(--space-8); align-items: end;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Component · Button</span>
+      <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em;">One control, five degrees of emphasis</h1>
+      <p style="margin: 0; max-width: 72ch; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-secondary); text-wrap: pretty;">Every value on this sheet is a Foundations role. Button needed three things the foundation did not have — control heights, a hit-target floor and a caution colour — and they were added there rather than defined here. Nothing below is a local decision.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: var(--space-3); border-left: 2px solid var(--boundary-1); padding-left: var(--space-5);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Contents</span>
+      <div style="display: grid; gap: var(--space-1); font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-secondary);">
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">01</span><span>Anatomy</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">02</span><span>Variants × sizes</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">03</span><span>States</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">04</span><span>Icon configurations</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">05</span><span>Link-styled navigation</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">06</span><span>Rules &amp; accessibility</span></span>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-8);">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="01 Anatomy">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">01</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Anatomy</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">A row of three slots on a fixed height. Only the label is required; the two icon slots are optional and mutually independent.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,380px); gap: var(--space-7); align-items: start;">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-7) var(--space-5); overflow-x: auto;">
+          <div style="display: inline-flex; align-items: center; justify-content: center; gap: var(--space-4); height: 72px; padding: 0 var(--space-5); background: var(--accent); border-radius: var(--radius-2);">
+            <span style="flex: 0 0 auto; width: 24px; height: 24px; border: 2px solid var(--text-primary); outline: 1px dashed rgba(236,231,220,0.5); outline-offset: 4px;"></span>
+            <span style="font-family: var(--font-label); font-size: 20px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; color: var(--text-primary); outline: 1px dashed rgba(236,231,220,0.5); outline-offset: 4px;">Submit verdict</span>
+            <span style="flex: 0 0 auto; width: 24px; height: 24px; border: 2px solid var(--text-primary); outline: 1px dashed rgba(236,231,220,0.5); outline-offset: 4px;"></span>
+          </div>
+          <div style="display: flex; gap: var(--space-5); padding-top: var(--space-6); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">
+            <span>1 · leading icon</span>
+            <span>2 · label</span>
+            <span>3 · trailing icon</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: grid; grid-template-columns: 24px minmax(0,1fr); gap: var(--space-4); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--confirm);">1</span>
+            <span style="display: flex; flex-direction: column; gap: var(--space-1);"><span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary);">Leading icon — optional</span><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">--icon-2 / -3 / -4 by size · 1.5px stroke · currentColor</span></span>
+          </div>
+          <div style="display: grid; grid-template-columns: 24px minmax(0,1fr); gap: var(--space-4); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--confirm);">2</span>
+            <span style="display: flex; flex-direction: column; gap: var(--space-1);"><span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary);">Label — required, one or two words, a verb first</span><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">--font-label · uppercase · 700 · tracked · never wraps</span></span>
+          </div>
+          <div style="display: grid; grid-template-columns: 24px minmax(0,1fr); gap: var(--space-4); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--confirm);">3</span>
+            <span style="display: flex; flex-direction: column; gap: var(--space-1);"><span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary);">Trailing icon — optional, direction and disclosure only</span><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">gap --space-2 (sm, md) · --space-3 (lg)</span></span>
+          </div>
+          <div style="display: grid; grid-template-columns: 24px minmax(0,1fr); gap: var(--space-4); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--confirm);">4</span>
+            <span style="display: flex; flex-direction: column; gap: var(--space-1);"><span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary);">Box — height, padding and radius from the foundation</span><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">--control-h-* · pad-x --space-3 / -4 / -5 · --radius-2</span></span>
+          </div>
+          <span style="padding-top: var(--space-4); font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">The icon set is not drawn yet. Specimens use the Foundations placeholder mark at the correct size and stroke, so geometry can be reviewed before the set exists.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="02 Variants and sizes">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">02</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Variants × sizes</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch; text-wrap: pretty;">Emphasis descends by subtraction: fill, then low fill, then hairline, then nothing. One primary per view. Every specimen is live — hover, tab to and hold it.</span>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-6);">
+        <div style="display: grid; grid-template-columns: 200px repeat(4, minmax(0,1fr)); gap: var(--space-5) var(--space-4); align-items: center;">
+          <span></span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">sm · 28</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">md · 36 default</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">lg · 44</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">icon-only</span>
+
+          <span style="display: flex; flex-direction: column; gap: var(--space-1); border-left: 2px solid var(--accent); padding-left: var(--space-3);"><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">primary</span><span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim);">The one action the view exists for.</span></span>
+          <dc-import name="Button" variant="primary" size="sm" label="{{ matrixLabel }}" hint-size="110px,28px"></dc-import>
+          <dc-import name="Button" variant="primary" size="md" label="{{ matrixLabel }}" hint-size="120px,36px"></dc-import>
+          <dc-import name="Button" variant="primary" size="lg" label="{{ matrixLabel }}" hint-size="150px,44px"></dc-import>
+          <dc-import name="Button" variant="primary" size="md" icon-only="{{ true }}" leading="{{ iconShape }}" icon-label="Approve" hint-size="36px,36px"></dc-import>
+
+          <span style="display: flex; flex-direction: column; gap: var(--space-1); border-left: 2px solid var(--boundary-1); padding-left: var(--space-3);"><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">secondary</span><span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim);">A real alternative, on a working surface.</span></span>
+          <dc-import name="Button" variant="secondary" size="sm" label="{{ matrixLabel }}" hint-size="110px,28px"></dc-import>
+          <dc-import name="Button" variant="secondary" size="md" label="{{ matrixLabel }}" hint-size="120px,36px"></dc-import>
+          <dc-import name="Button" variant="secondary" size="lg" label="{{ matrixLabel }}" hint-size="150px,44px"></dc-import>
+          <dc-import name="Button" variant="secondary" size="md" icon-only="{{ true }}" leading="{{ iconShape }}" icon-label="Approve" hint-size="36px,36px"></dc-import>
+
+          <span style="display: flex; flex-direction: column; gap: var(--space-1); border-left: 2px solid var(--boundary-2); padding-left: var(--space-3);"><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">outline</span><span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim);">Available but not urged. Hairline only, no fill.</span></span>
+          <dc-import name="Button" variant="outline" size="sm" label="{{ matrixLabel }}" hint-size="110px,28px"></dc-import>
+          <dc-import name="Button" variant="outline" size="md" label="{{ matrixLabel }}" hint-size="120px,36px"></dc-import>
+          <dc-import name="Button" variant="outline" size="lg" label="{{ matrixLabel }}" hint-size="150px,44px"></dc-import>
+          <dc-import name="Button" variant="outline" size="md" icon-only="{{ true }}" leading="{{ iconShape }}" icon-label="Approve" hint-size="36px,36px"></dc-import>
+
+          <span style="display: flex; flex-direction: column; gap: var(--space-1); border-left: 2px solid var(--boundary-3); padding-left: var(--space-3);"><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">ghost</span><span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim);">Dismiss, cancel, toolbar actions. No box until hover.</span></span>
+          <dc-import name="Button" variant="ghost" size="sm" label="{{ matrixLabel }}" hint-size="110px,28px"></dc-import>
+          <dc-import name="Button" variant="ghost" size="md" label="{{ matrixLabel }}" hint-size="120px,36px"></dc-import>
+          <dc-import name="Button" variant="ghost" size="lg" label="{{ matrixLabel }}" hint-size="150px,44px"></dc-import>
+          <dc-import name="Button" variant="ghost" size="md" icon-only="{{ true }}" leading="{{ iconShape }}" icon-label="Approve" hint-size="36px,36px"></dc-import>
+
+          <span style="display: flex; flex-direction: column; gap: var(--space-1); border-left: 2px solid var(--caution); padding-left: var(--space-3);"><span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">caution</span><span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim);">Destructive. Fills only under the finger.</span></span>
+          <dc-import name="Button" variant="caution" size="sm" label="Withdraw" hint-size="110px,28px"></dc-import>
+          <dc-import name="Button" variant="caution" size="md" label="Withdraw" hint-size="120px,36px"></dc-import>
+          <dc-import name="Button" variant="caution" size="lg" label="Withdraw" hint-size="150px,44px"></dc-import>
+          <dc-import name="Button" variant="caution" size="md" icon-only="{{ true }}" leading="bar" icon-label="Withdraw case" hint-size="36px,36px"></dc-import>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5);">
+        <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Why caution is not filled</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">The primary accent is already oxblood. A filled red destructive button would read as the ordinary primary action at a glance, which is the opposite of what a destructive control has to do. Caution therefore states itself with a hairline and a label, and takes a fill only on press — the moment the action is actually committed.</span>
+        </div>
+        <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Pairing</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">A committal pair is primary plus ghost, in that order, with <span style="font-family: var(--font-mono); color: var(--text-primary);">--space-3</span> between them. Two filled buttons side by side is drift.</span>
+          <div style="display: flex; gap: var(--space-3); align-items: center; padding-top: var(--space-2);">
+            <dc-import name="Button" variant="primary" size="md" label="Submit verdict" hint-size="150px,36px"></dc-import>
+            <dc-import name="Button" variant="ghost" size="md" label="Cancel" hint-size="90px,36px"></dc-import>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="03 States">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">03</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Six states, every variant</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch; text-wrap: pretty;">Held open, not hovered for. Each specimen below is pinned to one state so the whole matrix can be compared at once.</span>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-6);">
+        <div style="display: grid; grid-template-columns: 116px repeat(6, minmax(0,1fr)); gap: var(--space-5) var(--space-3); align-items: center;">
+          <span></span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">default</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">hover</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">focus</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">pressed</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">disabled</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">loading</span>
+
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary); border-left: 2px solid var(--accent); padding-left: var(--space-3);">primary</span>
+          <dc-import name="Button" variant="primary" state="default" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="primary" state="hover" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="primary" state="focus" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="primary" state="active" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="primary" state="disabled" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="primary" state="loading" label="Approve" loading-label="Filing…" hint-size="110px,36px"></dc-import>
+
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary); border-left: 2px solid var(--boundary-1); padding-left: var(--space-3);">secondary</span>
+          <dc-import name="Button" variant="secondary" state="default" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="secondary" state="hover" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="secondary" state="focus" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="secondary" state="active" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="secondary" state="disabled" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="secondary" state="loading" label="Approve" loading-label="Filing…" hint-size="110px,36px"></dc-import>
+
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary); border-left: 2px solid var(--boundary-2); padding-left: var(--space-3);">outline</span>
+          <dc-import name="Button" variant="outline" state="default" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="outline" state="hover" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="outline" state="focus" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="outline" state="active" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="outline" state="disabled" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="outline" state="loading" label="Approve" loading-label="Filing…" hint-size="110px,36px"></dc-import>
+
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary); border-left: 2px solid var(--boundary-3); padding-left: var(--space-3);">ghost</span>
+          <dc-import name="Button" variant="ghost" state="default" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="ghost" state="hover" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="ghost" state="focus" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="ghost" state="active" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="ghost" state="disabled" label="Approve" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="ghost" state="loading" label="Approve" loading-label="Filing…" hint-size="110px,36px"></dc-import>
+
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary); border-left: 2px solid var(--caution); padding-left: var(--space-3);">caution</span>
+          <dc-import name="Button" variant="caution" state="default" label="Withdraw" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="caution" state="hover" label="Withdraw" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="caution" state="focus" label="Withdraw" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="caution" state="active" label="Withdraw" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="caution" state="disabled" label="Withdraw" hint-size="110px,36px"></dc-import>
+          <dc-import name="Button" variant="caution" state="loading" label="Withdraw" loading-label="Withdrawing…" hint-size="110px,36px"></dc-import>
+
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary); border-left: 2px solid var(--confirm); padding-left: var(--space-3);">link</span>
+          <dc-import name="Button" variant="link" state="default" label="Read the case" hint-size="110px,22px"></dc-import>
+          <dc-import name="Button" variant="link" state="hover" label="Read the case" hint-size="110px,22px"></dc-import>
+          <dc-import name="Button" variant="link" state="focus" label="Read the case" hint-size="110px,22px"></dc-import>
+          <dc-import name="Button" variant="link" state="active" label="Read the case" hint-size="110px,22px"></dc-import>
+          <dc-import name="Button" variant="link" state="disabled" label="Read the case" hint-size="110px,22px"></dc-import>
+          <dc-import name="Button" variant="link" state="loading" label="Read the case" loading-label="Opening…" hint-size="110px,22px"></dc-import>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: grid; grid-template-columns: 116px minmax(0,1fr) minmax(0,300px); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Hover</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">A value changes and nothing moves: the fill steps deeper, or a wash and a warmer border arrive. Size and position are identical to default.</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">accent-deep · accent-quiet · confirm · dur-quick</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 116px minmax(0,1fr) minmax(0,300px); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Focus</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">The one ring, additive: it appears on top of whatever else the button is doing and is never traded for a colour change. Keyboard only — a pointer press does not draw it.</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">outline 2px focus-ring · offset 2px</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 116px minmax(0,1fr) minmax(0,300px); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Pressed</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">One pixel down into the surface, and the deepest step of the variant's colour. Caution is the only variant that gains a fill here.</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">translateY(1px) · accent-deep · caution-deep</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 116px minmax(0,1fr) minmax(0,300px); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Disabled</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">The whole control at op-disabled, never the label alone, and the layout does not change. A disabled button always has the reason stated next to it — the state says no, the sentence says why.</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">op-disabled 0.38 · cursor not-allowed · disabled attr</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 116px minmax(0,1fr) minmax(0,300px); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Loading</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">No spinner. The label is replaced by what is happening and breathes on the same 1.4s cycle placeholders use; the box keeps its own width, so nothing beside it shifts.</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">aria-busy · btnBreathe 1.4s ease-settle</span>
+        </div>
+      </div>
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-left: 2px solid var(--boundary-1); padding: var(--space-4) var(--space-5); display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap;">
+        <dc-import name="Button" variant="primary" size="md" state="disabled" label="Submit verdict" hint-size="150px,36px"></dc-import>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Rationale is required before a verdict can be filed.</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="04 Icon configurations">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">04</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Icon configurations</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch; text-wrap: pretty;">Leading icons name the action; trailing icons name where it goes. A button carries at most two, and never the same one twice.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Leading</span>
+          <div style="display: flex; align-items: flex-start;"><dc-import name="Button" variant="secondary" size="md" leading="{{ iconShape }}" label="Add evidence" hint-size="170px,36px"></dc-import></div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">The default position. Use for creation, state change and anything with a settled mark.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Trailing</span>
+          <div style="display: flex; align-items: flex-start;"><dc-import name="Button" variant="secondary" size="md" trailing="chevron" label="Next reviewer" hint-size="180px,36px"></dc-import></div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Direction, disclosure and external destinations only. Not decoration.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Both</span>
+          <div style="display: flex; align-items: flex-start;"><dc-import name="Button" variant="primary" size="md" leading="{{ iconShape }}" trailing="chevron" label="File and continue" hint-size="210px,36px"></dc-import></div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Allowed when the action and its destination are both worth stating. Rare by design.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--confirm); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Icon-only</span>
+          <div style="display: flex; gap: var(--space-3); align-items: center;">
+            <dc-import name="Button" variant="ghost" size="sm" icon-only="{{ true }}" leading="square" icon-label="Track this case" hint-size="28px,28px"></dc-import>
+            <dc-import name="Button" variant="ghost" size="md" icon-only="{{ true }}" leading="circle" icon-label="Copy link" hint-size="36px,36px"></dc-import>
+            <dc-import name="Button" variant="outline" size="lg" icon-only="{{ true }}" leading="diamond" icon-label="Open filters" hint-size="44px,44px"></dc-import>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Square box, no padding, name carried in <span style="font-family: var(--font-mono); color: var(--text-primary);">aria-label</span>. Only for actions a reviewer already knows by shape.</span>
+        </div>
+      </div>
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-left: 2px solid var(--accent); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Icon sizing</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 96ch; text-wrap: pretty;">The icon steps with the button and never on its own: <span style="font-family: var(--font-mono); color: var(--text-primary);">--icon-2</span> at sm, <span style="font-family: var(--font-mono); color: var(--text-primary);">--icon-3</span> at md, <span style="font-family: var(--font-mono); color: var(--text-primary);">--icon-4</span> at lg, drawn in currentColor so it inherits every state change for free.</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="05 Link-styled">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">05</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Link-styled navigation</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch; text-wrap: pretty;">Two separate axes: what the control looks like, and what element it is. Appearance follows emphasis; the element follows behaviour — anything that changes the address is an anchor.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-5);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--confirm); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Link appearance</span>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-start;">
+            <dc-import name="Button" variant="link" label="Read the full case" hint-size="160px,22px"></dc-import>
+            <dc-import name="Button" variant="link" label="Open in the corpus" trailing="chevron" hint-size="170px,22px"></dc-import>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Body type, <span style="font-family: var(--font-mono); color: var(--text-primary);">--confirm</span>, a 1px underline at 40% and no box. Identical to prose links, so an inline action inside a paragraph never invents a second look. It is the lowest emphasis the component offers.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Button appearance, anchor element</span>
+          <div style="display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap;">
+            <dc-import name="Button" variant="primary" size="md" as-link="{{ true }}" href="Case Index.dc.html" label="Browse cases" hint-size="150px,36px"></dc-import>
+            <dc-import name="Button" variant="secondary" size="md" as-link="{{ true }}" href="Reviewer Queue.dc.html" label="My queue" trailing="chevron" hint-size="150px,36px"></dc-import>
+            <dc-import name="Button" variant="ghost" size="md" as-link="{{ true }}" href="Foundations.dc.html" label="Foundations" hint-size="130px,36px"></dc-import>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Same geometry, same states, same ring — rendered as <span style="font-family: var(--font-mono); color: var(--text-primary);">&lt;a href&gt;</span>, so it opens in a new tab, is copyable and is announced as a link. Never a <span style="font-family: var(--font-mono); color: var(--text-primary);">&lt;div onclick&gt;</span> and never a button that navigates.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: var(--space-7);" data-screen-label="06 Rules and accessibility">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">06</span>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Accessibility</h2>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); font-weight: 600;">Keyboard focus is never removed</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">2px <span style="font-family: var(--font-mono);">--focus-ring</span> at a 2px offset, on every variant and every surface, drawn on top of hover rather than instead of it. Ghost and link keep it even though they have no box.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-1); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); font-weight: 600;">Disabled is not colour alone</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">The native <span style="font-family: var(--font-mono);">disabled</span> attribute carries it to assistive technology; opacity and cursor carry it visually; a sentence beside the control carries the reason. Anchors use <span style="font-family: var(--font-mono);">aria-disabled</span> instead, since a link cannot be disabled.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-1); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); font-weight: 600;">Icon-only buttons are named</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Every icon-only instance takes an <span style="font-family: var(--font-mono);">aria-label</span>; the mark itself is <span style="font-family: var(--font-mono);">aria-hidden</span>. A labelled button never gets one, so its visible text and its announced name stay the same words.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-1); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); font-weight: 600;">Targets meet the 44px floor</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">lg is <span style="font-family: var(--font-mono);">--hit-min</span> on its own. sm and md are only permitted where the container supplies the rest of the target — a 44px row, a toolbar, a list item.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-1); border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); font-weight: 600;">Loading is announced, not just animated</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;"><span style="font-family: var(--font-mono);">aria-busy</span> plus a label that names the work in progress. The breathing opacity is decoration on top of a change of words.</span>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">What Button added to the foundation</h2>
+        </div>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Three roles were missing and are now on the Foundations sheet, marked <span style="font-family: var(--font-label); color: var(--confirm);">new</span>. Every other value here already existed.</span>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: grid; grid-template-columns: minmax(0,200px) minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--control-h-sm / -md / -lg</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">28 / 36 / 44. Shared with fields and selects so a control row aligns without nudging.</span>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(0,200px) minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--hit-min</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">44px. The pointer-target floor, stated once so no component argues it down.</span>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(0,200px) minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--caution / -deep / -quiet</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Borrowed from the reject verdict rather than adding a hue, so red means one thing across the product.</span>
+          </div>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-left: 2px solid var(--boundary-1); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Not in Button</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">No pill radius, no gradient, no shadow, no full-width variant, no size below 28px, and no second filled variant. Split buttons, menu buttons and toggle groups are separate components that compose this one.</span>
+        </div>
+        <div style="display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; padding-top: var(--space-2);">
+          <dc-import name="Button" variant="secondary" size="md" as-link="{{ true }}" href="Foundations.dc.html" label="Foundations sheet" trailing="chevron" hint-size="200px,36px"></dc-import>
+          <dc-import name="Button" variant="ghost" size="md" as-link="{{ true }}" href="Components.dc.html" label="Inventory" hint-size="130px,36px"></dc-import>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360},&quot;matrixLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Approve&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sheet&quot;},&quot;iconShape&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;square&quot;,&quot;circle&quot;,&quot;diamond&quot;,&quot;bar&quot;,&quot;chevron&quot;],&quot;default&quot;:&quot;square&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sheet&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      matrixLabel: this.props.matrixLabel ?? 'Approve',
+      iconShape: this.props.iconShape ?? 'square'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

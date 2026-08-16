@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  @keyframes sf-avatar-sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+</style>
+</helmet>
+
+<span ref="{{ nodeRef }}" role="{{ rootRole }}" aria-label="{{ ariaLabel }}" aria-busy="{{ busy }}" title="{{ titleText }}" style="{{ rootStyle }}">
+  <sc-if value="{{ showImage }}" hint-placeholder-val="{{ false }}">
+    <img src="{{ src }}" alt="{{ altText }}" onError="{{ onError }}" onLoad="{{ onLoad }}" style="{{ imgStyle }}">
+  </sc-if>
+  <sc-if value="{{ showInitials }}" hint-placeholder-val="{{ true }}">
+    <span aria-hidden="true" style="{{ initialsStyle }}">{{ initials }}</span>
+  </sc-if>
+  <sc-if value="{{ showIcon }}" hint-placeholder-val="{{ false }}">
+    <span aria-hidden="true" style="{{ iconWrapStyle }}"><span style="{{ iconHeadStyle }}"></span><span style="{{ iconBodyStyle }}"></span></span>
+  </sc-if>
+  <sc-if value="{{ showLoading }}" hint-placeholder-val="{{ false }}">
+    <span aria-hidden="true" style="{{ sweepStyle }}"></span>
+  </sc-if>
+</span>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:220,&quot;height&quot;:120},&quot;size&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sm&quot;,&quot;md&quot;,&quot;lg&quot;],&quot;default&quot;:&quot;md&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;person&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Nkosi Khumalo&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;handle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@nkosi.dev&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;initials&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;src&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;content&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;image&quot;,&quot;initials&quot;,&quot;icon&quot;,&quot;loading&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;States&quot;},&quot;loading&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;States&quot;},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Accessibility&quot;}}">
+const T = (name, fallback) => 'var(--' + name + ', ' + fallback + ')';
+const SURFACE_1 = T('surface-1', '#242320');
+const SURFACE_2 = T('surface-2', '#1B1A18');
+const ACCENT = T('accent', '#A8342B');
+const TEXT_PRIMARY = T('text-primary', '#ECE7DC');
+const TEXT_LABEL = T('text-label', '#B9AFA0');
+const TEXT_DIM = T('text-dim', '#918A7F');
+const FONT_LABEL = T('font-label', "'Space Grotesk', ui-monospace, monospace");
+const GRAIN_1 = T('grain-1', 'repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px)');
+
+// Three sizes only. Type comes from the Foundations roles; the accent edge thickens with the box.
+const SIZES = {
+  sm: { box: 28, edge: 2, fs: T('text-caption', '12px'), track: '0.06em', icon: 14 },
+  md: { box: 48, edge: 3, fs: T('text-body', '16px'), track: '0.05em', icon: 22 },
+  lg: { box: 80, edge: 3, fs: T('text-h4', '25px'), track: '0.04em', icon: 36 }
+};
+
+const initialsFrom = (name, handle) => {
+  const n = (name || '').trim();
+  if (n) return n.split(/\s+/).map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
+  const h = (handle || '').replace('@', '').replace(/[^a-z]/gi, '');
+  return h.slice(0, 2).toUpperCase();
+};
+
+class Component extends DCLogic {
+  state = { broken: false, loaded: false };
+
+  componentDidUpdate(prev) {
+    if (prev.src !== this.props.src) this.setState({ broken: false, loaded: false });
+  }
+
+  renderVals() {
+    const p = this.props;
+    const s = SIZES[p.size] || SIZES.md;
+    const initials = (p.initials || initialsFrom(p.person, p.handle) || '').slice(0, 2);
+
+    // `content` forces a branch for documentation; left alone it resolves from what it was given.
+    const forced = p.content && p.content !== 'auto' ? p.content : null;
+    const resolved = forced || (
+      p.loading ? 'loading'
+      : (p.src && !this.state.broken) ? 'image'
+      : initials ? 'initials'
+      : 'icon'
+    );
+
+    const label = p.person || p.handle || 'Unknown member';
+
+    const root = {
+      position: 'relative',
+      overflow: 'hidden',
+      flex: '0 0 auto',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: s.box + 'px',
+      height: s.box + 'px',
+      background: resolved === 'loading' ? SURFACE_2 : SURFACE_1,
+      backgroundImage: resolved === 'image' ? 'none' : GRAIN_1,
+      borderLeft: s.edge + 'px solid ' + (resolved === 'loading' ? TEXT_DIM : ACCENT),
+      borderRadius: T('radius-1', '0px'),
+      userSelect: 'none'
+    };
+
+    return {
+      nodeRef: React.createRef(),
+      rootStyle: root,
+      rootRole: resolved === 'loading' ? 'presentation' : 'img',
+      ariaLabel: resolved === 'loading' ? undefined : label,
+      busy: resolved === 'loading' ? 'true' : undefined,
+      titleText: p.title ?? undefined,
+
+      showImage: resolved === 'image',
+      showInitials: resolved === 'initials',
+      showIcon: resolved === 'icon',
+      showLoading: resolved === 'loading',
+
+      src: p.src,
+      altText: '',
+      onError: () => this.setState({ broken: true }),
+      onLoad: () => this.setState({ loaded: true }),
+      imgStyle: { width: '100%', height: '100%', objectFit: 'cover', display: 'block' },
+
+      initials,
+      initialsStyle: {
+        fontFamily: FONT_LABEL,
+        fontSize: s.fs,
+        fontWeight: 500,
+        letterSpacing: s.track,
+        lineHeight: 1,
+        color: TEXT_PRIMARY
+      },
+
+      iconWrapStyle: { position: 'relative', width: s.icon + 'px', height: s.icon + 'px', color: TEXT_LABEL },
+      iconHeadStyle: {
+        position: 'absolute', left: '50%', top: 0, transform: 'translateX(-50%)',
+        width: Math.round(s.icon * 0.42) + 'px', height: Math.round(s.icon * 0.42) + 'px',
+        border: (s.box >= 48 ? 2 : 1.5) + 'px solid currentColor', borderRadius: '50%'
+      },
+      iconBodyStyle: {
+        position: 'absolute', left: '50%', bottom: 0, transform: 'translateX(-50%)',
+        width: Math.round(s.icon * 0.82) + 'px', height: Math.round(s.icon * 0.40) + 'px',
+        border: (s.box >= 48 ? 2 : 1.5) + 'px solid currentColor', borderBottom: 0,
+        borderRadius: Math.round(s.icon * 0.42) + 'px ' + Math.round(s.icon * 0.42) + 'px 0 0'
+      },
+
+      sweepStyle: {
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(90deg, transparent 0%, rgba(236,231,220,0.07) 45%, rgba(236,231,220,0.07) 55%, transparent 100%)',
+        animation: 'sf-avatar-sweep 1400ms ' + T('ease-settle', 'cubic-bezier(0.22, 0.68, 0.12, 1)') + ' infinite'
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

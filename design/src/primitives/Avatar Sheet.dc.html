@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  body { -webkit-font-smoothing: antialiased; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  input, textarea, button, select { font: inherit; color: inherit; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px solid #D9705C; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Avatar" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-code-sm: 12px; --lh-code-sm: 18px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-code: 14px; --lh-code: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-read: 17px; --lh-read: 27px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --text-h1: 49px; --lh-h1: 55px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-sunk: #0E0D0C;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --caution: #B87264; --caution-deep: #9C5B4E; --caution-quiet: rgba(184,114,100,0.14);
+  --control-h-sm: 28px; --control-h-md: 36px; --control-h-lg: 44px; --hit-min: 44px;
+  --focus-ring: #D9705C; --scrim: rgba(9,8,8,0.72);
+  --radius-1: 0px; --radius-2: 2px; --radius-3: 3px;
+  --op-disabled: 0.38; --op-muted: 0.62;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+
+  <header style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 2px solid var(--boundary-1); display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: var(--space-8); align-items: end;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Component · Avatar</span>
+      <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em;">A square with one accent edge, whatever it is holding</h1>
+      <p style="margin: 0; max-width: 72ch; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-secondary); text-wrap: pretty;">Avatar identifies a person in a header or beside their work. It keeps the square of the rest of the system — no circles, no rings — and the accent edge on the left is what marks it as a person rather than a thumbnail. Three sizes, four contents, one shape.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: var(--space-3); border-left: 2px solid var(--boundary-1); padding-left: var(--space-5);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Contents</span>
+      <div style="display: grid; gap: var(--space-1); font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-secondary);">
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">01</span><span>Sizes</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">02</span><span>Content &amp; fallback</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">03</span><span>The matrix</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">04</span><span>In place</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">05</span><span>Rules &amp; accessibility</span></span>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-8);">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="01 Sizes">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">01</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Sizes</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Three, each tied to a place it appears. The initials take a type role rather than a scaled-down heading, so the fallback is always set in the same family as the labels around it.</span>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{ sizeRows }}" as="z" hint-placeholder-count="3">
+          <div style="display: grid; grid-template-columns: 120px 120px minmax(0,1fr) minmax(0,320px); gap: var(--space-5); align-items: center; border-bottom: 1px solid var(--boundary-3); padding: var(--space-5) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-primary);">{{ z.name }}</span>
+            <span style="display: flex;">
+              <dc-import name="Avatar" size="{{ z.size }}" person="Nkosi Khumalo" hint-size="80px,80px"></dc-import>
+            </span>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ z.tokens }}</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ z.note }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="02 Content and fallback">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">02</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Content &amp; fallback</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">One ladder, walked down: image, then initials, then icon. Loading sits outside it — it is the state before the ladder is entered, and it never resolves to a fallback on its own.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-5);">
+        <sc-for list="{{ contentCards }}" as="c" hint-placeholder-count="4">
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="display: flex; align-items: center; gap: var(--space-4);">
+              <dc-import name="Avatar" size="lg" content="{{ c.content }}" src="{{ c.src }}" person="{{ c.person }}" initials="{{ c.initials }}" hint-size="80px,80px"></dc-import>
+              <span style="display: flex; flex-direction: column; gap: var(--space-1);">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ c.name }}</span>
+                <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">{{ c.trigger }}</span>
+              </span>
+            </div>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ c.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-left: 2px solid var(--accent); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">The fall is automatic</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">A broken source is caught on the image's error event and the component drops to initials in place — no flash of a missing-image glyph, no second request, no layout change, because the box is sized by the avatar and not by the file.</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="03 The matrix">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">03</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">The matrix</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Every content at every size. The accent edge holds at 2px on small and 3px above it, so it stays a mark rather than a stripe.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(0,1fr)); gap: var(--space-5); align-items: center; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span></span>
+        <sc-for list="{{ contentHeads }}" as="h" hint-placeholder-count="4">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ h.label }}</span>
+        </sc-for>
+      </div>
+      <sc-for list="{{ matrixRows }}" as="m" hint-placeholder-count="3">
+        <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(0,1fr)); gap: var(--space-5); align-items: center; border-bottom: 1px solid var(--boundary-3); padding: var(--space-5) 0;">
+          <span style="display: flex; flex-direction: column; gap: var(--space-1);">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">{{ m.size }}</span>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">{{ m.px }}</span>
+          </span>
+          <span style="display: flex;"><dc-import name="Avatar" size="{{ m.size }}" content="image" src="{{ photo }}" person="Nkosi Khumalo" hint-size="80px,80px"></dc-import></span>
+          <span style="display: flex;"><dc-import name="Avatar" size="{{ m.size }}" content="initials" person="Nkosi Khumalo" hint-size="80px,80px"></dc-import></span>
+          <span style="display: flex;"><dc-import name="Avatar" size="{{ m.size }}" content="icon" hint-size="80px,80px"></dc-import></span>
+          <span style="display: flex;"><dc-import name="Avatar" size="{{ m.size }}" content="loading" hint-size="80px,80px"></dc-import></span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="04 In place">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">04</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">In place</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">The two jobs the component exists for: identity in the header, and attribution beside a review or a case.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-5);">
+
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Header · sm</span>
+          <div style="display: flex; align-items: center; gap: var(--space-3); border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-3); align-self: flex-start;">
+            <dc-import name="Avatar" size="sm" person="Nkosi Khumalo" hint-size="28px,28px"></dc-import>
+            <span style="display: flex; flex-direction: column;">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-primary);">@nkosi.dev</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-dim);">AWS/Backend · Identity</span>
+            </span>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">The avatar is inside the account control, not a target of its own. The 44px hit area belongs to the button around it.</span>
+        </div>
+
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Attribution · sm</span>
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <sc-for list="{{ attributions }}" as="a" hint-placeholder-count="3">
+              <div style="display: flex; align-items: flex-start; gap: var(--space-3);">
+                <dc-import name="Avatar" size="sm" content="{{ a.content }}" src="{{ a.src }}" person="{{ a.person }}" hint-size="28px,28px"></dc-import>
+                <span style="display: flex; flex-direction: column; gap: var(--space-1); min-width: 0;">
+                  <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary);">{{ a.person }}<span style="color: var(--text-dim);"> · {{ a.when }}</span></span>
+                  <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ a.line }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Profile head · lg</span>
+          <div style="display: flex; align-items: flex-start; gap: var(--space-5);">
+            <dc-import name="Avatar" size="lg" content="image" src="{{ photo }}" person="Thandi Mabaso" hint-size="80px,80px"></dc-import>
+            <span style="display: flex; flex-direction: column; gap: var(--space-1); min-width: 0;">
+              <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.02em;">Thandi Mabaso</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-dim);">@t.mabaso · Backend engineer</span>
+              <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Large is the only size that appears once per screen. Two of them on one page means one of them is the wrong size.</span>
+            </span>
+          </div>
+        </div>
+
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Queue row · md, loading</span>
+          <div style="display: flex; align-items: center; gap: var(--space-4);">
+            <dc-import name="Avatar" size="md" content="loading" hint-size="48px,48px"></dc-import>
+            <span style="display: flex; flex-direction: column; gap: var(--space-2); flex: 1 1 auto;">
+              <span style="height: 10px; width: 60%; background: var(--surface-1); background-image: var(--grain-1);"></span>
+              <span style="height: 10px; width: 38%; background: var(--surface-1); background-image: var(--grain-1);"></span>
+            </span>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Loading drops the accent edge to dim and sweeps once every 1.4s. It reserves the same box, so nothing moves when the row arrives.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="05 Rules and accessibility">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">05</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Rules &amp; accessibility</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-5) var(--space-7);">
+        <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: var(--space-2); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ r.name }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ r.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360}}">
+const PHOTO = 'data:image/svg+xml,' + encodeURIComponent(
+  "<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>" +
+  "<defs><pattern id='p' width='12' height='12' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'>" +
+  "<rect width='12' height='12' fill='#2B2925'/><rect width='5' height='12' fill='#3A3730'/></pattern></defs>" +
+  "<rect width='160' height='160' fill='url(#p)'/></svg>"
+);
+
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      photo: PHOTO,
+
+      sizeRows: [
+        ['sm', 'sm', '28px · edge 2px · caption 12px', 'Header account control, attribution beside a comment, any row where the name does the identifying and the avatar only confirms it.'],
+        ['md', 'md', '48px · edge 3px · body 16px', 'Queue rows, member lists, the account screen. The default when an avatar sits in a list of people rather than a line of text.'],
+        ['lg', 'lg', '80px · edge 3px · h4 25px', 'Profile and settings heads. One per screen; it is the subject of the page, not decoration on it.']
+      ].map(z => ({ name: z[0], size: z[1], tokens: z[2], note: z[3] })),
+
+      contentHeads: [
+        { label: 'Image' }, { label: 'Initials' }, { label: 'Icon' }, { label: 'Loading' }
+      ],
+
+      contentCards: [
+        { name: 'Image', content: 'image', src: PHOTO, person: 'Nkosi Khumalo', initials: '', trigger: 'src resolves', body: 'The uploaded square, cropped with object-fit: cover so a non-square file is never distorted. Grain is dropped here — it belongs to the empty box, not over a photograph.' },
+        { name: 'Initials', content: 'initials', src: '', person: 'Nkosi Khumalo', initials: '', trigger: 'no src · name known', body: 'Up to two letters from the name, set in the label face on surface-1. Derived from the name when not given, so a member never has to supply them.' },
+        { name: 'Icon', content: 'icon', src: '', person: '', initials: '', trigger: 'no src · no name', body: 'A drawn mark in text-label, for an invited address with no profile yet or a reviewer withheld during blind review. It says unknown, not empty.' },
+        { name: 'Loading', content: 'loading', src: '', person: '', initials: '', trigger: 'loading = true', body: 'Surface-2 with a dim edge and a slow sweep, marked aria-busy. It holds the box while the person is being fetched and is never used as a permanent empty state.' }
+      ],
+
+      matrixRows: [
+        { size: 'sm', px: '28px' },
+        { size: 'md', px: '48px' },
+        { size: 'lg', px: '80px' }
+      ],
+
+      attributions: [
+        { person: 'Thandi Mabaso', content: 'image', src: PHOTO, when: 'two days ago', line: 'Requested changes on the refresh path before the adapter merges.' },
+        { person: 'Jay', content: 'initials', src: '', when: 'yesterday', line: 'Accepted with the retry budget noted as a follow-up.' },
+        { person: 'Withheld reviewer', content: 'icon', src: '', when: 'this morning', line: 'Blind pass — the identity is released with the verdict.' }
+      ],
+
+      rules: [
+        ['One shape', 'Square, radius-1, accent edge on the left. No circles, no rounded corners, no ring around the image — the system has one shape and the avatar does not get an exception.'],
+        ['Never colour-coded', 'Initials sit on surface-1 for everyone. No per-person tint, no hashed hue: colour in this system means state, and a person is not a state.'],
+        ['Not a button', 'The avatar carries no hover, focus or press of its own. Where it is clickable it is wrapped in a Button or Link that owns the target, the ring and the 44px hit area.'],
+        ['Announced once', 'The box is role="img" with the person\u2019s name as its label, and the inner image carries an empty alt so the name is not read twice. Loading is aria-busy and unlabelled.'],
+        ['Fallbacks are not decoration', 'Initials and icon mean different things: a person we can name, and a person we cannot. Do not substitute a generic icon where initials are available.'],
+        ['Size follows place', 'Small beside text, medium in lists, large at the head of a profile. An avatar is never scaled to fill space left over by a layout.']
+      ].map(r => ({ name: r[0], body: r[1] }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

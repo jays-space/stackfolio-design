@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  input::placeholder { color: #6A645B; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Authoring (start → bring → check → submit)" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="authoring" handle="@jays-space" niche="Frontend/Platform · Senior" queue-count="0" max-width="1360px" hint-size="100%,72px"></dc-import>
+
+  <div style="background: var(--surface-1); background-image: var(--grain-1); border-bottom: 1px solid var(--boundary-1);">
+    <div style="max-width: 1360px; margin: 0 auto; padding: var(--space-4) var(--space-6); display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap;">
+      <sc-for list="{{ stages }}" as="st" hint-placeholder-count="4">
+        <span style="display: flex; align-items: baseline; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; color: {{ st.numColor }};">{{ st.num }}</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: {{ st.color }}; border-bottom: 2px solid {{ st.rule }}; padding-bottom: 3px;">{{ st.label }}</span>
+        </span>
+      </sc-for>
+      <span style="margin-left: auto; font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">{{ saveState }}</span>
+    </div>
+  </div>
+
+  <main style="max-width: 860px; margin: 0 auto; padding: var(--space-8) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-6);">
+
+    <sc-if value="{{ isRevision }}">
+      <section style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--confirm); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--confirm);">Deferred · one revision left</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary);">v1 → v2</span>
+        </div>
+        <p style="margin: 0; max-width: 68ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); text-wrap: pretty;">“v1 leaks a Cognito <span style="font-family: var(--font-label); font-size: 15px;">groups</span> claim into the app-owned <span style="font-family: var(--font-label); font-size: 15px;">Session</span>. That is a vendor type crossing the boundary the whole design exists to hold. Fix the mapping and this is an approve.”</p>
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary);">@nkosi.dev · Senior · AWS/Backend</span>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3); text-wrap: pretty;">Amend the files, re-pin, and the same reviewers see v2. Spend the revision once.</span>
+      </section>
+    </sc-if>
+
+
+    <sc-if value="{{ isStart }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: var(--space-6); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Step 1 of 4</span>
+          <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">Start a case</h1>
+          <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Three fields, then your files. StackFolio never asks you to write prose in a browser.</p>
+        </div>
+
+        <label style="display: flex; flex-direction: column; gap: var(--space-3); border-top: 2px solid var(--boundary-1); padding-top: var(--space-5);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Title</span>
+          <input value="{{ title }}" onInput="{{ onTitle }}" placeholder="Name the case" style="background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: 0 0 var(--space-3) 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em; color: var(--text-primary); width: 100%;">
+        </label>
+
+        <label style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">The claim</span>
+          <input value="{{ description }}" onInput="{{ onDescription }}" placeholder="One sentence, as it appears in a list" style="background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: 0 0 var(--space-3) 0; font-family: var(--font-body); font-size: var(--text-body); color: var(--text-primary); width: 100%;">
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">The position you are taking, not a summary of the problem.</span>
+        </label>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Discipline</span>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+            <sc-for list="{{ disciplines }}" as="d" hint-placeholder-count="6">
+              <button onClick="{{ d.pick }}" style="cursor: pointer; background: {{ d.bg }}; border: 1px solid {{ d.border }}; padding: var(--space-2) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: {{ d.color }}; transition: all var(--dur-quick) var(--ease-settle);">{{ d.label }}</button>
+            </sc-for>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Half the routing key. Speciality comes after StackFolio reads your files.</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); border-top: 1px solid var(--boundary-2); padding-top: var(--space-5);">
+          <button onClick="{{ next }}" style="cursor: pointer; align-self: flex-start; background: {{ startBtnBg }}; border: 0; padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: {{ startBtnColor }}; transition: background var(--dur-quick) var(--ease-settle);">Bring the case →</button>
+          <sc-if value="{{ startBlocked }}">
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--confirm);">{{ startBlockReason }}</span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isBring }}">
+      <div style="display: flex; flex-direction: column; gap: var(--space-6); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Step 2 of 4</span>
+          <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">Bring the case</h1>
+          <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">A case is a folder of markdown that meets a contract. Write it wherever you write; StackFolio reads it, checks it, renders it.</p>
+        </div>
+
+        <section style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;">
+            <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">The contract</h2>
+            <button onClick="{{ copyScaffold }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">{{ copyLabel }}</button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <sc-for list="{{ contract }}" as="c" hint-placeholder-count="3">
+              <div style="display: flex; flex-direction: column; gap: var(--space-2); background: var(--surface-3); border-left: 2px solid {{ c.mark }}; padding: var(--space-3) var(--space-4);">
+                <span style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap;">
+                  <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-primary);">{{ c.file }}</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.reqColor }};">{{ c.req }}</span>
+                </span>
+                <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ c.must }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">A required section can conclude there was nothing to say. “None considered — this is the standard approach in Next.js” is an answer, and a reviewer can argue with it. Blank is not an answer.</span>
+        </section>
+
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-4);">
+          <button onClick="{{ pickUpload }}" style="cursor: pointer; flex: 1 1 260px; text-align: left; background: {{ uploadBg }}; border: 1px solid {{ uploadBorder }}; padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); transition: all var(--dur-quick) var(--ease-settle);">
+            <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{ uploadColor }};">Upload the folder</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">A folder that meets the contract. Nothing leaves your machine until you submit.</span>
+          </button>
+          <button onClick="{{ pickRepo }}" style="cursor: pointer; flex: 1 1 260px; text-align: left; background: {{ repoBg }}; border: 1px solid {{ repoBorder }}; padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); transition: all var(--dur-quick) var(--ease-settle);">
+            <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{ repoColor }};">Connect a repository</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Point at a folder in your repo. Pinned to a commit at submit.</span>
+          </button>
+        </div>
+
+        <sc-if value="{{ routeUpload }}">
+          <section style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+            <div style="border: 1px dashed var(--boundary-1); padding: var(--space-7) var(--space-5); display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3);">
+              <span style="font-family: var(--font-label); font-size: var(--text-body-sm); letter-spacing: 0.06em; color: var(--text-secondary);">{{ uploadState }}</span>
+              <button onClick="{{ doUpload }}" style="cursor: pointer; background: transparent; border: 1px solid var(--text-secondary); padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">Choose folder</button>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ routeRepo }}">
+          <section style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+            <sc-if value="{{ ghDisconnected }}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">StackFolio reads public repositories, and only the folder you name.</span>
+                <button onClick="{{ connectGh }}" style="cursor: pointer; align-self: flex-start; background: transparent; border: 1px solid var(--text-secondary); padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">Connect GitHub</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ ghConnected }}">
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <span style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap;">
+                  <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-primary);">jays-space/ikishi-io</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary);">main · 4f1c9ab</span>
+                </span>
+                <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-label);">docs/cases/forward-compatible-auth/</span>
+              </div>
+            </sc-if>
+          </section>
+        </sc-if>
+
+        <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; border-top: 1px solid var(--boundary-2); padding-top: var(--space-5);">
+          <button onClick="{{ prev }}" style="cursor: pointer; background: transparent; border: 0; padding: var(--space-3) 0; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);">← Back</button>
+          <button onClick="{{ next }}" style="cursor: pointer; background: {{ bringBtnBg }}; border: 0; padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: {{ bringBtnColor }}; transition: background var(--dur-quick) var(--ease-settle);">Read and check →</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCheck }}">
+      <div style="display: flex; flex-direction: column; gap: var(--space-6); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Step 3 of 4 · {{ sourceLabel }}</span>
+          <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">{{ checkHeadline }}</h1>
+          <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">{{ checkLead }}</p>
+        </div>
+
+        <section style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <sc-for list="{{ checks }}" as="c" hint-placeholder-count="6">
+            <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-3); align-items: center; background: {{ c.bg }}; border-left: 2px solid {{ c.mark }}; padding: var(--space-3) var(--space-4); margin-left: {{ c.indent }};">
+              <span style="font-family: var(--font-label); font-size: {{ c.size }}; color: {{ c.color }}; overflow-wrap: anywhere;">{{ c.label }}</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.stateColor }}; white-space: nowrap;">{{ c.state }}</span>
+            </div>
+          </sc-for>
+        </section>
+
+        <sc-if value="{{ hasIssues }}">
+          <section style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--confirm); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+            <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">{{ issuesHeadline }}</h2>
+            <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+              <sc-for list="{{ issues }}" as="i" hint-placeholder-count="2">
+                <div style="display: flex; flex-direction: column; gap: var(--space-2); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+                  <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-primary); overflow-wrap: anywhere;">{{ i.where }}</span>
+                  <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ i.why }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <button onClick="{{ recheck }}" style="cursor: pointer; align-self: flex-start; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">Fixed it — check again</button>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ hasWarnings }}">
+          <section style="border-left: 2px solid var(--boundary-1); padding: var(--space-3) var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Reviewers will see</span>
+            <sc-for list="{{ warnings }}" as="w" hint-placeholder-count="1">
+              <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ w.text }}</span>
+            </sc-for>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Shown beside the section it concerns while they judge. Nothing is said about your case that you have not read here.</span>
+          </section>
+        </sc-if>
+
+        <section style="display: flex; flex-direction: column; gap: var(--space-5); border-top: 2px solid var(--boundary-1); padding-top: var(--space-5);">
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <span style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap;">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Toolset you chose</span>
+              <sc-if value="{{ errTools }}"><span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--confirm);">Pick at least one</span></sc-if>
+            </span>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+              <sc-for list="{{ toolOptions }}" as="t" hint-placeholder-count="8">
+                <button onClick="{{ t.toggle }}" style="cursor: pointer; background: {{ t.bg }}; border: 1px solid {{ t.border }}; padding: 4px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: {{ t.color }}; transition: all var(--dur-quick) var(--ease-settle);">{{ t.label }}</button>
+              </sc-for>
+            </div>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Nobody handed you this stack. The choice is part of the claim, and it can be argued with.</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <span style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap;">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Speciality</span>
+              <sc-if value="{{ errSpeciality }}"><span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--confirm);">Required</span></sc-if>
+            </span>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+              <sc-for list="{{ specialities }}" as="sp" hint-placeholder-count="5">
+                <button onClick="{{ sp.pick }}" style="cursor: pointer; background: {{ sp.bg }}; border: 1px solid {{ sp.border }}; padding: 4px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: {{ sp.color }}; transition: all var(--dur-quick) var(--ease-settle);">{{ sp.label }}</button>
+              </sc-for>
+            </div>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">With the discipline, this decides whose verdict binds.</span>
+          </div>
+        </section>
+
+        <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; border-top: 1px solid var(--boundary-2); padding-top: var(--space-5);">
+          <button onClick="{{ prev }}" style="cursor: pointer; background: transparent; border: 0; padding: var(--space-3) 0; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);">← Back</button>
+          <button onClick="{{ next }}" style="cursor: pointer; background: {{ checkBtnBg }}; border: 0; padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: {{ checkBtnColor }}; transition: background var(--dur-quick) var(--ease-settle);">Ready to submit →</button>
+          <sc-if value="{{ checkBlocked }}">
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--confirm); max-width: 46ch; text-wrap: pretty;">{{ checkBlockReason }}</span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSubmit }}">
+      <div style="display: flex; flex-direction: column; gap: var(--space-6); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Step 4 of 4</span>
+          <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">Submit for review</h1>
+          <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Submitting pins the files as they stand and summons matching reviewers. You cannot edit while judgment is pending. That is what makes it worth having.</p>
+        </div>
+
+        <section style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+          <sc-for list="{{ summary }}" as="s" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: minmax(120px, 180px) minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">{{ s.label }}</span>
+              <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); overflow-wrap: anywhere;">{{ s.value }}</span>
+            </div>
+          </sc-for>
+        </section>
+
+        <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; border-top: 1px solid var(--boundary-2); padding-top: var(--space-5);">
+          <button onClick="{{ prev }}" style="cursor: pointer; background: transparent; border: 0; padding: var(--space-3) 0; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);">← Back</button>
+          <button onClick="{{ submit }}" style="cursor: pointer; background: var(--accent); border: 0; padding: var(--space-4) var(--space-6); font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ECE7DC; transition: background var(--dur-quick) var(--ease-settle);" style-hover="background: #7E2620;">Submit for review</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDone }}">
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--accent); padding: var(--space-7) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); animation: qSettle var(--dur-slow) var(--ease-settle) both;">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--confirm);">{{ doneKicker }}</span>
+        <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">{{ title }}</h1>
+        <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">{{ doneLead }}</p>
+        <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; border-top: 1px solid var(--boundary-2); padding-top: var(--space-4);">
+          <a href="Review Thread.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Watch the thread →</a>
+          <a href="Case Index.dc.html" style="font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Back to cases</a>
+        </div>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <dc-import name="Footer" max-width="1360px" hint-size="100%,300px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;flow&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;New case&quot;,&quot;Revision after defer&quot;],&quot;default&quot;:&quot;New case&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;startStep&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Start&quot;,&quot;Bring the case&quot;,&quot;Check&quot;,&quot;Submit&quot;],&quot;default&quot;:&quot;Start&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;strictContract&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+class Component extends DCLogic {
+  state = {
+    step: 0,
+    title: '',
+    description: '',
+    discipline: '',
+    route: null,
+    gh: false,
+    uploaded: false,
+    fixed: false,
+    tools: [],
+    speciality: '',
+    copied: false,
+    tried: false,
+    submitted: false
+  };
+
+  componentDidMount() {
+    const rev = this.props.flow === 'Revision after defer';
+    const start = rev ? 'Bring the case' : this.props.startStep;
+    if (start && start !== 'Start') {
+      const map = { 'Bring the case': 1, 'Check': 2, 'Submit': 3 };
+      const demo = {
+        title: 'Forward-compatible auth via an anti-corruption layer',
+        description: 'The IdP can be replaced without touching a single consumer.',
+        discipline: 'Frontend/Platform',
+        route: 'repo',
+        gh: true
+      };
+      this.setState(Object.assign({ step: map[start] ?? 0 }, demo));
+    }
+  }
+
+  set = (patch) => this.setState(patch);
+
+  renderVals() {
+    const s = this.state;
+
+    const DISCIPLINES = ['Frontend/Platform', 'Backend', 'Infrastructure', 'Architecture', 'Data', 'Security'];
+    const SPECIALITIES = ['Auth · Next.js', 'AWS', 'Kubernetes', 'Postgres', 'Design systems'];
+    const TOOLS = ['Next.js', 'React', 'Auth.js', 'Cognito', 'AWS SDK', 'TypeScript', 'Postgres', 'Terraform'];
+
+    const startOk = s.title.trim() && s.description.trim() && s.discipline;
+    const brought = (s.route === 'upload' && s.uploaded) || (s.route === 'repo' && s.gh);
+
+    // The parse. design.md arrives incomplete so the contract has something to say.
+    const rows = [];
+    const push = (label, state, opts) => rows.push(Object.assign({
+      label, state,
+      indent: '0px',
+      size: 'var(--text-body-sm)',
+      bg: 'var(--surface-2)',
+      color: 'var(--text-primary)',
+      mark: 'var(--boundary-1)',
+      stateColor: 'var(--text-dim)'
+    }, opts || {}));
+
+    push('problem.md', 'Found');
+    push('design.md', 'Found');
+    push('## Alternatives rejected', s.fixed ? 'Filled' : 'Empty', {
+      indent: 'var(--space-5)', size: 'var(--text-caption)', bg: 'var(--surface-3)',
+      color: 'var(--text-label)',
+      mark: s.fixed ? 'var(--boundary-2)' : 'var(--confirm)',
+      stateColor: s.fixed ? 'var(--text-dim)' : 'var(--confirm)'
+    });
+    push('## What would prove this wrong', s.fixed ? 'Filled' : 'Missing', {
+      indent: 'var(--space-5)', size: 'var(--text-caption)', bg: 'var(--surface-3)',
+      color: 'var(--text-label)',
+      mark: s.fixed ? 'var(--boundary-2)' : 'var(--confirm)',
+      stateColor: s.fixed ? 'var(--text-dim)' : 'var(--confirm)'
+    });
+    push('build.md', 'Not provided', { color: 'var(--text-secondary)', stateColor: 'var(--text-dim)' });
+
+    const strict = this.props.strictContract ?? true;
+    const issues = [];
+    if (!s.fixed && strict) {
+      issues.push({
+        where: 'design.md · ## What would prove this wrong',
+        why: 'The heading is not in the file. A reviewer judges your design against the test you name. Without one, all they have is taste.'
+      });
+      issues.push({
+        where: 'design.md · ## Alternatives rejected',
+        why: 'The heading is there, nothing under it. Say what you weighed, or say you weighed nothing and why that was fair. Either is a claim.'
+      });
+    }
+
+    const warnings = [{ text: 'No build.md — a design with nothing built yet.' }];
+    if (!s.fixed && !strict) warnings.push({ text: 'design.md has no falsifier section, and its alternatives section is empty. The author submitted anyway.' });
+
+    const missingTools = s.tools.length === 0;
+    const missingSpeciality = !s.speciality;
+    const checkClean = issues.length === 0 && !missingTools && !missingSpeciality;
+
+    let checkBlockReason = '';
+    if (issues.length) checkBlockReason = issues.length === 1 ? 'One thing to fix before this can route.' : issues.length + ' things to fix before this can route.';
+    else if (missingTools) checkBlockReason = 'Name the toolset. It is part of the claim, and it decides who can judge it.';
+    else if (missingSpeciality) checkBlockReason = 'Pick a speciality, or nobody can be matched to this.';
+
+    const isRev = this.props.flow === 'Revision after defer';
+    const pin = isRev ? 'b7e204d' : '4f1c9ab';
+    const stageNames = isRev ? ['Start', 'Amend the files', 'Check', 'Re-submit'] : ['Start', 'Bring the case', 'Check', 'Submit'];
+    const stages = stageNames.map((label, i) => ({
+      num: '0' + (i + 1),
+      label,
+      numColor: i === s.step ? 'var(--accent)' : 'var(--text-dim)',
+      color: i === s.step ? 'var(--text-primary)' : 'var(--text-secondary)',
+      rule: i === s.step ? 'var(--accent)' : 'transparent'
+    }));
+
+    return {
+      stages,
+      saveState: s.submitted ? (isRev ? 'v2 submitted' : 'Submitted') : (isRev ? 'Revising · autosaving' : 'Draft · autosaving'),
+
+      isRevision: this.props.flow === 'Revision after defer',
+      isStart: !s.submitted && s.step === 0,
+      isBring: !s.submitted && s.step === 1,
+      isCheck: !s.submitted && s.step === 2,
+      isSubmit: !s.submitted && s.step === 3,
+      isDone: s.submitted,
+
+      title: s.title,
+      description: s.description,
+      onTitle: (e) => this.set({ title: e.target.value }),
+      onDescription: (e) => this.set({ description: e.target.value }),
+      disciplines: DISCIPLINES.map(d => ({
+        label: d,
+        bg: s.discipline === d ? 'var(--accent)' : 'transparent',
+        border: s.discipline === d ? 'var(--accent)' : 'var(--boundary-1)',
+        color: s.discipline === d ? '#ECE7DC' : 'var(--text-secondary)',
+        pick: () => this.set({ discipline: d })
+      })),
+      startBtnBg: startOk ? 'var(--accent)' : 'var(--surface-1)',
+      startBtnColor: startOk ? '#ECE7DC' : 'var(--text-dim)',
+      startBlocked: !startOk,
+      startBlockReason: 'All three, before StackFolio can read anything.',
+
+      contract: [
+        { file: 'problem.md', req: 'Required', reqColor: 'var(--confirm)', mark: 'var(--accent)', must: 'What was wrong, who it hurt, and what stays broken if nobody acts.' },
+        { file: 'design.md', req: 'Required', reqColor: 'var(--confirm)', mark: 'var(--accent)', must: 'Your approach. Must carry ## Alternatives rejected and ## What would prove this wrong.' },
+        { file: 'build.md', req: 'Optional', reqColor: 'var(--text-dim)', mark: 'var(--boundary-1)', must: 'Only if you built it. Must carry ## Against the falsifier.' }
+      ],
+      copyLabel: s.copied ? 'Template copied' : 'Copy the template',
+      copyScaffold: () => this.set({ copied: true }),
+
+      routeUpload: s.route === 'upload',
+      routeRepo: s.route === 'repo',
+      uploadBg: s.route === 'upload' ? 'var(--surface-1)' : 'transparent',
+      repoBg: s.route === 'repo' ? 'var(--surface-1)' : 'transparent',
+      uploadBorder: s.route === 'upload' ? 'var(--accent)' : 'var(--boundary-1)',
+      repoBorder: s.route === 'repo' ? 'var(--accent)' : 'var(--boundary-1)',
+      uploadColor: s.route === 'upload' ? 'var(--text-primary)' : 'var(--text-secondary)',
+      repoColor: s.route === 'repo' ? 'var(--text-primary)' : 'var(--text-secondary)',
+      pickUpload: () => this.set({ route: 'upload' }),
+      pickRepo: () => this.set({ route: 'repo' }),
+      uploadState: s.uploaded ? 'forward-compatible-auth/ — 2 files read' : 'Drop the case folder here',
+      doUpload: () => this.set({ uploaded: true }),
+      ghConnected: s.gh,
+      ghDisconnected: !s.gh,
+      connectGh: () => this.set({ gh: true }),
+      bringBtnBg: brought ? 'var(--accent)' : 'var(--surface-1)',
+      bringBtnColor: brought ? '#ECE7DC' : 'var(--text-dim)',
+
+      sourceLabel: s.route === 'repo' ? 'jays-space/ikishi-io' : 'forward-compatible-auth/',
+      checkHeadline: issues.length ? 'The contract is not met' : 'The contract is met',
+      checkLead: issues.length
+        ? 'What StackFolio could not accept, and why each one matters to whoever judges this.'
+        : 'Every required file and section is there. Two declarations left.',
+      checks: rows,
+      hasIssues: issues.length > 0,
+      issues,
+      issuesHeadline: issues.length === 1 ? 'One thing blocks submission' : issues.length + ' things block submission',
+      recheck: () => this.set({ fixed: true }),
+      hasWarnings: warnings.length > 0,
+      warnings,
+
+      toolOptions: TOOLS.map(t => {
+        const on = s.tools.includes(t);
+        return {
+          label: t,
+          bg: on ? 'var(--accent)' : 'transparent',
+          border: on ? 'var(--accent)' : 'var(--boundary-1)',
+          color: on ? '#ECE7DC' : 'var(--text-secondary)',
+          toggle: () => this.setState(p => ({ tools: p.tools.includes(t) ? p.tools.filter(x => x !== t) : p.tools.concat(t), tried: false }))
+        };
+      }),
+      specialities: SPECIALITIES.map(sp => ({
+        label: sp,
+        bg: s.speciality === sp ? 'var(--accent)' : 'transparent',
+        border: s.speciality === sp ? 'var(--accent)' : 'var(--boundary-1)',
+        color: s.speciality === sp ? '#ECE7DC' : 'var(--text-secondary)',
+        pick: () => this.set({ speciality: sp, tried: false })
+      })),
+      errTools: s.tried && missingTools,
+      errSpeciality: s.tried && missingSpeciality,
+      checkBtnBg: checkClean ? 'var(--accent)' : 'var(--surface-1)',
+      checkBtnColor: checkClean ? '#ECE7DC' : 'var(--text-dim)',
+      checkBlocked: !checkClean,
+      checkBlockReason,
+
+      summary: [
+        { label: 'Case', value: s.title || 'Untitled' },
+        { label: 'Claim', value: s.description || '—' },
+        { label: 'Niche', value: (s.discipline || '—') + ' · ' + (s.speciality || '—') },
+        { label: 'Toolset', value: s.tools.length ? s.tools.join(' · ') : '—' },
+        { label: 'Source', value: s.route === 'repo' ? 'jays-space/ikishi-io · main · pinned ' + pin : 'forward-compatible-auth/ · uploaded' },
+        { label: 'Files', value: 'problem.md · design.md' },
+        { label: 'Version', value: isRev ? 'v2 — re-pinned from v1 (4f1c9ab)' : 'v1 — first submission' }
+      ],
+      nicheLine: (s.discipline || 'Frontend/Platform') + ' · ' + (s.speciality || 'Auth · Next.js'),
+      pin,
+      doneKicker: isRev ? 'v2 submitted · under review' : 'Submitted · under review',
+      doneLead: isRev
+        ? 'Re-pinned at ' + pin + ' and back to the same reviewers, plus anyone new who matches. They see v1 beside it — the trajectory is the teaching content.'
+        : 'Pinned at ' + pin + ', routed to reviewers matching your niche. Comments stay shut until the review concludes. You will hear on the first verdict.',
+
+      next: () => {
+        if (s.step === 0 && !startOk) return;
+        if (s.step === 1 && !brought) return;
+        if (s.step === 2 && !checkClean) { this.set({ tried: true }); return; }
+        this.setState(p => ({ step: Math.min(p.step + 1, 3) }));
+      },
+      prev: () => this.setState(p => ({ step: Math.max(p.step - 1, 0) })),
+      submit: () => this.set({ submitted: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

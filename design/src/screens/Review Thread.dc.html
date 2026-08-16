@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible, [tabindex]:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Review thread (Lineage specimen)" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --v-approve: #7C8A5E; --v-defer: #C08A4A; --v-reject: #B87264;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="cases" max-width="1360px" hint-size="100%,72px"></dc-import>
+
+  <header style="max-width: 1360px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 2px solid var(--boundary-1);">
+    <div style="display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: var(--space-8); align-items: end;">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: center; gap: var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">
+          <span>Case study</span><span style="color: var(--text-dim);">/</span><span>Frontend platform</span>
+        </div>
+        <h1 style="margin: 0; max-width: 22ch; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em; text-wrap: pretty;">Forward-compatible auth via an anti-corruption layer</h1>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); font-size: var(--text-body-sm); color: var(--text-secondary);">
+          <span style="color: var(--text-primary); font-weight: 600;">Jay</span>
+          <span style="font-family: var(--font-label); color: var(--text-dim);">@jays-space</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-1);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary); border: 1px solid var(--boundary-2); padding: 3px var(--space-3);">Frontend/Platform</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary); border: 1px solid var(--boundary-2); padding: 3px var(--space-3);">Auth · Next.js</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-secondary); border: 1px solid var(--boundary-2); padding: 3px var(--space-3);">Senior+</span>
+        </div>
+      </div>
+      <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Provenance</span>
+        <sc-if value="{{ isLive }}">
+          <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; color: var(--text-label);">Under review</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">v1 is with its reviewers. Provenance is not written until the review concludes.</span>
+        </sc-if>
+        <sc-if value="{{ notLive }}" hint-placeholder-val="{{ true }}">
+          <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Approved after revision</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Deferred once, amended, re-reviewed.</span>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+
+  <div style="max-width: 1360px; margin: 0 auto; padding: 0 var(--space-6); display: grid; display: flex; flex-wrap: wrap; gap: var(--space-6); align-items: flex-start;">
+
+
+    <main style="flex: 1 1 480px; min-width: 0; padding-top: var(--space-7); display: flex; flex-direction: column; gap: var(--space-6);">
+
+      <div style="display: flex; align-items: center; gap: var(--space-5); border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Viewing</span>
+        <div style="display: flex; gap: var(--space-4);">
+          <button onClick="{{ goV1 }}" style="position: relative; cursor: pointer; background: transparent; border: 0; padding: 0 0 var(--space-2) 0; font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary);" style-hover="color: #ECE7DC;">v1
+            <sc-if value="{{ v1Active }}"><span style="position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent);"></span></sc-if>
+          </button>
+          <button onClick="{{ goV2 }}" style="position: relative; cursor: pointer; background: transparent; border: 0; padding: 0 0 var(--space-2) 0; font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary);" style-hover="color: #ECE7DC;">v2
+            <sc-if value="{{ v2Active }}" hint-placeholder-val="{{ true }}"><span style="position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent);"></span></sc-if>
+          </button>
+        </div>
+        <span style="flex: 1;"></span>
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Review thread</span>
+      </div>
+
+      <sc-if value="{{ showV2 }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: var(--space-5); animation: qSettle var(--dur-slow) var(--ease-settle) both;">
+
+          <section style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-5) var(--space-6); display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-6); align-items: center;">
+            <div style="display: flex; gap: var(--space-7);">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="width: 8px; height: 34px; background: var(--text-primary);"></span>
+                <span style="display: flex; flex-direction: column;">
+                  <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: 1; font-weight: 700;">2</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-top: 6px;">Approve</span>
+                </span>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="width: 8px; height: 34px; border: 1px solid var(--text-secondary); background: transparent;"></span>
+                <span style="display: flex; flex-direction: column;">
+                  <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: 1; font-weight: 400; color: var(--text-secondary);">0</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-top: 6px;">Defer</span>
+                </span>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="width: 8px; height: 34px; background: var(--text-dim);"></span>
+                <span style="display: flex; flex-direction: column;">
+                  <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: 1; font-weight: 400; color: var(--text-secondary);">0</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-top: 6px;">Reject</span>
+                </span>
+              </div>
+            </div>
+            <div style="text-align: right; display: flex; flex-direction: column; gap: var(--space-1); border-left: 1px solid var(--boundary-1); padding-left: var(--space-6);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Resolution</span>
+              <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700; color: var(--text-primary);">Approved</span>
+              <span style="font-size: var(--text-caption); color: var(--text-secondary);">Counting rule satisfied</span>
+            </div>
+          </section>
+
+          <article style="display: grid; grid-template-columns: 8px minmax(0,1fr); background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2);">
+            <span style="background: var(--text-primary);"></span>
+            <div style="padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;">
+                <span style="display: flex; align-items: baseline; gap: var(--space-3);">
+                  <span style="font-family: var(--font-label); font-size: var(--text-body); font-weight: 500; color: var(--text-primary);">@sanele.k</span>
+                  <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">SME · Identity/Auth</span>
+                </span>
+                <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-primary);">Approve</span>
+              </div>
+              <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); max-width: 68ch; text-wrap: pretty;">Anti-corruption layer is applied correctly once the claim-mapping is owned by <span style="font-family: var(--font-label); font-size: 15px;">User</span>/<span style="font-family: var(--font-label); font-size: 15px;">Session</span>. This is how it should be done.</p>
+              <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+                <span style="flex: 1;"></span>
+                <button onClick="{{ endSanele }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: 5px var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">
+                  <sc-if value="{{ saneleOff }}" hint-placeholder-val="{{ true }}"><span>Endorse review</span></sc-if>
+                  <sc-if value="{{ saneleOn }}"><span>Endorsed · rescind</span></sc-if>
+                </button>
+              </div>
+              <sc-if value="{{ saneleOn }}">
+                <label style="display: grid; gap: var(--space-2); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Your reason — attributed, rescindable</span>
+                  <input value="Names the exact ownership move that made the boundary hold." style="background: var(--surface-3); border: 0; border-bottom: 1px solid var(--accent); padding: var(--space-3); font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); width: 100%; max-width: 520px;">
+                </label>
+              </sc-if>
+            </div>
+          </article>
+
+          <article style="display: grid; grid-template-columns: 8px minmax(0,1fr); background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2);">
+            <span style="background: var(--text-primary);"></span>
+            <div style="padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;">
+                <span style="display: flex; align-items: baseline; gap: var(--space-3);">
+                  <span style="font-family: var(--font-label); font-size: var(--text-body); font-weight: 500; color: var(--text-primary);">@t.molefe</span>
+                  <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">Intermediate · Frontend/Next.js</span>
+                </span>
+                <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-primary);">Approve</span>
+              </div>
+              <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); max-width: 68ch; text-wrap: pretty;">Direction was right in v1 and the clarification settled it: <span style="font-family: var(--font-label); font-size: 15px;">middleware.ts</span> goes through the adapter's guard, not Auth.js. Nothing vendor-shaped reaches a consumer.</p>
+              <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+                <span style="flex: 1;"></span>
+                <button onClick="{{ endMolefe }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: 5px var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">
+                  <sc-if value="{{ molefeOff }}" hint-placeholder-val="{{ true }}"><span>Endorse review</span></sc-if>
+                  <sc-if value="{{ molefeOn }}"><span>Endorsed · rescind</span></sc-if>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <div style="display: flex; align-items: center; gap: var(--space-4); padding-top: var(--space-2);">
+            <span style="height: 1px; flex: 1; background: var(--boundary-2);"></span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Review concluded · general comments open</span>
+            <span style="height: 1px; flex: 1; background: var(--boundary-2);"></span>
+          </div>
+
+          <section style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">General comments</h2>
+            <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+              <div style="border-left: 1px solid var(--boundary-2); padding: var(--space-1) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+                <span style="display: flex; align-items: baseline; gap: var(--space-3);"><span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-label);">@r.dlamini</span><span style="font-size: var(--text-caption); color: var(--text-dim);">2 days ago</span></span>
+                <p style="margin: 0; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch;">Copying the adapter shape into our Cognito migration this week. The v1 defer is the part worth reading first.</p>
+              </div>
+              <div style="border-left: 1px solid var(--boundary-2); padding: var(--space-1) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+                <span style="display: flex; align-items: baseline; gap: var(--space-3);">
+                  <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-label);">@jays-space</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--boundary-2); padding: 1px 6px;">Author</span>
+                  <span style="font-size: var(--text-caption); color: var(--text-dim);">1 day ago</span>
+                </span>
+                <p style="margin: 0; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch;">The AWS-phase swap is not written yet. When it lands it should touch the adapter's implementation and nothing else — that is the falsifiable part.</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: var(--space-3); align-items: center; background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); padding: var(--space-4);">
+              <input placeholder="Add a general comment" style="flex: 1; background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: var(--space-2) 0; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary);">
+              <button style="cursor: pointer; background: var(--accent); border: 0; padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ECE7DC; transition: background var(--dur-quick) var(--ease-settle);" style-hover="background: #7E2620;">Post</button>
+            </div>
+          </section>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showV1 }}">
+        <div style="display: flex; flex-direction: column; gap: var(--space-5); animation: qSettle var(--dur-slow) var(--ease-settle) both;">
+
+          <section style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); padding: var(--space-5) var(--space-6); display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-6); align-items: center;">
+            <div style="display: flex; gap: var(--space-7);">
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="width: 8px; height: 34px; background: var(--text-primary);"></span>
+                <span style="display: flex; flex-direction: column;">
+                  <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: 1; font-weight: 400; color: var(--text-secondary);">0</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-top: 6px;">Approve</span>
+                </span>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="width: 8px; height: 34px; border: 1px solid var(--text-secondary); background: transparent;"></span>
+                <span style="display: flex; flex-direction: column;">
+                  <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: 1; font-weight: 700; color: var(--text-primary);">1</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-top: 6px;">Defer</span>
+                </span>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-3);">
+                <span style="width: 8px; height: 34px; background: var(--text-dim);"></span>
+                <span style="display: flex; flex-direction: column;">
+                  <span style="font-family: var(--font-heading); font-size: var(--text-h4); line-height: 1; font-weight: 400; color: var(--text-secondary);">0</span>
+                  <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-top: 6px;">Reject</span>
+                </span>
+              </div>
+            </div>
+            <div style="text-align: right; display: flex; flex-direction: column; gap: var(--space-1); border-left: 1px solid var(--boundary-2); padding-left: var(--space-6);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Resolution</span>
+              <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700; color: var(--text-secondary);">Deferred</span>
+              <span style="font-size: var(--text-caption); color: var(--text-secondary);">Revision granted · 1 of {{ budget }}</span>
+            </div>
+          </section>
+
+          <sc-if value="{{ clarify }}" hint-placeholder-val="{{ true }}">
+            <div style="border-left: 1px solid var(--boundary-2); padding: var(--space-2) var(--space-5); margin-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+              <span style="display: flex; align-items: baseline; gap: var(--space-3);">
+                <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-label);">@t.molefe</span>
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Clarification</span>
+              </span>
+              <p style="margin: 0; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch;">Does <span style="font-family: var(--font-label); font-size: 13px; color: var(--text-primary);">middleware.ts</span> call the adapter or Auth.js directly?</p>
+              <span style="font-size: var(--text-caption); color: var(--text-secondary);">Open, editable, non-committal — no round is closed by a question.</span>
+            </div>
+          </sc-if>
+
+          <article style="display: grid; grid-template-columns: 8px minmax(0,1fr); background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2);">
+            <span style="border: 1px solid var(--text-secondary); background: transparent;"></span>
+            <div style="padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap;">
+                <span style="display: flex; align-items: baseline; gap: var(--space-3);">
+                  <span style="font-family: var(--font-label); font-size: var(--text-body); font-weight: 500; color: var(--text-primary);">@nkosi.dev</span>
+                  <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">Senior · AWS/Backend</span>
+                </span>
+                <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-secondary);">Defer for update</span>
+              </div>
+              <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); max-width: 68ch; text-wrap: pretty;">The adapter shape is right, but v1 leaks a Cognito <span style="font-family: var(--font-label); font-size: 15px;">groups</span> claim into the app-owned <span style="font-family: var(--font-label); font-size: 15px;">Session</span>. That's a vendor type crossing the boundary the whole design exists to hold.</p>
+              <div style="border-left: 2px solid var(--accent); padding: var(--space-2) var(--space-4); display: flex; flex-direction: column; gap: var(--space-1);">
+                <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">What must change</span>
+                <span style="font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); max-width: 68ch; text-wrap: pretty;">Own the claim mapping inside <span style="font-family: var(--font-label); font-size: 15px;">User</span>/<span style="font-family: var(--font-label); font-size: 15px;">Session</span> so no Cognito type appears in the app-owned session. Fix that and this is an approve.</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+                <span style="flex: 1;"></span>
+                <button onClick="{{ endNkosi }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: 5px var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">
+                  <sc-if value="{{ nkosiOff }}" hint-placeholder-val="{{ true }}"><span>Endorse review</span></sc-if>
+                  <sc-if value="{{ nkosiOn }}"><span>Endorsed · rescind</span></sc-if>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <div style="display: flex; align-items: center; gap: var(--space-4); padding-top: var(--space-2);">
+            <span style="height: 1px; flex: 1; background: var(--boundary-2);"></span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Round closed · superseded by v2</span>
+            <span style="height: 1px; flex: 1; background: var(--boundary-2);"></span>
+          </div>
+
+          <div style="background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Comments were closed on this version</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch;">While a case is under review, general comments are disabled — Track and emoji reactions only. They reopened on v2 when the review concluded.</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isLive }}">
+        <div style="display: flex; flex-direction: column; gap: var(--space-5); animation: qSettle var(--dur-slow) var(--ease-settle) both;">
+
+          <section style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--accent); padding: var(--space-5) var(--space-6); display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-6); align-items: center;">
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-label);">Under review · v1</span>
+              <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 60ch;">Routed to 4 niche-matched reviewers. No verdict has landed yet.</span>
+            </div>
+            <div style="text-align: right; display: flex; flex-direction: column; gap: var(--space-1); border-left: 1px solid var(--boundary-2); padding-left: var(--space-6);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Quorum</span>
+              <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700; color: var(--text-primary);">0 of 2</span>
+              <span style="font-size: var(--text-caption); color: var(--text-secondary);">Binding verdicts in</span>
+            </div>
+          </section>
+
+          <div style="border-left: 1px solid var(--boundary-2); padding: var(--space-2) var(--space-5); margin-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="display: flex; align-items: baseline; gap: var(--space-3);">
+              <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-label);">@t.molefe</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Clarification · open</span>
+            </span>
+            <p style="margin: 0; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch;">Does <span style="font-family: var(--font-label); font-size: 13px; color: var(--text-primary);">middleware.ts</span> call the adapter or Auth.js directly?</p>
+            <span style="font-size: var(--text-caption); color: var(--text-secondary);">Awaiting the author. A question closes no round.</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: var(--space-4); padding-top: var(--space-2);">
+            <span style="height: 1px; flex: 1; background: var(--boundary-2);"></span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Comments closed until review concludes</span>
+            <span style="height: 1px; flex: 1; background: var(--boundary-2);"></span>
+          </div>
+
+          <section style="background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); padding: var(--space-5) var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+            <p style="margin: 0; max-width: 66ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); text-wrap: pretty;">The peanut gallery is closed while judgment is pending. One bit decides it — review concluded, yes or no — and it is what makes passing review carry weight.</p>
+            <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;">
+              <button style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-3); font-size: var(--text-body-sm); color: var(--text-primary); transition: border-color var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">↑ 12</button>
+              <button style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-3); font-size: var(--text-body-sm); color: var(--text-primary); transition: border-color var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">◆ 4</button>
+              <button style="cursor: pointer; background: transparent; border: 1px solid var(--text-secondary); padding: var(--space-3) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #ECE7DC;">Track this case</button>
+              <span style="font-size: var(--text-caption); color: var(--text-secondary);">Reactions and tracking stay open. Comments reopen when the review concludes.</span>
+            </div>
+          </section>
+        </div>
+      </sc-if>
+
+    </main>
+
+    <aside style="flex: 1 1 280px; max-width: 320px; min-width: 0; position: sticky; top: var(--space-5); padding-top: var(--space-7); display: flex; flex-direction: column; gap: var(--space-5);">
+      <div style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-3);">Lineage · trajectory</div>
+
+      <div style="display: flex; flex-direction: column;">
+        <button onClick="{{ goV1 }}" style="position: relative; text-align: left; cursor: pointer; background: var(--surface-3); background-image: var(--grain-3); border: 0; border-top: 1px solid var(--boundary-3); border-left: 2px solid var(--boundary-2); padding: var(--space-4) var(--space-4) var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); font-family: var(--font-body); transition: background var(--dur-base) var(--ease-settle);" style-hover="background: var(--surface-2);">
+          <sc-if value="{{ v1Active }}"><span style="position: absolute; left: -2px; top: 0; bottom: 0; width: 2px; background: var(--accent);"></span></sc-if>
+          <span style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.06em; color: var(--text-secondary);">v1</span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Disputed</span>
+          </span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Deferred by @nkosi.dev — vendor claim crossing the boundary.</span>
+        </button>
+
+        <div style="display: grid; grid-template-columns: 20px 1fr; align-items: stretch;">
+          <div style="border-right: 1px solid var(--boundary-1); border-bottom: 1px solid var(--boundary-1); height: var(--space-6); margin-left: var(--space-4);"></div>
+          <div style="display: flex; align-items: flex-end; padding-bottom: var(--space-2); padding-left: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Revision · 1 of {{ budget }}</span>
+          </div>
+        </div>
+
+        <button onClick="{{ goV2 }}" style="position: relative; text-align: left; cursor: pointer; background: var(--surface-1); background-image: var(--grain-1); border: 0; border-top: 1px solid var(--boundary-1); border-left: 2px solid var(--boundary-2); padding: var(--space-4) var(--space-4) var(--space-4) var(--space-5); margin-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); font-family: var(--font-body); transition: background var(--dur-base) var(--ease-settle);" style-hover="background: #2A2925;">
+          <sc-if value="{{ v2Active }}" hint-placeholder-val="{{ true }}"><span style="position: absolute; left: -2px; top: 0; bottom: 0; width: 2px; background: var(--accent);"></span></sc-if>
+          <span style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.06em; color: var(--text-primary);">v2</span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Endorsed</span>
+          </span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Claim mapping moved behind <span style="font-family: var(--font-label); font-size: 13px; color: var(--text-primary);">User</span> / <span style="font-family: var(--font-label); font-size: 13px; color: var(--text-primary);">Session</span>. Approved by two.</span>
+        </button>
+      </div>
+
+      <div style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3); text-wrap: pretty;">Trust is not in the final state. It is in the trajectory — what was disputed, what changed, what survived.</div>
+    </aside>
+  </div>
+
+  <dc-import name="Footer" max-width="1360px" hint-size="100%,300px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1180},&quot;showClarifications&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;MVP collapse&quot;},&quot;revisionBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1,&quot;min&quot;:1,&quot;max&quot;:2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Review loop&quot;}}">
+class Component extends DCLogic {
+  state = { version: 'v2', endorsed: {} };
+
+  go(v) { this.setState({ version: v }); }
+  toggle(k) { this.setState(s => ({ endorsed: { ...s.endorsed, [k]: !s.endorsed[k] } })); }
+
+  renderVals() {
+    const v = this.state.version, e = this.state.endorsed;
+    const live = (this.props.reviewState ?? 'concluded') === 'under-review';
+    return {
+      v1Active: live ? true : v === 'v1',
+      v2Active: live ? false : v === 'v2',
+      isLive: live,
+      notLive: !live,
+      showV1: !live && v === 'v1',
+      showV2: !live && v === 'v2',
+      goV1: () => this.go('v1'),
+      goV2: () => this.go('v2'),
+      clarify: this.props.showClarifications ?? true,
+      budget: this.props.revisionBudget ?? 1,
+      endNkosi: () => this.toggle('nkosi'),
+      endMolefe: () => this.toggle('molefe'),
+      endSanele: () => this.toggle('sanele'),
+      nkosiOn: !!e.nkosi, nkosiOff: !e.nkosi,
+      molefeOn: !!e.molefe, molefeOff: !e.molefe,
+      saneleOn: !!e.sanele, saneleOff: !e.sanele
+    };
+  }
+}
+
+</script>
+</body>
+</html>

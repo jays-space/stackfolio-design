@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Tracked cases" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="none" max-width="960px" hint-size="100%,72px"></dc-import>
+
+  <header style="max-width: 960px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-5); border-bottom: 2px solid var(--boundary-1); display: flex; flex-direction: column; gap: var(--space-3);">
+    <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Private to you</span>
+    <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">Tracked cases</h1>
+    <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Cases you are watching but not judging. StackFolio tells you when one concludes — that is the moment general comments open and the verdicts become readable in full.</p>
+  </header>
+
+  <main style="max-width: 960px; margin: 0 auto; padding: var(--space-6) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-5);">
+
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim);">{{ summary }}</span>
+      <span style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+        <button onClick="{{ pickAll }}" style="cursor: pointer; background: {{ allBg }}; border: 1px solid {{ allBorder }}; padding: 3px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: {{ allColor }}; transition: all var(--dur-quick) var(--ease-settle);">All</button>
+        <button onClick="{{ pickLive }}" style="cursor: pointer; background: {{ liveBg }}; border: 1px solid {{ liveBorder }}; padding: 3px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: {{ liveColor }}; transition: all var(--dur-quick) var(--ease-settle);">Still open</button>
+        <button onClick="{{ pickDone }}" style="cursor: pointer; background: {{ doneBg }}; border: 1px solid {{ doneBorder }}; padding: 3px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: {{ doneColor }}; transition: all var(--dur-quick) var(--ease-settle);">Concluded</button>
+      </span>
+    </div>
+
+    <sc-for list="{{ cases }}" as="c" hint-placeholder-count="3">
+      <article style="display: grid; grid-template-columns: 8px minmax(0,1fr); background: var(--surface-2); background-image: var(--grain-2); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+        <span style="background: {{ c.mark }};"></span>
+        <div style="padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;">
+            <a href="Case Reader.dc.html" style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; border-bottom: 0;">{{ c.title }}</a>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: {{ c.stateColor }}; white-space: nowrap;">{{ c.state }}</span>
+          </div>
+          <p style="margin: 0; max-width: 68ch; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ c.claim }}</p>
+          <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; background: var(--surface-3); background-image: var(--grain-3); padding: var(--space-2) var(--space-4);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">{{ c.sinceLabel }}</span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: {{ c.sinceColor }};">{{ c.since }}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim);">{{ c.meta }}</span>
+            <button onClick="{{ c.untrack }}" style="cursor: pointer; margin-left: auto; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">Stop tracking</button>
+          </div>
+        </div>
+      </article>
+    </sc-for>
+
+    <sc-if value="{{ isEmpty }}">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4); border-left: 2px solid var(--boundary-1); padding: var(--space-4) var(--space-5); max-width: 68ch;">
+        <p style="margin: 0; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">{{ emptyText }}</p>
+        <a href="Case Index.dc.html" style="align-self: flex-start; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Browse cases →</a>
+      </div>
+    </sc-if>
+  </main>
+
+  <dc-import name="Footer" max-width="960px" hint-size="100%,300px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+// All Frontend/Platform — outside @nkosi.dev's AWS/Backend · Identity binding,
+// so he can watch these but cannot bind a verdict on any of them.
+const TRACKED = [
+  {
+    id: 'optimistic',
+    title: 'Optimistic writes with a rollback contract',
+    claim: 'If the server rejects, the interface must return to a state the user recognises.',
+    state: 'Under review',
+    live: true,
+    stateColor: 'var(--confirm)',
+    mark: 'var(--confirm)',
+    sinceLabel: 'In progress',
+    since: '1 approve · 1 defer · comments closed until it concludes',
+    sinceColor: 'var(--text-primary)',
+    meta: 'v1 · @r.dlamini · Frontend/Platform · 3 days ago'
+  },
+  {
+    id: 'route-loading',
+    title: 'Route-level data loading with server components',
+    claim: 'Move the fetch to the route boundary and let the component tree stay ignorant of where data came from.',
+    state: 'Under review',
+    live: true,
+    stateColor: 'var(--confirm)',
+    mark: 'var(--confirm)',
+    sinceLabel: 'In progress',
+    since: '1 of 2 verdicts in · you cannot bind on this niche',
+    sinceColor: 'var(--text-primary)',
+    meta: 'v1 · @t.molefe · Frontend/Platform · 1 day ago'
+  },
+  {
+    id: 'edge-authz',
+    title: 'Edge middleware as an authorisation boundary',
+    claim: 'Authorisation at the edge is cheap and fast, and wrong the moment it becomes the only check.',
+    state: 'Approved after revision',
+    live: false,
+    stateColor: 'var(--text-primary)',
+    mark: 'var(--text-primary)',
+    sinceLabel: 'Concluded',
+    since: 'Comments are open · 9 days ago',
+    sinceColor: 'var(--text-primary)',
+    meta: 'v2 · @t.molefe · 2 approve · 0 defer'
+  }
+];
+
+class Component extends DCLogic {
+  state = { filter: 'all', dropped: [] };
+
+  renderVals() {
+    const s = this.state;
+    const kept = TRACKED.filter(c => !s.dropped.includes(c.id));
+    const shown = s.filter === 'all' ? kept : kept.filter(c => (s.filter === 'live' ? c.live : !c.live));
+    const liveCount = kept.filter(c => c.live).length;
+
+    const chip = (on) => ({
+      bg: on ? 'var(--accent)' : 'transparent',
+      border: on ? 'var(--accent)' : 'var(--boundary-1)',
+      color: on ? '#ECE7DC' : 'var(--text-secondary)'
+    });
+    const all = chip(s.filter === 'all'), live = chip(s.filter === 'live'), done = chip(s.filter === 'done');
+
+    const empty = {
+      all: 'You are not tracking anything. Track a case while it is under review and StackFolio will tell you when the verdicts land.',
+      live: 'Nothing you track is still open.',
+      done: 'Nothing you track has concluded yet.'
+    };
+
+    return {
+      summary: kept.length === 0
+        ? 'Nothing tracked'
+        : kept.length + (kept.length === 1 ? ' case' : ' cases') + (liveCount ? ' · ' + liveCount + ' still open' : ' · all concluded'),
+      cases: shown.map(c => Object.assign({}, c, {
+        untrack: () => this.setState({ dropped: s.dropped.concat(c.id) })
+      })),
+      isEmpty: shown.length === 0,
+      emptyText: empty[s.filter],
+
+      allBg: all.bg, allBorder: all.border, allColor: all.color,
+      liveBg: live.bg, liveBorder: live.border, liveColor: live.color,
+      doneBg: done.bg, doneBorder: done.border, doneColor: done.color,
+      pickAll: () => this.setState({ filter: 'all' }),
+      pickLive: () => this.setState({ filter: 'live' }),
+      pickDone: () => this.setState({ filter: 'done' })
+    };
+  }
+}
+</script>
+</body>
+</html>

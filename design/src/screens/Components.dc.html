@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Component inventory" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="none" max-width="1200px" hint-size="100%,72px"></dc-import>
+
+  <header style="max-width: 1200px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 2px solid var(--boundary-1); display: flex; flex-direction: column; gap: var(--space-3);">
+    <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Inventory</span>
+    <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">What composes StackFolio</h1>
+    <p style="margin: 0; max-width: 68ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Every component the built screens actually use, and the ones that are decided but undrawn. Derived from the surfaces, not assumed ahead of them.</p>
+    <div style="display: flex; gap: var(--space-5); flex-wrap: wrap; padding-top: var(--space-3);">
+      <sc-for list="{{ totals }}" as="t" hint-placeholder-count="3">
+        <span style="display: flex; align-items: baseline; gap: var(--space-2);">
+          <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700; color: {{ t.color }};">{{ t.n }}</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);">{{ t.label }}</span>
+        </span>
+      </sc-for>
+    </div>
+  </header>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-7);">
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="6">
+      <section style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">{{ g.name }}</h2>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ g.note }}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: minmax(180px, 240px) minmax(0,1fr) minmax(120px, 180px) 92px; gap: var(--space-4); align-items: baseline; background: {{ it.bg }}; border-left: 2px solid {{ it.mark }}; padding: var(--space-3) var(--space-4);">
+              <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-primary); overflow-wrap: anywhere;">{{ it.name }}</span>
+              <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ it.what }}</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-dim); overflow-wrap: anywhere;">{{ it.where }}</span>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: {{ it.statusColor }}; text-align: right;">{{ it.status }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+
+    <section style="background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+      <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">What is left</h2>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <sc-for list="{{ remaining }}" as="r" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: var(--space-2); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-primary);">{{ r.name }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 78ch; text-wrap: pretty;">{{ r.why }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <dc-import name="Footer" max-width="1200px" hint-size="100%,300px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const BUILT = { status: 'Built', statusColor: 'var(--text-dim)', mark: 'var(--boundary-1)', bg: 'var(--surface-2)' };
+const PARTIAL = { status: 'Partial', statusColor: 'var(--text-label)', mark: 'var(--text-label)', bg: 'var(--surface-2)' };
+const TODO = { status: 'Undrawn', statusColor: 'var(--confirm)', mark: 'var(--confirm)', bg: 'var(--surface-1)' };
+
+const G = [
+  ['Shell', 'Mounted on every screen. One header, one footer, one account.', [
+    ['App header', 'One shell, two states. Signed out: brand and a reading note. Signed in: nav, queue badge, new-case action, account menu.', 'Header', BUILT],
+    ['Footer', 'Family sequence, secondary links, the one-line statement.', 'Footer', BUILT],
+    ['Account menu', 'Handle, niche, queue, sign out. Closes on outside click.', 'Header', BUILT],
+    ['Member profile', 'A member’s cases, reviews given, declared niche.', '—', TODO],
+    ['Notifications', 'Routing is push, so arrival needs a surface of its own.', '—', TODO]
+  ]],
+  ['Discovery', 'Finding a case before anyone reviews it.', [
+    ['Orientation landing', 'What StackFolio is, the loop, stamped cases, browse beneath. Anonymous.', 'Home', BUILT],
+    ['Signed-in home', 'Verdicts waiting, what moved, browse. Reviewer-first, because routing is push.', 'Home - signed in', BUILT],
+    ['Keyword search', 'Deferred. Filters answer the index until volume demands a search service.', '—', TODO],
+    ['Facet rail', 'Discipline, speciality, state, toolset. Left, because it changes the list.', 'Case Index', BUILT],
+    ['Result row', 'Title, claim, author, niche chips, review state.', 'Case Index', BUILT],
+    ['Load skeleton', 'Grain-matched placeholder rows.', 'Case Index', BUILT],
+    ['Error + retry', 'Recoverable, states what did not load.', 'Case Index', BUILT],
+    ['Empty / gone', 'No results, and the honest not-found.', 'Case Index', BUILT]
+  ]],
+  ['Reading', 'The case as one continuous document.', [
+    ['Case reader', 'Problem, design, toolset, alternatives, falsifier, build. No tabs.', 'Case Reader', BUILT],
+    ['Outcome block', 'Review state, resolution, tally. Rail, above the lineage.', 'Case Reader', BUILT],
+    ['Lineage trajectory', 'Version → review history → verdict, sinking as it recedes.', 'Reader · Thread', BUILT],
+    ['Version switcher', 'v1 / v2, swaps the thread and the outcome with it.', 'Reader · Thread', BUILT],
+    ['Falsifier block', 'Accent-topped. What the verdicts are measured against.', 'Reader · Verdict Panel', BUILT],
+    ['Markdown renderer', 'Renders the contract-parsed files. Nothing displays a case body without it.', '—', TODO]
+  ]],
+  ['Review loop', 'The load-bearing part. Independent, attributed, whole-case.', [
+    ['Review thread', 'Concluded and live states, verdicts on their own stratum.', 'Reader · Thread', BUILT],
+    ['Verdict tally', 'Aggregate counts, resolved status.', 'Reader · Thread', BUILT],
+    ['Verdict card', 'Identity, niche, value, rationale, endorse.', 'Reader · Thread', BUILT],
+    ['Clarification entry', 'Dialogue weight — deliberately lighter than a verdict.', 'Review Thread', BUILT],
+    ['Verdict panel', 'Clarify ↔ cast. Sinks into a denser stratum when engaged.', 'Verdict Panel', BUILT],
+    ['Defer notice', 'Names the revision budget the verdict grants.', 'Verdict Panel', BUILT],
+    ['Pending lock', 'The author cannot edit while judgment is out.', 'Verdict Panel', BUILT],
+    ['Endorse control', 'Attributed, reasoned, rescindable. No count.', 'Reader · Thread', BUILT],
+    ['Queue item', 'How a reviewer arrives. Push, never browse.', 'Reviewer Queue', BUILT],
+    ['Awaiting reviewers', 'Under-quota, curator handling, not a silent stall.', 'Reviewer Queue', BUILT],
+    ['Terminal reject', 'Budget exhausted, with the trajectory that led there.', 'Reviewer Queue', BUILT],
+    ['Contract warnings', 'The author’s gaps, shown beside the section being judged.', '—', TODO],
+    ['Passage quoting', 'Cite a passage inside a rationale — precision without per-part verdicts.', '—', TODO]
+  ]],
+  ['Participation', 'What a member can do that is not a verdict.', [
+    ['Sign-in hand-off', 'Cognito owns the credential step. StackFolio owns the return.', 'Sign-in interrupted', BUILT],
+    ['Interrupted sign-in', 'Cancelled or failed. The held intent survives, nothing written.', 'Sign-in interrupted', BUILT],
+    ['Invite acceptance', 'Hand-admitted. The directives are the terms; the niche arrives with the invite.', 'Invite', BUILT],
+    ['Comment thread', 'Conversation, opened only once review concludes.', 'Case Reader', BUILT],
+    ['Reactions', 'The one lightweight expression allowed under review.', 'Case Reader', BUILT],
+    ['Track control', 'Optimistic, rolls back on failure, offers retry.', 'Case Reader', BUILT],
+    ['Eligibility note', 'Why a verdict is not yours to cast. Never a mystery.', 'Reader · Queue', BUILT]
+  ]],
+  ['Authoring', 'Four steps. No editor — the case is a folder of markdown.', [
+    ['Step rail', 'Start, bring, check, submit. Renamed in revision.', 'Authoring', BUILT],
+    ['Start form', 'Title, claim, discipline. The only typing StackFolio asks for.', 'Authoring', BUILT],
+    ['Contract panel', 'Required files, required headings, copyable template.', 'Authoring', BUILT],
+    ['Upload route', 'A folder that meets the contract.', 'Authoring', BUILT],
+    ['Repo route', 'Connect, name the folder, pin the commit.', 'Authoring', BUILT],
+    ['Parse result', 'Files with headings beneath, found / empty / missing.', 'Authoring', BUILT],
+    ['Blocking issues', 'Exact file, exact heading, why a reviewer needs it.', 'Authoring', BUILT],
+    ['Declarations', 'Toolset and speciality — routing and eligibility.', 'Authoring', BUILT],
+    ['Submit summary', 'What is pinned, what is routed, what locks.', 'Authoring', BUILT],
+    ['Revision mode', 'The defer, the re-pin, v1 → v2.', 'Authoring', BUILT],
+    ['Documentation bundle', 'Whatever the industry expects, in place of the invented file convention.', '—', TODO]
+  ]]
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    const groups = G.map(([name, note, items]) => ({
+      name, note,
+      items: items.map(([n, what, where, st]) => Object.assign({ name: n, what, where }, st))
+    }));
+    const all = groups.reduce((acc, g) => acc.concat(g.items), []);
+    const count = (s) => all.filter(i => i.status === s).length;
+    return {
+      groups,
+      totals: [
+        { n: count('Built'), label: 'built', color: 'var(--text-primary)' },
+        { n: count('Partial'), label: 'partial', color: 'var(--text-label)' },
+        { n: count('Undrawn'), label: 'undrawn', color: 'var(--confirm)' }
+      ],
+      remaining: [
+        { name: 'Markdown renderer', why: 'It left with the editor. Every case body now arrives as markdown files, and nothing in the reader renders them — the case reader still shows hard-coded prose. Until this exists the contract parses files that no one can read. First.' },
+        { name: 'Member profile', why: 'The account menu points at a person who has no page. Low stakes while there is one author, but every verdict is attributed — a reader will want to know who @nkosi.dev is before weighing his defer.' },
+        { name: 'Notifications', why: 'Routing is push. A reviewer is summoned, and right now the only place that arrival lands is the queue badge. The queue covers the reviewer; it does not cover the author waiting on a verdict.' },
+        { name: 'Contract warnings in the verdict panel', why: 'Decided and built on the author side — they see what reviewers will see. The reviewer half is not drawn: the warning should sit beside the section it concerns while they judge.' },
+        { name: 'Quoting a passage in a rationale', why: 'A verdict is on the whole case, so the rationale carries all the pointing. Letting a reviewer cite a passage would restore precision without reintroducing per-part verdicts. The sharpest remaining gap in the defer loop.' },
+        { name: 'The documentation bundle', why: 'problem.md / design.md / build.md is invented. If there is an industry-standard bundle for delivering software or infrastructure, the contract should be that instead — a convention engineers already recognise beats one StackFolio made up.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

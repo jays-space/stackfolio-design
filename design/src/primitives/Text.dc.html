@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+</helmet>
+
+<sc-if value="{{ isH1 }}" hint-placeholder-val="{{ false }}"><h1 style="{{ rootStyle }}">{{ text }}</h1></sc-if>
+<sc-if value="{{ isH2 }}" hint-placeholder-val="{{ false }}"><h2 style="{{ rootStyle }}">{{ text }}</h2></sc-if>
+<sc-if value="{{ isH3 }}" hint-placeholder-val="{{ false }}"><h3 style="{{ rootStyle }}">{{ text }}</h3></sc-if>
+<sc-if value="{{ isH4 }}" hint-placeholder-val="{{ false }}"><h4 style="{{ rootStyle }}">{{ text }}</h4></sc-if>
+<sc-if value="{{ isH5 }}" hint-placeholder-val="{{ false }}"><h5 style="{{ rootStyle }}">{{ text }}</h5></sc-if>
+<sc-if value="{{ isP }}" hint-placeholder-val="{{ true }}"><p style="{{ rootStyle }}">{{ text }}</p></sc-if>
+<sc-if value="{{ isSpan }}" hint-placeholder-val="{{ false }}"><span style="{{ rootStyle }}">{{ text }}</span></sc-if>
+<sc-if value="{{ isDiv }}" hint-placeholder-val="{{ false }}"><div style="{{ rootStyle }}">{{ text }}</div></sc-if>
+<sc-if value="{{ isLabelEl }}" hint-placeholder-val="{{ false }}"><label style="{{ rootStyle }}">{{ text }}</label></sc-if>
+<sc-if value="{{ isCodeEl }}" hint-placeholder-val="{{ false }}"><code style="{{ rootStyle }}">{{ text }}</code></sc-if>
+<sc-if value="{{ isPre }}" hint-placeholder-val="{{ false }}"><pre style="{{ rootStyle }}">{{ text }}</pre></sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:520,&quot;height&quot;:120},&quot;text&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A case is a claim with its reasoning attached&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;role&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;h1&quot;,&quot;h2&quot;,&quot;h3&quot;,&quot;h4&quot;,&quot;h5&quot;,&quot;read&quot;,&quot;body&quot;,&quot;body-sm&quot;,&quot;label&quot;,&quot;code&quot;,&quot;code-sm&quot;],&quot;default&quot;:&quot;body&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;element&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;h1&quot;,&quot;h2&quot;,&quot;h3&quot;,&quot;h4&quot;,&quot;h5&quot;,&quot;p&quot;,&quot;span&quot;,&quot;div&quot;,&quot;label&quot;,&quot;code&quot;,&quot;pre&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Element&quot;},&quot;tone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;role&quot;,&quot;primary&quot;,&quot;secondary&quot;,&quot;dim&quot;,&quot;label&quot;,&quot;confirm&quot;,&quot;caution&quot;,&quot;muted&quot;],&quot;default&quot;:&quot;role&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Tone&quot;},&quot;align&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;left&quot;,&quot;center&quot;,&quot;right&quot;],&quot;default&quot;:&quot;left&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;measure&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;overflow&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;wrap&quot;,&quot;truncate&quot;,&quot;clamp&quot;],&quot;default&quot;:&quot;wrap&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Overflow&quot;},&quot;clampLines&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2,&quot;min&quot;:1,&quot;max&quot;:6,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Overflow&quot;}}">
+const T = (name, fallback) => 'var(--' + name + ', ' + fallback + ')';
+
+const FONT_HEADING = T('font-heading', "'Epilogue', system-ui, sans-serif");
+const FONT_BODY = T('font-body', "'Manrope', system-ui, sans-serif");
+const FONT_LABEL = T('font-label', "'Space Grotesk', ui-monospace, monospace");
+const FONT_MONO = T('font-mono', "'Geist Mono', ui-monospace, monospace");
+
+// Every row is a Foundations type role. No size, line height or weight is invented here —
+// a role that does not exist on this table has to be added to Foundations first.
+const ROLES = {
+  h1:        { f: FONT_HEADING, fs: T('text-h1', '49px'),      lh: T('lh-h1', '55px'),      w: 800, ls: '-0.026em', el: 'h1',   tone: 'primary'   },
+  h2:        { f: FONT_HEADING, fs: T('text-h2', '39px'),      lh: T('lh-h2', '47px'),      w: 700, ls: '-0.022em', el: 'h2',   tone: 'primary'   },
+  h3:        { f: FONT_HEADING, fs: T('text-h3', '31px'),      lh: T('lh-h3', '40px'),      w: 700, ls: '-0.02em',  el: 'h3',   tone: 'primary'   },
+  h4:        { f: FONT_HEADING, fs: T('text-h4', '25px'),      lh: T('lh-h4', '33px'),      w: 700, ls: '-0.018em', el: 'h4',   tone: 'primary'   },
+  h5:        { f: FONT_HEADING, fs: T('text-h5', '20px'),      lh: T('lh-h5', '28px'),      w: 700, ls: '-0.01em',  el: 'h5',   tone: 'primary'   },
+  read:      { f: FONT_BODY,    fs: T('text-read', '17px'),    lh: T('lh-read', '27px'),    w: 400, ls: '0',        el: 'p',    tone: 'secondary', measure: '70ch' },
+  body:      { f: FONT_BODY,    fs: T('text-body', '16px'),    lh: T('lh-body', '26px'),    w: 400, ls: '0',        el: 'p',    tone: 'secondary', measure: '80ch' },
+  'body-sm': { f: FONT_BODY,    fs: T('text-body-sm', '14px'), lh: T('lh-body-sm', '22px'), w: 400, ls: '0',        el: 'p',    tone: 'secondary' },
+  label:     { f: FONT_LABEL,   fs: T('text-caption', '12px'), lh: T('lh-caption', '16px'), w: 500, ls: '0.12em',   el: 'span', tone: 'dim', upper: true },
+  code:      { f: FONT_MONO,    fs: T('text-code', '14px'),    lh: T('lh-code', '22px'),    w: 400, ls: '0',        el: 'code', tone: 'primary'   },
+  'code-sm': { f: FONT_MONO,    fs: T('text-code-sm', '12px'), lh: T('lh-code-sm', '18px'), w: 400, ls: '0',        el: 'code', tone: 'dim'       }
+};
+
+const TONES = {
+  primary:   T('text-primary', '#ECE7DC'),
+  secondary: T('text-secondary', '#9B948A'),
+  dim:       T('text-dim', '#918A7F'),
+  label:     T('text-label', '#B9AFA0'),
+  confirm:   T('confirm', '#D9705C'),
+  caution:   T('caution', '#B87264')
+};
+
+const ELEMENTS = ['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'span', 'div', 'label', 'code', 'pre'];
+
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const roleName = ROLES[p.role] ? p.role : 'body';
+    const r = ROLES[roleName];
+    const el = ELEMENTS.indexOf(p.element) >= 0 ? p.element : r.el;
+
+    const tone = p.tone && p.tone !== 'role' ? p.tone : r.tone;
+    const muted = tone === 'muted';
+
+    const style = {
+      margin: '0',
+      fontFamily: r.f,
+      fontSize: r.fs,
+      lineHeight: r.lh,
+      fontWeight: r.w,
+      letterSpacing: r.ls,
+      color: muted ? TONES.primary : (TONES[tone] || TONES[r.tone]),
+      textTransform: r.upper ? 'uppercase' : 'none',
+      textAlign: p.align || 'left',
+      textWrap: 'pretty'
+    };
+    if (muted) style.opacity = T('op-muted', '0.62');
+
+    // Prose roles carry a measure so a long run never sets wider than it reads.
+    const measure = p.measure || r.measure;
+    if (measure) style.maxWidth = measure;
+
+    const overflow = p.overflow || 'wrap';
+    if (overflow === 'truncate') {
+      style.display = 'block';
+      style.whiteSpace = 'nowrap';
+      style.overflow = 'hidden';
+      style.textOverflow = 'ellipsis';
+      style.textWrap = 'nowrap';
+    } else if (overflow === 'clamp') {
+      style.display = '-webkit-box';
+      style.WebkitBoxOrient = 'vertical';
+      style.WebkitLineClamp = Math.max(1, Number(p.clampLines ?? 2));
+      style.overflow = 'hidden';
+    } else if (el === 'pre') {
+      style.whiteSpace = 'pre';
+      style.overflowX = 'auto';
+    }
+
+    return {
+      text: p.text ?? 'The quick brown fox jumps over the lazy dog',
+      rootStyle: style,
+      isH1: el === 'h1', isH2: el === 'h2', isH3: el === 'h3', isH4: el === 'h4', isH5: el === 'h5',
+      isP: el === 'p', isSpan: el === 'span', isDiv: el === 'div',
+      isLabelEl: el === 'label', isCodeEl: el === 'code', isPre: el === 'pre'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

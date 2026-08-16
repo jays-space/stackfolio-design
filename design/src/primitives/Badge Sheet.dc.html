@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  body { -webkit-font-smoothing: antialiased; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  input, textarea, button, select { font: inherit; color: inherit; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px solid #D9705C; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Badge" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-code-sm: 12px; --lh-code-sm: 18px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-code: 14px; --lh-code: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-read: 17px; --lh-read: 27px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --text-h1: 49px; --lh-h1: 55px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-sunk: #0E0D0C;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --caution: #B87264; --caution-deep: #9C5B4E; --caution-quiet: rgba(184,114,100,0.14);
+  --control-h-sm: 28px; --control-h-md: 36px; --control-h-lg: 44px; --hit-min: 44px;
+  --focus-ring: #D9705C; --scrim: rgba(9,8,8,0.72);
+  --radius-1: 0px; --radius-2: 2px; --radius-3: 3px;
+  --op-disabled: 0.38; --op-muted: 0.62;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+
+  <header style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 2px solid var(--boundary-1); display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: var(--space-8); align-items: end;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Component · Badge</span>
+      <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em;">A word in a box, kept neutral so the domains can colour it</h1>
+      <p style="margin: 0; max-width: 72ch; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-secondary); text-wrap: pretty;">Badge is the label that track, provenance, conclusion and niche are all built from. It carries no meaning of its own: three emphases, two sizes, an optional leading mark. Everything a domain badge adds is colour and a word.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: var(--space-3); border-left: 2px solid var(--boundary-1); padding-left: var(--space-5);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Contents</span>
+      <div style="display: grid; gap: var(--space-1); font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-secondary);">
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">01</span><span>Emphasis</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">02</span><span>Sizes</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">03</span><span>The matrix</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">04</span><span>Leading mark</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">05</span><span>Removable</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">06</span><span>Theming &amp; in place</span></span>
+        <span style="display: flex; gap: var(--space-3);"><span style="color: var(--text-dim);">07</span><span>Rules &amp; accessibility</span></span>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-8);">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="01 Emphasis">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">01</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Emphasis</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Three, and the choice is about how loud the label is against what it sits beside — not about what the label says. Subtle is the default; a page with more than one solid badge in view has picked wrong.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5);">
+        <sc-for list="{{ emphasisCards }}" as="e" hint-placeholder-count="3">
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;">
+              <dc-import name="Badge" label="Tracked" emphasis="{{ e.emphasis }}" size="md" hint-size="96px,26px"></dc-import>
+              <dc-import name="Badge" label="Draft" emphasis="{{ e.emphasis }}" size="md" marker="dot" hint-size="96px,26px"></dc-import>
+            </div>
+            <span style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ e.name }}</span>
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ e.tokens }}</span>
+            </span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ e.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="02 Sizes">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">02</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Sizes</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Two. Both set the label at the caption role — the size changes the padding and the tracking, never the type size, so a badge beside a heading reads at the same weight as one in a row.</span>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{ sizeRows }}" as="z" hint-placeholder-count="2">
+          <div style="display: grid; grid-template-columns: 120px 160px minmax(0,1fr) minmax(0,320px); gap: var(--space-5); align-items: center; border-bottom: 1px solid var(--boundary-3); padding: var(--space-5) 0;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-primary);">{{ z.name }}</span>
+            <span style="display: flex;"><dc-import name="Badge" label="Provenance" size="{{ z.size }}" emphasis="subtle" hint-size="110px,24px"></dc-import></span>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ z.tokens }}</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ z.note }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="03 The matrix">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">03</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">The matrix</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Every emphasis at both sizes, with and without a leading mark. Six cells per column: the whole generic component.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 140px repeat(3, minmax(0,1fr)); gap: var(--space-5); align-items: center; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span></span>
+        <sc-for list="{{ emphasisHeads }}" as="h" hint-placeholder-count="3">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ h.label }}</span>
+        </sc-for>
+      </div>
+      <sc-for list="{{ matrixRows }}" as="m" hint-placeholder-count="6">
+        <div style="display: grid; grid-template-columns: 140px repeat(3, minmax(0,1fr)); gap: var(--space-5); align-items: center; border-bottom: 1px solid var(--boundary-3); padding: var(--space-4) 0;">
+          <span style="display: flex; flex-direction: column; gap: var(--space-1);">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">{{ m.size }}</span>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">{{ m.markerLabel }}</span>
+          </span>
+          <span style="display: flex;"><dc-import name="Badge" label="Tracked" emphasis="solid" size="{{ m.size }}" marker="{{ m.marker }}" hint-size="96px,24px"></dc-import></span>
+          <span style="display: flex;"><dc-import name="Badge" label="Tracked" emphasis="subtle" size="{{ m.size }}" marker="{{ m.marker }}" hint-size="96px,24px"></dc-import></span>
+          <span style="display: flex;"><dc-import name="Badge" label="Tracked" emphasis="outline" size="{{ m.size }}" marker="{{ m.marker }}" hint-size="96px,24px"></dc-import></span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="04 Leading mark">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">04</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Leading mark</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">None, a dot, or a mark. The dot is a square — the system has one shape — and it exists so a set of badges can be told apart at a glance when they are stacked in a filter row.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-5);">
+        <sc-for list="{{ markerCards }}" as="k" hint-placeholder-count="3">
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;">
+              <dc-import name="Badge" label="Merged" emphasis="subtle" size="md" marker="{{ k.marker }}" hint-size="96px,26px"></dc-import>
+              <dc-import name="Badge" label="Merged" emphasis="outline" size="md" marker="{{ k.marker }}" hint-size="96px,26px"></dc-import>
+            </div>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ k.name }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ k.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="05 Removable">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">05</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Removable</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">The one interactive form, and it exists for exactly one job: an applied filter the reader can drop. A badge that states a fact — a track, a verdict, a niche — is never removable.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-5);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Applied filters · live</span>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; min-height: 30px;">
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+              <dc-import name="Badge" label="{{ f.label }}" emphasis="subtle" size="md" marker="dot" removable="{{ true }}" onRemove="{{ f.onRemove }}" hint-size="120px,26px"></dc-import>
+            </sc-for>
+            <sc-if value="{{ noFilters }}" hint-placeholder-val="{{ false }}">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: var(--text-dim);">No filters applied</span>
+            </sc-if>
+          </div>
+          <button type="button" onClick="{{ resetFilters }}" style="align-self: flex-start; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-label); cursor: pointer;">Reset</button>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">The close control is 14px at sm and 16px at md, well under the hit minimum. It is allowed because it sits inside a filter row that is pointer-only and duplicated by a Reset action; on touch layouts the row is replaced by a list of Buttons.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Both sizes, all three emphases</span>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center;">
+            <dc-import name="Badge" label="AWS" emphasis="solid" size="sm" removable="{{ true }}" hint-size="80px,22px"></dc-import>
+            <dc-import name="Badge" label="AWS" emphasis="subtle" size="sm" removable="{{ true }}" hint-size="80px,22px"></dc-import>
+            <dc-import name="Badge" label="AWS" emphasis="outline" size="sm" removable="{{ true }}" hint-size="80px,22px"></dc-import>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center;">
+            <dc-import name="Badge" label="Identity" emphasis="solid" size="md" marker="dot" removable="{{ true }}" hint-size="110px,26px"></dc-import>
+            <dc-import name="Badge" label="Identity" emphasis="subtle" size="md" marker="dot" removable="{{ true }}" hint-size="110px,26px"></dc-import>
+            <dc-import name="Badge" label="Identity" emphasis="outline" size="md" marker="dot" removable="{{ true }}" hint-size="110px,26px"></dc-import>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Removable trims the right padding so the control sits closer to the edge than the label does, and the whole badge stays one box — no separate chip, no divider.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="06 Theming and in place">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">06</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Theming &amp; in place</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">A domain badge is this component with a tone and a word. Neutral is what ships; accent and caution are the two system tones a domain may reach for, and ink / fill / edge take a role token directly when a domain needs one the tones do not cover.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5);">
+        <sc-for list="{{ toneCards }}" as="t" hint-placeholder-count="3">
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;">
+              <dc-import name="Badge" label="{{ t.label }}" tone="{{ t.tone }}" emphasis="solid" size="md" hint-size="96px,26px"></dc-import>
+              <dc-import name="Badge" label="{{ t.label }}" tone="{{ t.tone }}" emphasis="subtle" size="md" marker="dot" hint-size="96px,26px"></dc-import>
+              <dc-import name="Badge" label="{{ t.label }}" tone="{{ t.tone }}" emphasis="outline" size="md" marker="icon" hint-size="96px,26px"></dc-import>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ t.tokens }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ t.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-5);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Case row · sm</span>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3); border: 1px solid var(--boundary-1); padding: var(--space-4);">
+            <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700; letter-spacing: -0.014em;">Token refresh races the retry budget</span>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;">
+              <dc-import name="Badge" label="Tracked" emphasis="subtle" size="sm" marker="dot" hint-size="86px,22px"></dc-import>
+              <dc-import name="Badge" label="First-hand" emphasis="outline" size="sm" hint-size="90px,22px"></dc-import>
+              <dc-import name="Badge" label="Identity" emphasis="outline" size="sm" hint-size="80px,22px"></dc-import>
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-dim);">two days ago</span>
+            </div>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Small in a row of them, and only one badge in the set carries a mark — the one whose value changes over time.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Case head · md</span>
+          <div style="display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;">
+            <h3 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Adapter rewrite</h3>
+            <dc-import name="Badge" label="Accepted" tone="accent" emphasis="solid" size="md" hint-size="100px,26px"></dc-import>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Medium beside a heading, solid, one of them. The badge is the verdict; nothing else on the line competes with it.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="07 Rules and accessibility">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">07</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Rules &amp; accessibility</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-5) var(--space-7);">
+        <sc-for list="{{ rules }}" as="r" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: var(--space-2); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ r.name }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ r.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360}}">
+const ALL_FILTERS = ['AWS/Backend', 'Identity', 'First-hand', 'Tracked'];
+
+class Component extends DCLogic {
+  state = { filters: ALL_FILTERS.slice(0, 3) };
+
+  renderVals() {
+    return {
+      emphasisCards: [
+        ['Solid', 'solid', 'fill surface-1 · ink text-primary · edge boundary-1', 'The filled box. Reserved for the one badge on a screen that is the answer to the question the screen asks — a verdict at the head of a case, a state at the head of a row.'],
+        ['Subtle', 'subtle', 'fill surface-2 + grain-1 · ink text-label · no edge', 'The default. A quiet fill and no border, so a run of them beside a title reads as one band of metadata rather than four objects.'],
+        ['Outline', 'outline', 'fill transparent · ink text-label · edge boundary-1', 'For badges over a surface that is already filled — inside a card, over a panel — where a second fill would stack two greys with nothing between them.']
+      ].map(e => ({ name: e[0], emphasis: e[1], tokens: e[2], body: e[3] })),
+
+      sizeRows: [
+        ['sm', 'sm', 'pad 1/6px · gap 5px · caption 12px · track 0.10em', 'Case rows, filter rows, anywhere a badge sits in a line with body text. The default size — most badges in the product are this one.'],
+        ['md', 'md', 'pad 3/9px · gap 7px · caption 12px · track 0.12em', 'Beside an h4 or larger, or alone at the head of a panel. Use it when the badge has to hold its own against a heading.']
+      ].map(z => ({ name: z[0], size: z[1], tokens: z[2], note: z[3] })),
+
+      emphasisHeads: [{ label: 'Solid' }, { label: 'Subtle' }, { label: 'Outline' }],
+
+      matrixRows: [
+        { size: 'sm', marker: 'none', markerLabel: 'no mark' },
+        { size: 'sm', marker: 'dot', markerLabel: 'dot' },
+        { size: 'sm', marker: 'icon', markerLabel: 'icon' },
+        { size: 'md', marker: 'none', markerLabel: 'no mark' },
+        { size: 'md', marker: 'dot', markerLabel: 'dot' },
+        { size: 'md', marker: 'icon', markerLabel: 'icon' }
+      ],
+
+      markerCards: [
+        ['None', 'none', 'The word carries it. If a set of badges is already distinguished by what it says, a mark adds a second thing to scan for nothing.'],
+        ['Dot', 'dot', 'A 5px square at sm, 6px at md, in the tone colour — text-dim on neutral. It marks the badge whose value can change, so a reader learns which one to check.'],
+        ['Icon', 'icon', 'A drawn mark at the same size as the dot, for domains that have their own glyph. It is never a second word and never larger than the cap height of the label.']
+      ].map(k => ({ name: k[0], marker: k[1], body: k[2] })),
+
+      toneCards: [
+        ['Neutral', 'neutral', 'Tracked', 'surface-1 / surface-2 / boundary-1 · text-label', 'What the generic Badge ships as. Every domain badge starts here and overrides only what its meaning requires.'],
+        ['Accent', 'accent', 'Accepted', 'accent / accent-quiet · confirm', 'The system accent. One meaning only — the case is resolved — so it is never used for emphasis on a badge that states something else.'],
+        ['Caution', 'caution', 'Contested', 'caution-deep / caution-quiet · caution', 'Held, contested, or expired. It signals that the label is provisional, not that anything is wrong.']
+      ].map(t => ({ name: t[0], tone: t[1], label: t[2], tokens: t[3], body: t[4] })),
+
+      filters: this.state.filters.map(f => ({
+        label: f,
+        onRemove: () => this.setState(s => ({ filters: s.filters.filter(x => x !== f) }))
+      })),
+      noFilters: this.state.filters.length === 0,
+      resetFilters: () => this.setState({ filters: ALL_FILTERS.slice(0, 3) }),
+
+      rules: [
+        ['One shape', 'Square, radius-1, one border width. There is no pill in this system — the rounded tag is the shape every other product uses, and the box is what makes a StackFolio badge legible as one.'],
+        ['Neutral by default', 'The generic Badge has no colour of its own. A tone is a claim about meaning, and only a domain badge is entitled to make one.'],
+        ['The label is a label', 'Caption role, uppercase, one or two words. A badge that needs a sentence is a line of text; a badge that needs a number is a count beside a link.'],
+        ['Not a link', 'A static badge has no hover, focus or press. Where a badge navigates, it is wrapped in a Link that owns the target and the ring; where it filters, it is removable and the close control is the only interactive part.'],
+        ['Announced as text', 'The label is read as ordinary text — no role, no aria-label duplicating the word. The close control is a real button labelled "Remove {label}", and removal moves focus to the next badge or the row.'],
+        ['One solid per view', 'Solid is the loudest thing on a line. Two of them in the same view means neither is the answer, and the reader has to choose which to believe.']
+      ].map(r => ({ name: r[0], body: r[1] }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap">
+<style>
+  @keyframes btnBreathe { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.9; } }
+</style>
+</helmet>
+
+<sc-if value="{{ isLink }}" hint-placeholder-val="{{ false }}">
+  <a href="{{ href }}" aria-label="{{ ariaLabel }}" aria-disabled="{{ ariaDisabled }}" style="{{ rootStyle }}" onMouseEnter="{{ onEnter }}" onMouseLeave="{{ onLeave }}" onMouseDown="{{ onDown }}" onMouseUp="{{ onUp }}" onFocus="{{ onFocus }}" onBlur="{{ onBlur }}">
+    <sc-if value="{{ hasLead }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ leadStyle }}"></span></sc-if>
+    <sc-if value="{{ hasLabel }}" hint-placeholder-val="{{ true }}"><span style="{{ labelStyle }}">{{ text }}</span></sc-if>
+    <sc-if value="{{ hasTrail }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ trailStyle }}"></span></sc-if>
+  </a>
+</sc-if>
+<sc-if value="{{ isButton }}" hint-placeholder-val="{{ true }}">
+  <button type="button" disabled="{{ isDisabled }}" aria-busy="{{ ariaBusy }}" aria-label="{{ ariaLabel }}" style="{{ rootStyle }}" onMouseEnter="{{ onEnter }}" onMouseLeave="{{ onLeave }}" onMouseDown="{{ onDown }}" onMouseUp="{{ onUp }}" onFocus="{{ onFocus }}" onBlur="{{ onBlur }}">
+    <sc-if value="{{ hasLead }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ leadStyle }}"></span></sc-if>
+    <sc-if value="{{ hasLabel }}" hint-placeholder-val="{{ true }}"><span style="{{ labelStyle }}">{{ text }}</span></sc-if>
+    <sc-if value="{{ hasTrail }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="{{ trailStyle }}"></span></sc-if>
+  </button>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:320,&quot;height&quot;:80},&quot;label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Submit verdict&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;primary&quot;,&quot;secondary&quot;,&quot;outline&quot;,&quot;ghost&quot;,&quot;caution&quot;,&quot;link&quot;],&quot;default&quot;:&quot;primary&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sm&quot;,&quot;md&quot;,&quot;lg&quot;],&quot;default&quot;:&quot;md&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;default&quot;,&quot;hover&quot;,&quot;focus&quot;,&quot;active&quot;,&quot;disabled&quot;,&quot;loading&quot;],&quot;default&quot;:&quot;default&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;States&quot;},&quot;leading&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;square&quot;,&quot;circle&quot;,&quot;diamond&quot;,&quot;bar&quot;,&quot;chevron&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;trailing&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;square&quot;,&quot;circle&quot;,&quot;diamond&quot;,&quot;bar&quot;,&quot;chevron&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;iconOnly&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;iconLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;asLink&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;href&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;loadingLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Submitting…&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;States&quot;}}">
+const T = (name, fallback) => 'var(--' + name + ', ' + fallback + ')';
+const TP = T('text-primary', '#ECE7DC');
+const TS = T('text-secondary', '#9B948A');
+const A = T('accent', '#A8342B');
+const AD = T('accent-deep', '#7E2620');
+const AQ = T('accent-quiet', 'rgba(168,52,43,0.12)');
+const CONFIRM = T('confirm', '#D9705C');
+const B1 = T('boundary-1', '#37342D');
+const S1 = T('surface-1', '#242320');
+const CAUTION = T('caution', '#B87264');
+const CAUTION_D = T('caution-deep', '#9C5B4E');
+const CAUTION_Q = T('caution-quiet', 'rgba(184,114,100,0.14)');
+const RING = T('focus-ring', '#D9705C');
+const R2 = T('radius-2', '2px');
+const FONT_LABEL = T('font-label', "'Space Grotesk', ui-monospace, monospace");
+const FONT_BODY = T('font-body', "'Manrope', system-ui, sans-serif");
+const DUR = T('dur-quick', '180ms');
+const EASE = T('ease-settle', 'cubic-bezier(0.22, 0.68, 0.12, 1)');
+
+const SIZES = {
+  sm: { h: T('control-h-sm', '28px'), padX: T('space-3', '12px'), fs: T('text-caption', '12px'), ls: '0.1em', icon: T('icon-2', '14px'), iconPx: 14, gap: T('space-2', '8px') },
+  md: { h: T('control-h-md', '36px'), padX: T('space-4', '16px'), fs: T('text-caption', '12px'), ls: '0.1em', icon: T('icon-3', '16px'), iconPx: 16, gap: T('space-2', '8px') },
+  lg: { h: T('control-h-lg', '44px'), padX: T('space-5', '24px'), fs: T('text-body-sm', '14px'), ls: '0.12em', icon: T('icon-4', '20px'), iconPx: 20, gap: T('space-3', '12px') }
+};
+
+// Emphasis ladder: filled accent, low fill, hairline, bare, caution. Caution is not a
+// filled variant — a red fill would read as the primary oxblood accent.
+const VARIANTS = {
+  primary: {
+    base: { background: A, color: TP, border: '0' },
+    hover: { background: AD },
+    active: { background: AD, transform: 'translateY(1px)' }
+  },
+  secondary: {
+    base: { background: S1, color: TP, border: '1px solid ' + B1 },
+    hover: { background: AQ, borderColor: CONFIRM },
+    active: { background: AQ, borderColor: CONFIRM, transform: 'translateY(1px)' }
+  },
+  outline: {
+    base: { background: 'transparent', color: TP, border: '1px solid ' + B1 },
+    hover: { borderColor: CONFIRM },
+    active: { borderColor: CONFIRM, transform: 'translateY(1px)' }
+  },
+  ghost: {
+    base: { background: 'transparent', color: TS, border: '0' },
+    hover: { background: AQ, color: TP },
+    active: { background: AQ, color: TP, transform: 'translateY(1px)' }
+  },
+  caution: {
+    base: { background: 'transparent', color: CAUTION, border: '1px solid ' + CAUTION },
+    hover: { background: CAUTION_Q },
+    active: { background: CAUTION_D, color: TP, borderColor: CAUTION_D, transform: 'translateY(1px)' }
+  }
+};
+
+class Component extends DCLogic {
+  state = { hover: false, press: false, focus: false };
+
+  shape(kind, px, weight) {
+    const w = (weight || 1.5) + 'px';
+    const base = { flex: '0 0 auto', display: 'block', boxSizing: 'border-box' };
+    if (kind === 'circle') return Object.assign(base, { width: px, height: px, border: w + ' solid currentColor', borderRadius: '50%' });
+    if (kind === 'diamond') return Object.assign(base, { width: Math.round(px * 0.72) + 'px', height: Math.round(px * 0.72) + 'px', border: w + ' solid currentColor', transform: 'rotate(45deg)' });
+    if (kind === 'bar') return Object.assign(base, { width: px, height: w, background: 'currentColor' });
+    if (kind === 'chevron') return Object.assign(base, { width: Math.round(px * 0.5) + 'px', height: Math.round(px * 0.5) + 'px', borderRight: w + ' solid currentColor', borderBottom: w + ' solid currentColor', transform: 'rotate(-45deg)' });
+    return Object.assign(base, { width: px, height: px, border: w + ' solid currentColor' });
+  }
+
+  renderVals() {
+    const p = this.props;
+    const variant = p.variant || 'primary';
+    const size = SIZES[p.size] ? p.size : 'md';
+    const sz = SIZES[size];
+    const forced = p.state && p.state !== 'default' ? p.state : null;
+    const iconOnly = !!p.iconOnly;
+    const isLinkVariant = variant === 'link';
+    const asLink = !!p.asLink || isLinkVariant;
+
+    const loading = forced === 'loading' || !!p.loading;
+    const disabled = forced === 'disabled' || !!p.disabled;
+    const hover = forced === 'hover' || (!forced && this.state.hover && !disabled && !loading);
+    const press = forced === 'active' || (!forced && this.state.press && !disabled && !loading);
+    const focus = forced === 'focus' || (!forced && this.state.focus && !disabled);
+
+    let root;
+    if (isLinkVariant) {
+      root = {
+        display: 'inline-flex', alignItems: 'baseline', gap: sz.gap,
+        fontFamily: FONT_BODY, fontSize: T('text-body-sm', '14px'), fontWeight: 600,
+        color: hover ? TP : CONFIRM,
+        background: 'transparent', border: '0',
+        borderBottom: '1px solid ' + (hover ? TP : 'rgba(217,112,92,0.40)'),
+        padding: '0', textDecoration: 'none', cursor: 'pointer',
+        transition: 'color ' + DUR + ' ' + EASE + ', border-color ' + DUR + ' ' + EASE
+      };
+    } else {
+      const v = VARIANTS[variant] || VARIANTS.primary;
+      root = Object.assign({
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        gap: iconOnly ? '0' : sz.gap,
+        height: sz.h,
+        width: iconOnly ? sz.h : 'auto',
+        padding: iconOnly ? '0' : '0 ' + sz.padX,
+        borderRadius: R2,
+        fontFamily: FONT_LABEL, fontSize: sz.fs, fontWeight: 700,
+        letterSpacing: sz.ls, textTransform: 'uppercase',
+        textDecoration: 'none', whiteSpace: 'nowrap', cursor: 'pointer',
+        transition: 'background ' + DUR + ' ' + EASE + ', border-color ' + DUR + ' ' + EASE + ', color ' + DUR + ' ' + EASE + ', transform ' + DUR + ' ' + EASE
+      }, v.base);
+      if (hover) Object.assign(root, v.hover);
+      if (press) Object.assign(root, v.active);
+    }
+
+    if (focus) { root.outline = '2px solid ' + RING; root.outlineOffset = '2px'; }
+    if (disabled) { root.opacity = T('op-disabled', '0.38'); root.cursor = 'not-allowed'; }
+    if (loading) { root.cursor = 'progress'; root.pointerEvents = 'none'; }
+
+    const label = p.label ?? 'Submit verdict';
+    const loadingLabel = p.loadingLabel ?? 'Submitting…';
+    const text = loading && !iconOnly ? loadingLabel : label;
+    const iconPx = isLinkVariant ? 12 : sz.iconPx;
+
+    return {
+      isLink: asLink, isButton: !asLink,
+      href: asLink ? (p.href || '#') : undefined,
+      isDisabled: !asLink && disabled ? true : undefined,
+      ariaBusy: loading ? 'true' : undefined,
+      ariaDisabled: asLink && disabled ? 'true' : undefined,
+      // Icon-only carries its name in aria-label; a labelled button must not override its text.
+      ariaLabel: iconOnly ? (p.iconLabel || label) : undefined,
+      hasLabel: !iconOnly,
+      text,
+      labelStyle: Object.assign({ display: 'block' }, loading ? { animation: 'btnBreathe 1.4s ' + EASE + ' infinite' } : null),
+      hasLead: !!p.leading || iconOnly,
+      hasTrail: !!p.trailing && !iconOnly,
+      leadStyle: Object.assign(
+        this.shape(iconOnly ? (p.leading || 'square') : p.leading, iconPx),
+        loading ? { animation: 'btnBreathe 1.4s ' + EASE + ' infinite' } : null
+      ),
+      trailStyle: this.shape(p.trailing, iconPx),
+      rootStyle: root,
+      onEnter: () => this.setState({ hover: true }),
+      onLeave: () => this.setState({ hover: false, press: false }),
+      onDown: () => this.setState({ press: true }),
+      onUp: () => this.setState({ press: false }),
+      onFocus: (e) => { try { if (e.target.matches(':focus-visible')) this.setState({ focus: true }); } catch (err) { this.setState({ focus: true }); } },
+      onBlur: () => this.setState({ focus: false, press: false })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

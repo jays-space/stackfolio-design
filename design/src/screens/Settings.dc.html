@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid #A8342B; outline-offset: 2px; }
+  input::placeholder, textarea::placeholder { color: #6A645B; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes qSettle { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Settings" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms; --dur-base: 320ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9);
+">
+
+  <dc-import name="Header" active="none" max-width="820px" hint-size="100%,72px"></dc-import>
+
+  <header style="max-width: 820px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-5); border-bottom: 2px solid var(--boundary-1); display: flex; flex-direction: column; gap: var(--space-3);">
+    <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Your account</span>
+    <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 700; letter-spacing: -0.02em;">Settings</h1>
+    <p style="margin: 0; max-width: 62ch; font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-secondary); text-wrap: pretty;">Everything here is yours to change. What appears on your public profile is marked as such — the rest nobody else sees.</p>
+    <a href="Profile.dc.html?member=%40nkosi.dev&amp;self=1" style="align-self: flex-start; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">View your profile →</a>
+  </header>
+
+  <main style="max-width: 820px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-8);">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">How you appear</h2>
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">On your profile</span>
+      </div>
+
+      <div style="display: flex; gap: var(--space-5); flex-wrap: wrap; align-items: flex-start;">
+        <span style="width: 80px; height: 80px; flex: none; background: var(--surface-1); background-image: var(--grain-1); border-left: 3px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: var(--text-h4); font-weight: 800; color: var(--text-primary);">{{ initials }}</span>
+        <div style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Avatar</span>
+          <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+            <button onClick="{{ uploadAvatar }}" style="cursor: pointer; background: transparent; border: 1px solid var(--text-secondary); padding: var(--space-3) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">{{ avatarLabel }}</button>
+            <sc-if value="{{ hasAvatar }}">
+              <button onClick="{{ clearAvatar }}" style="cursor: pointer; background: transparent; border: 0; padding: var(--space-3) 0; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);" style-hover="color: #ECE7DC;">Remove</button>
+            </sc-if>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ avatarNote }}</span>
+        </div>
+      </div>
+
+      <label style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Display name</span>
+        <input value="{{ name }}" onInput="{{ onName }}" style="background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: 0 0 var(--space-3) 0; font-family: var(--font-body); font-size: var(--text-body); color: var(--text-primary); width: 100%;">
+      </label>
+
+      <label style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Role and where you are</span>
+        <input value="{{ position }}" onInput="{{ onPosition }}" placeholder="Platform engineer · Johannesburg" style="background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: 0 0 var(--space-3) 0; font-family: var(--font-body); font-size: var(--text-body); color: var(--text-primary); width: 100%;">
+      </label>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Handle</span>
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-3); align-items: center; border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-body); color: var(--text-secondary);">@nkosi.dev</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim);">Fixed</span>
+        </div>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Your handle is on every verdict you have cast. Changing it would break attribution, so it stays.</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">Expertise</h2>
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">On your profile</span>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+          <sc-for list="{{ mine }}" as="m" hint-placeholder-count="6">
+            <button onClick="{{ m.remove }}" style="cursor: pointer; display: flex; align-items: center; gap: var(--space-2); background: var(--accent); border: 1px solid var(--accent); padding: 4px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: #ECE7DC; transition: all var(--dur-quick) var(--ease-settle);" style-hover="background: #7E2620;">{{ m.label }} <span style="opacity: 0.7;">×</span></button>
+          </sc-for>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-3); background: var(--surface-2); background-image: var(--grain-2); padding: var(--space-4) var(--space-5);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Add from the shared vocabulary</span>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-2);">
+          <sc-for list="{{ available }}" as="a" hint-placeholder-count="8">
+            <button onClick="{{ a.add }}" style="cursor: pointer; background: transparent; border: 1px dashed var(--boundary-1); padding: 4px var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">+ {{ a.label }}</button>
+          </sc-for>
+        </div>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">A curator keeps this list. Specific terms get you routed better than broad ones — “lease handling” finds you the right cases, “backend” finds you everything.</span>
+      </div>
+
+      <label style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">What you look for when reviewing</span>
+        <textarea onInput="{{ onStance }}" rows="4" value="{{ stance }}" style="background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: 0 0 var(--space-3) 0; font-family: var(--font-body); font-size: var(--text-body); line-height: var(--lh-body); color: var(--text-primary); resize: vertical; width: 100%;"></textarea>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Authors read this before they submit into your queue. Say what would make you defer.</span>
+      </label>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">Reviewing</h2>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Are you taking reviews?</span>
+        <div style="display: flex; border: 1px solid var(--boundary-1); align-self: flex-start;">
+          <button onClick="{{ setOpen }}" style="cursor: pointer; background: {{ openBg }}; border: 0; padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{ openColor }}; transition: all var(--dur-quick) var(--ease-settle);">Taking reviews</button>
+          <button onClick="{{ setPaused }}" style="cursor: pointer; background: {{ pausedBg }}; border: 0; border-left: 1px solid var(--boundary-1); padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{ pausedColor }}; transition: all var(--dur-quick) var(--ease-settle);">Paused</button>
+        </div>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ availabilityNote }}</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Verdicts bind on</span>
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-3); align-items: center; border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-body); color: var(--text-secondary);">AWS/Backend · Identity · Senior</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim);">Curator-set</span>
+        </div>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Your niche decides whose cases you can bind a verdict on. You cannot widen it yourself — <a href="#">ask a curator</a> if it is wrong.</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">Sign-in</h2>
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Private</span>
+      </div>
+
+      <label style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Email</span>
+        <input value="nkosi@khumalo.dev" style="background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: 0 0 var(--space-3) 0; font-family: var(--font-body); font-size: var(--text-body); color: var(--text-primary); width: 100%;">
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Changing this sends a confirmation to both addresses before it takes effect.</span>
+      </label>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Password</span>
+        <sc-if value="{{ pwClosed }}" hint-placeholder-val="{{ true }}">
+          <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-3); align-items: center; border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-3);">
+            <span style="font-size: var(--text-body-sm); color: var(--text-secondary);">Last changed 4 months ago</span>
+            <button onClick="{{ openPw }}" style="cursor: pointer; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-2) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">Change</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ pwOpen }}">
+          <div style="display: flex; flex-direction: column; gap: var(--space-4); background: var(--surface-2); background-image: var(--grain-2); padding: var(--space-5); animation: qSettle var(--dur-base) var(--ease-settle) both;">
+            <label style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">Current password</span>
+              <input type="password" value="············" style="background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: 0 0 var(--space-2) 0; font-family: var(--font-label); font-size: var(--text-body); color: var(--text-primary); width: 100%;">
+            </label>
+            <label style="display: flex; flex-direction: column; gap: var(--space-2);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-label);">New password</span>
+              <input type="password" onInput="{{ onPw }}" value="{{ pw }}" placeholder="At least 12 characters" style="background: transparent; border: 0; border-bottom: 1px solid var(--boundary-1); padding: 0 0 var(--space-2) 0; font-family: var(--font-label); font-size: var(--text-body); color: var(--text-primary); width: 100%;">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.06em; color: {{ pwColor }};">{{ pwHint }}</span>
+            </label>
+            <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; border-top: 1px solid var(--boundary-1); padding-top: var(--space-4);">
+              <button onClick="{{ savePw }}" style="cursor: pointer; background: var(--accent); border: 0; padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ECE7DC; transition: background var(--dur-quick) var(--ease-settle);" style-hover="background: #7E2620;">Change password</button>
+              <button onClick="{{ closePw }}" style="cursor: pointer; background: transparent; border: 0; padding: var(--space-3) 0; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);" style-hover="color: #ECE7DC;">Cancel</button>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Signs out every other device.</span>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">GitHub</span>
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: var(--space-3); align-items: center; border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-body-sm); color: var(--text-primary); overflow-wrap: anywhere;">github.com/nkosi-dev</span>
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--confirm); white-space: nowrap;">Connected</span>
+        </div>
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Lets you build a case from a repository, and shows on your profile. Disconnecting leaves your published cases pinned where they are.</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-4);">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">What StackFolio emails you</h2>
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Private</span>
+      </div>
+      <sc-for list="{{ notifications }}" as="n" hint-placeholder-count="4">
+        <button onClick="{{ n.toggle }}" style="cursor: pointer; text-align: left; display: grid; grid-template-columns: 16px minmax(0,1fr); gap: var(--space-4); align-items: start; background: transparent; border: 0; border-bottom: 1px solid var(--boundary-2); padding: var(--space-3) 0; font-family: var(--font-body);">
+          <span style="width: 16px; height: 16px; margin-top: 3px; border: 1px solid {{ n.boxBorder }}; background: {{ n.boxBg }}; display: block;"></span>
+          <span style="display: flex; flex-direction: column; gap: var(--space-1); min-width: 0;">
+            <span style="font-size: var(--text-body-sm); color: var(--text-primary);">{{ n.label }}</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ n.note }}</span>
+          </span>
+        </button>
+      </sc-for>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-4); border-top: 2px solid var(--boundary-1); padding-top: var(--space-5);">
+      <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700; color: var(--text-secondary);">Leaving</h2>
+      <p style="margin: 0; max-width: 68ch; font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Your account can be closed, but the verdicts you cast stay published and attributed. A review someone acted on cannot be withdrawn later — that is what makes it worth acting on.</p>
+      <button style="cursor: pointer; align-self: flex-start; background: transparent; border: 1px solid var(--boundary-1); padding: var(--space-3) var(--space-5); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); transition: all var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B; color: #ECE7DC;">Close my account</button>
+    </section>
+
+  </main>
+
+  <div style="position: sticky; bottom: 0; margin-top: var(--space-8); background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent);">
+    <div style="max-width: 820px; margin: 0 auto; padding: var(--space-4) var(--space-6); display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap;">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: {{ saveColor }};">{{ saveState }}</span>
+      <span style="margin-left: auto; display: flex; gap: var(--space-3); flex-wrap: wrap;">
+        <sc-if value="{{ dirty }}">
+          <button onClick="{{ discard }}" style="cursor: pointer; background: transparent; border: 0; padding: var(--space-3) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);" style-hover="color: #ECE7DC;">Discard</button>
+        </sc-if>
+        <button onClick="{{ save }}" style="cursor: pointer; background: {{ saveBg }}; border: 0; padding: var(--space-3) var(--space-6); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{ saveBtnColor }}; transition: background var(--dur-quick) var(--ease-settle);">Save changes</button>
+      </span>
+    </div>
+  </div>
+
+  <dc-import name="Footer" max-width="820px" hint-size="100%,300px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const VOCAB = [
+  'claim mapping', 'session design', 'idempotency', 'lease handling', 'provider boundaries',
+  'webhook delivery', 'queue semantics', 'blue-green cutover', 'token refresh', 'schema migration',
+  'caching', 'design tokens', 'observability', 'infrastructure as code'
+];
+
+class Component extends DCLogic {
+  state = {
+    name: 'Nkosi Khumalo',
+    position: 'Platform engineer · Johannesburg',
+    stance: 'I look for boundaries that hold when the vendor changes. If a provider type reaches a consumer I will defer it — not because it breaks today, but because it decides what the next migration costs.',
+    expertise: ['claim mapping', 'session design', 'idempotency', 'lease handling', 'provider boundaries', 'webhook delivery'],
+    taking: true,
+    avatar: false,
+    pwOpen: false,
+    pw: '',
+    notify: { summons: true, verdict: true, endorse: false, tracked: true },
+    dirty: false,
+    saved: false
+  };
+
+  touch = (patch) => this.setState(Object.assign({ dirty: true, saved: false }, patch));
+
+  renderVals() {
+    const s = this.state;
+    const initials = s.name.trim().split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase() || 'NK';
+    const pwLong = s.pw.length >= 12;
+
+    const NOTES = {
+      summons: 'A case matched your niche and needs a verdict from you.',
+      verdict: 'A verdict landed on a case you published.',
+      endorse: 'Someone endorsed a review you wrote.',
+      tracked: 'A case you track concluded.'
+    };
+    const LABELS = {
+      summons: 'You are summoned to review',
+      verdict: 'A verdict on your case',
+      endorse: 'Your review was endorsed',
+      tracked: 'A tracked case concluded'
+    };
+
+    return {
+      initials,
+      name: s.name,
+      position: s.position,
+      stance: s.stance,
+      onName: (e) => this.touch({ name: e.target.value }),
+      onPosition: (e) => this.touch({ position: e.target.value }),
+      onStance: (e) => this.touch({ stance: e.target.value }),
+
+      hasAvatar: s.avatar,
+      avatarLabel: s.avatar ? 'Replace image' : 'Upload an image',
+      avatarNote: s.avatar
+        ? 'Shown wherever your handle appears. Square, at least 200px.'
+        : 'Until you upload one, StackFolio uses your initials. Square, at least 200px.',
+      uploadAvatar: () => this.touch({ avatar: true }),
+      clearAvatar: () => this.touch({ avatar: false }),
+
+      mine: s.expertise.map(label => ({
+        label,
+        remove: () => this.touch({ expertise: s.expertise.filter(x => x !== label) })
+      })),
+      available: VOCAB.filter(v => !s.expertise.includes(v)).map(label => ({
+        label,
+        add: () => this.touch({ expertise: s.expertise.concat(label) })
+      })),
+
+      openBg: s.taking ? 'var(--accent)' : 'transparent',
+      pausedBg: s.taking ? 'transparent' : 'var(--accent)',
+      openColor: s.taking ? '#ECE7DC' : 'var(--text-secondary)',
+      pausedColor: s.taking ? 'var(--text-secondary)' : '#ECE7DC',
+      setOpen: () => this.touch({ taking: true }),
+      setPaused: () => this.touch({ taking: false }),
+      availabilityNote: s.taking
+        ? 'Cases matching your niche will be routed to you. Shown on your profile so authors know what to expect.'
+        : 'No new cases will be routed to you. Anything already in your queue stays there — pausing does not abandon a case mid-review.',
+
+      pwOpen: s.pwOpen,
+      pwClosed: !s.pwOpen,
+      pw: s.pw,
+      openPw: () => this.setState({ pwOpen: true }),
+      closePw: () => this.setState({ pwOpen: false, pw: '' }),
+      onPw: (e) => this.setState({ pw: e.target.value }),
+      pwHint: s.pw.length === 0 ? 'Twelve characters or more.' : (pwLong ? 'Long enough.' : (12 - s.pw.length) + ' more to go.'),
+      pwColor: s.pw.length === 0 ? 'var(--text-secondary)' : (pwLong ? 'var(--confirm)' : 'var(--text-secondary)'),
+      savePw: () => this.setState({ pwOpen: false, pw: '' }),
+
+      notifications: Object.keys(NOTES).map(k => {
+        const on = s.notify[k];
+        return {
+          label: LABELS[k],
+          note: NOTES[k],
+          boxBg: on ? 'var(--accent)' : 'transparent',
+          boxBorder: on ? 'var(--accent)' : 'var(--text-secondary)',
+          toggle: () => this.touch({ notify: Object.assign({}, s.notify, { [k]: !on }) })
+        };
+      }),
+
+      dirty: s.dirty,
+      saveState: s.dirty ? 'Unsaved changes' : (s.saved ? 'Saved' : 'Everything saved'),
+      saveColor: s.dirty ? 'var(--confirm)' : 'var(--text-dim)',
+      saveBg: s.dirty ? 'var(--accent)' : 'var(--surface-2)',
+      saveBtnColor: s.dirty ? '#ECE7DC' : 'var(--text-dim)',
+      save: () => this.setState({ dirty: false, saved: true }),
+      discard: () => this.setState({ dirty: false, saved: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

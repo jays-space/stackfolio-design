@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #131211; }
+  * { box-sizing: border-box; }
+  body { -webkit-font-smoothing: antialiased; }
+  a { color: #D9705C; text-decoration: none; border-bottom: 1px solid rgba(217,112,92,0.40); }
+  a:hover { color: #ECE7DC; border-bottom-color: #ECE7DC; }
+  input, textarea, button, select { font: inherit; color: inherit; }
+  button:focus-visible, input:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px solid #D9705C; outline-offset: 2px; }
+  ::selection { background: rgba(168,52,43,0.30); color: #ECE7DC; }
+  @keyframes fdBreathe { 0%, 100% { opacity: 0.45; } 50% { opacity: 0.85; } }
+  @keyframes fdSettle { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div data-screen-label="StackFolio — Foundations" style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+  --text-code-sm: 12px; --lh-code-sm: 18px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-code: 14px; --lh-code: 22px;
+  --text-body: 16px; --lh-body: 26px;
+  --text-read: 17px; --lh-read: 27px;
+  --text-h5: 20px; --lh-h5: 28px;
+  --text-h4: 25px; --lh-h4: 33px;
+  --text-h3: 31px; --lh-h3: 40px;
+  --text-h2: 39px; --lh-h2: 47px;
+  --text-h1: 49px; --lh-h1: 55px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211; --surface-sunk: #0E0D0C;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --accent-deep: #7E2620; --accent-quiet: rgba(168,52,43,0.12); --confirm: #D9705C;
+  --v-approve: #7C8A5E; --v-defer: #C08A4A; --v-reject: #B87264; --v-reject-mark: #9C5B4E;
+  --st-workshop: #918A7F; --st-track: #B9AFA0;
+  --caution: #B87264; --caution-deep: #9C5B4E; --caution-quiet: rgba(184,114,100,0.14);
+  --control-h-sm: 28px; --control-h-md: 36px; --control-h-lg: 44px; --hit-min: 44px;
+  --focus-ring: #D9705C; --scrim: rgba(9,8,8,0.72);
+  --shadow-overlay: 0 24px 48px rgba(0,0,0,0.55);
+  --z-sticky: 100; --z-menu: 200; --z-scrim: 300; --z-dialog: 400; --z-toast: 500;
+  --stroke-hair: 1px; --stroke-edge: 2px; --stroke-mark: 8px;
+  --radius-1: 0px; --radius-2: 2px; --radius-3: 3px;
+  --op-disabled: 0.38; --op-muted: 0.62;
+  --icon-1: 12px; --icon-2: 14px; --icon-3: 16px; --icon-4: 20px; --icon-5: 24px;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-2: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --dur-quick: 180ms; --dur-base: 320ms; --dur-slow: 560ms;
+  background: var(--surface-3); color: var(--text-primary); font-family: var(--font-body);
+  width: 100%; min-height: 100vh; padding-bottom: var(--space-9); position: relative;
+">
+
+  <dc-import name="Header" active="none" max-width="1280px" hint-size="100%,72px"></dc-import>
+
+  <header style="max-width: 1280px; margin: 0 auto; padding: var(--space-8) var(--space-6) var(--space-6); border-bottom: 2px solid var(--boundary-1); display: grid; grid-template-columns: minmax(0,1fr) 320px; gap: var(--space-8); align-items: end;">
+    <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Foundations · Impande roles, StackFolio values</span>
+      <h1 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h2); line-height: var(--lh-h2); font-weight: 700; letter-spacing: -0.022em;">What every component draws from</h1>
+      <p style="margin: 0; max-width: 72ch; font-size: var(--text-read); line-height: var(--lh-read); color: var(--text-secondary); text-wrap: pretty;">The system layer fixes the roles; this sheet gives each one StackFolio's value and shows it rendered. Anything a component needs that is not on this page is either a proposal to the foundation or a local decision that will drift. Roles added since the first slice are marked <span style="font-family: var(--font-label); color: var(--confirm);">new</span>.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: var(--space-3); border-left: 2px solid var(--boundary-1); padding-left: var(--space-5);">
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Contents</span>
+      <div style="display: grid; gap: var(--space-1);">
+        <sc-for list="{{ contents }}" as="c" hint-placeholder-count="11">
+          <span style="display: flex; align-items: baseline; gap: var(--space-3); font-family: var(--font-label); font-size: var(--text-caption); color: var(--text-secondary);">
+            <span style="color: var(--text-dim);">{{ c.num }}</span>
+            <span>{{ c.label }}</span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: var(--space-7) var(--space-6) 0; display: flex; flex-direction: column; gap: var(--space-8);">
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="01 Colour roles">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">01</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Colour roles</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Near-achromatic earth neutrals carrying one hot accent. Hue is scarce on purpose: outside the status set, colour means action.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: var(--space-6) var(--space-7);">
+        <sc-for list="{{ colourGroups }}" as="g" hint-placeholder-count="6">
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-2); padding-bottom: var(--space-2);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ g.name }}</span>
+              <sc-if value="{{ g.isNew }}"><span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--confirm);">new</span></sc-if>
+            </div>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); max-width: 62ch; text-wrap: pretty;">{{ g.note }}</span>
+            <div style="display: flex; flex-direction: column;">
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="4">
+                <div style="display: grid; grid-template-columns: 40px minmax(0,160px) minmax(150px, auto) minmax(0,1fr); gap: var(--space-3); align-items: center; border-bottom: 1px solid var(--boundary-3); padding: var(--space-2) 0;">
+                  <span style="height: 24px; border: 1px solid var(--boundary-2); background: {{ r.swatch }};"></span>
+                  <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: {{ tokenNameColor }}; overflow-wrap: anywhere;">{{ r.token }}</span>
+                  <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ r.value }}</span>
+                  <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ r.use }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-left: 2px solid var(--accent); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Contrast floor</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 96ch; text-wrap: pretty;">Every text role clears 4.5:1 on the lightest ground it may sit on. <span style="font-family: var(--font-mono); color: var(--text-primary);">--accent</span> is a fill only — it never carries text or a hairline that must be seen; <span style="font-family: var(--font-mono); color: var(--text-primary);">--confirm</span> is its text-safe step, and is what links, focus and committal labels use.</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="02 Elevation and layering">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">02</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Elevation &amp; layering</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">In-page separation is depth, not lift: three strata, a seam at every boundary, grain tightening as it sinks. Detachment from the page is the single exception.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); border-left: 1px solid var(--boundary-2);">
+        <div style="background: var(--surface-1); background-image: var(--grain-1); border-top: 1px solid var(--boundary-1); border-right: 1px solid var(--boundary-2); padding: var(--space-5); min-height: 168px; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-4);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--surface-1 · #242320</span>
+          <span style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">Working surface</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Present and editable. Loosest grain, brightest seam.</span>
+          </span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-2); border-right: 1px solid var(--boundary-3); padding: var(--space-5); min-height: 168px; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-4);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--surface-2 · #1B1A18</span>
+          <span style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">Settled</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Committed content: rows, cards, the body of a case.</span>
+          </span>
+        </div>
+        <div style="background: var(--surface-3); background-image: var(--grain-3); border-top: 1px solid var(--boundary-3); border-right: 1px solid var(--boundary-3); padding: var(--space-5); min-height: 168px; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-4);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--surface-3 · #131211</span>
+          <span style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 700;">Context &amp; history</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary);">Page ground, provenance, older versions. Read on demand.</span>
+          </span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,420px); gap: var(--space-7); align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Layer order <span style="color: var(--confirm);">new</span></span>
+          <div style="display: flex; flex-direction: column;">
+            <sc-for list="{{ layers }}" as="l" hint-placeholder-count="6">
+              <div style="display: grid; grid-template-columns: 64px minmax(0,180px) minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+                <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--confirm);">{{ l.z }}</span>
+                <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">{{ l.token }}</span>
+                <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ l.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 88ch; text-wrap: pretty;">Overlays are the only place the system permits a shadow, because they are the only place a surface genuinely leaves the page. It is long, low and colourless — <span style="font-family: var(--font-mono); color: var(--text-primary);">--shadow-overlay: 0 24px 48px rgba(0,0,0,0.55)</span> — and it is always paired with a scrim, never used to imply hierarchy inside the page.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Overlay specimen</span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">A dialog rises to <span style="font-family: var(--font-mono); color: var(--text-primary);">--surface-1</span>, keeps the 2px accent edge, and puts everything behind it under the scrim.</span>
+          <button onClick="{{ openDialog }}" style="align-self: flex-start; cursor: pointer; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); background: transparent; border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: var(--space-3) var(--space-4); transition: border-color var(--dur-quick) var(--ease-settle);" style-hover="border-color: var(--confirm);">Open dialog</button>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="03 Typography">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">03</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Typography</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">Four families, each with one job. Modular 1.25 scale with a paired line height on every step; nothing is set at a size that is not on the scale.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-heading); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 800; letter-spacing: -0.022em;">Ag</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--font-heading</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Epilogue 700/800. Headings and committal words only.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-body); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 500;">Ag</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--font-body</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Manrope 400/500/600. All prose and controls.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-label); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 500;">Ag</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--font-label</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Space Grotesk. Micro-labels: uppercase, tracked, never a sentence.</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--confirm); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-h3); line-height: var(--lh-h3); font-weight: 400;">Ag</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--font-mono <span style="color: var(--confirm);">new</span></span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Geist Mono. Code, repo paths, token names, diagram source.</span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,440px); gap: var(--space-7); align-items: start;">
+        <div style="display: flex; flex-direction: column;">
+          <sc-for list="{{ typeScale }}" as="t" hint-placeholder-count="10">
+            <div style="display: grid; grid-template-columns: 132px minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim);">{{ t.token }}</span>
+              <span style="font-family: {{ t.family }}; font-size: {{ t.size }}; line-height: {{ t.lh }}; font-weight: {{ t.weight }}; letter-spacing: {{ t.tracking }}; color: {{ t.color }}; text-transform: {{ t.transform }}; display: block; max-width: 54ch; text-wrap: pretty;">{{ t.sample }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Code &amp; paths <span style="color: var(--confirm);">new</span></span>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Two steps only: <span style="font-family: var(--font-mono); color: var(--text-primary);">--text-code</span> for blocks and <span style="font-family: var(--font-mono); color: var(--text-primary);">--text-code-sm</span> for inline metadata. Code sits one stratum down from its container and keeps the grain.</span>
+          <pre style="margin: 0; background: var(--surface-3); background-image: var(--grain-3); border-left: 2px solid var(--boundary-1); padding: var(--space-4); overflow-x: auto; font-family: var(--font-mono); font-size: var(--text-code); line-height: var(--lh-code); color: var(--text-primary);">lib/auth/adapter.ts
+  export interface SessionPort {
+    current(): Session | null
+    guard(scope: Scope): void
+  }</pre>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim);">github.com/stackfolio/auth-adapter · v1 · 4 files changed</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr); gap: var(--space-7);" data-screen-label="04 Spacing, radii, strokes">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">04</span>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Spacing</h2>
+        </div>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">4px base. Steps 1–4 are inside components, 5–6 between them, 7–9 between sections.</span>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <sc-for list="{{ spacing }}" as="s" hint-placeholder-count="9">
+            <div style="display: grid; grid-template-columns: 108px 1fr; gap: var(--space-3); align-items: center;">
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">{{ s.label }}</span>
+              <span style="height: 10px; width: {{ s.px }}; background: var(--text-dim); border-left: 1px solid var(--boundary-1);"></span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">05</span>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Radii</h2>
+        </div>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Flat by decision — a journal, not an app. There is no pill radius: chips are squared, and a pill shape is drift.</span>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <div style="display: grid; grid-template-columns: 108px 1fr; gap: var(--space-3); align-items: center;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">--radius-1 · 0</span>
+            <span style="height: 40px; background: var(--surface-1); background-image: var(--grain-1); border: 1px solid var(--boundary-1); border-radius: var(--radius-1);"></span>
+          </div>
+          <div style="display: grid; grid-template-columns: 108px 1fr; gap: var(--space-3); align-items: center;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">--radius-2 · 2</span>
+            <span style="height: 40px; background: var(--surface-1); background-image: var(--grain-1); border: 1px solid var(--boundary-1); border-radius: var(--radius-2);"></span>
+          </div>
+          <div style="display: grid; grid-template-columns: 108px 1fr; gap: var(--space-3); align-items: center;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">--radius-3 · 3</span>
+            <span style="height: 40px; background: var(--surface-1); background-image: var(--grain-1); border: 1px solid var(--boundary-1); border-radius: var(--radius-3);"></span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2); border-top: 1px solid var(--boundary-2); padding-top: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Assignment</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Surfaces and rows take radius-1. Controls, inputs and dialogs take radius-2. Chips and tally marks take radius-3, the largest the theme owns.</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">06</span>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Strokes <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--confirm);">new</span></h2>
+        </div>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Three widths, each paired with a boundary colour. Width carries the meaning; colour only sets how loud it is.</span>
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="border-top: var(--stroke-hair) solid var(--boundary-2); padding-top: var(--space-2); font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--stroke-hair · 1px</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Dividers within a group; row seams. Pairs with boundary-2 or -3.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="border-top: var(--stroke-edge) solid var(--boundary-1); padding-top: var(--space-2); font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--stroke-edge · 2px</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">The top edge of a section or overlay. Pairs with boundary-1, or accent when the surface is the subject.</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="display: flex; align-items: stretch; gap: var(--space-3);">
+              <span style="width: var(--stroke-mark); background: var(--v-approve);"></span>
+              <span style="flex: 1; display: flex; flex-direction: column; gap: var(--space-1); padding: var(--space-1) 0;">
+                <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--stroke-mark · 8px</span>
+                <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Status bars only. Wide enough that filled and hollow read apart; at 3px they do not.</span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="07 Motion">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">07</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Motion</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 66ch; text-wrap: pretty;">One entry curve, inherited and never overridden. Things arrive downward and settle; nothing springs. Exit is the only other curve, and it is faster and duller than entry.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 300px minmax(0,1fr); gap: var(--space-7); align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <svg viewBox="0 0 200 200" width="100%" height="200" style="display: block; background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1);">
+            <path d="M12 12 L12 188 L188 188" fill="none" stroke="#37342D" stroke-width="1"></path>
+            <path d="M12 188 C 55 60, 30 12, 188 12" fill="none" stroke="#D9705C" stroke-width="2"></path>
+          </svg>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-primary);">--ease-settle<br>cubic-bezier(0.22, 0.68, 0.12, 1)</span>
+          <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim);">--ease-exit<br>cubic-bezier(0.4, 0, 1, 1)</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Durations — press a block to play it</span>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5);">
+            <sc-for list="{{ durations }}" as="d" hint-placeholder-count="3">
+              <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-4); overflow: hidden; display: flex; flex-direction: column; gap: var(--space-3);">
+                <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">{{ d.token }} · {{ d.ms }}</span>
+                <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">{{ d.use }}</span>
+                <button onClick="{{ d.play }}" style="cursor: pointer; height: 64px; background: var(--accent-quiet); border: 0; border-top: 1px solid var(--boundary-1); border-radius: var(--radius-2); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); {{ d.anim }}">settle</button>
+              </div>
+            </sc-for>
+          </div>
+          <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 92ch; text-wrap: pretty;">Hover changes value, never position. Press moves one pixel down into the surface. Anything that would move more than 8px does not move at all — it fades.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr); gap: var(--space-7);" data-screen-label="08 Focus, opacity, icons">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">08</span>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Focus <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--confirm);">new</span></h2>
+        </div>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">One ring, on every surface: <span style="font-family: var(--font-mono); color: var(--text-primary);">--focus-ring</span> in <span style="font-family: var(--font-mono); color: var(--text-primary);">--confirm</span>, offset 2px so the surface reads through it. The earlier accent ring was replaced — oxblood on surface-3 was not visible enough to be a focus indicator. Focus is never removed and never conveyed by colour change alone.</span>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); background: {{ focusSurface }}; background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-5);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Tab through these — rendered on {{ focusSurfaceName }}</span>
+          <div style="display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center;">
+            <button style="cursor: pointer; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); background: var(--accent); border: 0; border-radius: var(--radius-2); padding: var(--space-3) var(--space-4);">Submit verdict</button>
+            <button style="cursor: pointer; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); background: transparent; border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: var(--space-3) var(--space-4);">Read case</button>
+            <input value="Cite the failing test" style="background: var(--surface-3); border: 0; border-bottom: 2px solid var(--boundary-1); border-radius: var(--radius-2) var(--radius-2) 0 0; padding: var(--space-3); font-size: var(--text-body-sm); color: var(--text-primary);">
+          </div>
+          <div style="display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap;">
+            <span style="display: inline-flex; padding: var(--space-2) var(--space-3); border: 1px solid var(--boundary-2); border-radius: var(--radius-2); outline: {{ ringWidth }} solid var(--focus-ring); outline-offset: 2px; font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-primary);">focused, rendered</span>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-dim);">outline: {{ ringWidth }} solid var(--focus-ring); outline-offset: 2px</span>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">09</span>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Opacity <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--confirm);">new</span></h2>
+        </div>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Two values, and they are the whole vocabulary for "not now" and "not important".</span>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--op-disabled · 0.38</span>
+            <button disabled="disabled" style="align-self: flex-start; cursor: not-allowed; opacity: var(--op-disabled); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); background: transparent; border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: var(--space-3) var(--space-4);">Close verdict</button>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Applied to the whole control, never to its label alone. A disabled control keeps its layout and always has a reason next to it.</span>
+          </div>
+          <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 1px solid var(--boundary-1); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--op-muted · 0.62</span>
+            <span style="opacity: var(--op-muted); font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary);">Withdrawn review · kept for the record</span>
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Superseded or withdrawn content that must stay readable. Never used on text already set in a dim role.</span>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: baseline; gap: var(--space-3); border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">10</span>
+          <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Icons <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--confirm);">new</span></h2>
+        </div>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">Sizes only — the set itself is not drawn yet. 1.5px stroke at every size, squared ends, aligned to the text baseline beside it.</span>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+          <sc-for list="{{ icons }}" as="i" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 32px 116px minmax(0,1fr); gap: var(--space-3); align-items: center; border-bottom: 1px solid var(--boundary-3); padding: var(--space-2) 0;">
+              <span style="display: flex; justify-content: center;"><span style="width: {{ i.px }}; height: {{ i.px }}; border: 1.5px solid var(--text-label);"></span></span>
+              <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">{{ i.token }}</span>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">{{ i.use }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="11 Interaction states">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">11</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Interaction states</h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 70ch; text-wrap: pretty;">The same six states expressed the same way on every component, so a control is legible before its label is read. Every specimen below is live: hover, tab to and hold it.</span>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <sc-for list="{{ stateRules }}" as="s" hint-placeholder-count="6">
+          <div style="display: grid; grid-template-columns: 120px minmax(0,1fr) minmax(0,1fr); gap: var(--space-4); align-items: baseline; border-bottom: 1px solid var(--boundary-3); padding: var(--space-3) 0;">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">{{ s.name }}</span>
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">{{ s.rule }}</span>
+            <span style="font-family: var(--font-mono); font-size: var(--text-code-sm); line-height: var(--lh-code-sm); color: var(--text-dim); overflow-wrap: anywhere;">{{ s.tokens }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5);">
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Action</span>
+          <div style="display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-start;">
+            <button style="cursor: pointer; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); background: var(--accent); border: 0; border-radius: var(--radius-2); padding: var(--space-3) var(--space-5); transition: background var(--dur-quick) var(--ease-settle), transform var(--dur-quick) var(--ease-settle);" style-hover="background: var(--accent-deep);" style-active="background: var(--accent-deep); transform: translateY(1px);">Submit verdict</button>
+            <button style="cursor: pointer; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); background: transparent; border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: var(--space-3) var(--space-5); transition: border-color var(--dur-quick) var(--ease-settle), background var(--dur-quick) var(--ease-settle), transform var(--dur-quick) var(--ease-settle);" style-hover="border-color: var(--confirm); background: var(--accent-quiet);" style-active="transform: translateY(1px);">Read case</button>
+            <button onClick="{{ startLoad }}" style="cursor: pointer; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: {{ loadColor }}; background: transparent; border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: var(--space-3) var(--space-5); {{ loadAnim }}">{{ loadLabel }}</button>
+            <button disabled="disabled" style="cursor: not-allowed; opacity: var(--op-disabled); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); background: transparent; border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: var(--space-3) var(--space-5);">Close verdict</button>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim);">Primary · secondary · loading (press it) · disabled</span>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Field</span>
+          <label style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim);">Rationale</span>
+            <input value="Port boundary sits at the right seam" style="background: var(--surface-3); border: 0; border-bottom: 2px solid var(--boundary-1); border-radius: var(--radius-2) var(--radius-2) 0 0; padding: var(--space-3); font-size: var(--text-body-sm); color: var(--text-primary); outline: none; transition: border-color var(--dur-quick) var(--ease-settle);" style-hover="border-bottom-color: var(--text-dim);" style-focus="border-bottom-color: var(--confirm);">
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim);">Required on dispute.</span>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: var(--v-reject);">Evidence link · error</span>
+            <input value="postmortem/token-refresh" style="background: var(--surface-3); border: 0; border-bottom: 2px solid var(--v-reject); border-radius: var(--radius-2) var(--radius-2) 0 0; padding: var(--space-3); font-size: var(--text-body-sm); color: var(--text-primary); outline: none;">
+            <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--v-reject);">Must resolve to a corpus entry.</span>
+          </label>
+        </div>
+        <div style="background: var(--surface-2); background-image: var(--grain-2); border-top: 2px solid var(--boundary-1); padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4);">
+          <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Row &amp; loading</span>
+          <a href="Case Index.dc.html" style="border: 0; display: flex; flex-direction: column; gap: var(--space-1); background: var(--surface-1); border-left: 2px solid var(--boundary-1); padding: var(--space-3) var(--space-4); transition: border-left-color var(--dur-quick) var(--ease-settle), background var(--dur-quick) var(--ease-settle);" style-hover="border-left-color: var(--confirm); background: var(--surface-1);">
+            <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-primary); font-weight: 600;">Auth adapter as an anti-corruption layer</span>
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim);">Backend · in the workshop</span>
+          </a>
+          <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <span style="height: 20px; background: var(--surface-1); animation: fdBreathe 1.8s var(--ease-settle) infinite;"></span>
+            <span style="height: 14px; width: 80%; background: var(--surface-1); animation: fdBreathe 1.8s var(--ease-settle) 0.12s infinite;"></span>
+            <span style="height: 14px; width: 62%; background: var(--surface-1); animation: fdBreathe 1.8s var(--ease-settle) 0.24s infinite;"></span>
+          </div>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); text-wrap: pretty;">Loading is a grain-matched placeholder at the size of the thing arriving — never a spinner, never a layout that shifts when it lands.</span>
+        </div>
+      </div>
+    </section>
+    <section style="display: flex; flex-direction: column; gap: var(--space-5);" data-screen-label="12 Control heights">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; border-bottom: 1px solid var(--boundary-1); padding-bottom: var(--space-3);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; color: var(--text-dim);">12</span>
+        <h2 style="margin: 0; font-family: var(--font-heading); font-size: var(--text-h4); line-height: var(--lh-h4); font-weight: 700; letter-spacing: -0.018em;">Control heights <span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--confirm);">new</span></h2>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 68ch; text-wrap: pretty;">Three heights shared by every control that can be pressed or typed into, so a button and a field in the same row line up without either one being nudged.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-5);">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="display: flex; align-items: center; height: var(--control-h-sm); background: var(--surface-1); border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: 0 var(--space-3); font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--control-h-sm · 28</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">Dense rows and inline actions inside a list. Never the only way to perform an action on a page.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="display: flex; align-items: center; height: var(--control-h-md); background: var(--surface-1); border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: 0 var(--space-4); font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--control-h-md · 36</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">The default. Toolbars, forms, panels, anything on a working surface.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+          <span style="display: flex; align-items: center; height: var(--control-h-lg); background: var(--surface-1); border: 1px solid var(--boundary-1); border-radius: var(--radius-2); padding: 0 var(--space-5); font-family: var(--font-mono); font-size: var(--text-code-sm); color: var(--text-primary);">--control-h-lg · 44</span>
+          <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary); text-wrap: pretty;">One per screen at most: the committal action of a page or an overlay. Equals the hit-target minimum.</span>
+        </div>
+      </div>
+      <div style="background: var(--surface-2); background-image: var(--grain-2); border-left: 2px solid var(--accent); padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-2);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-label);">Hit target</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); max-width: 96ch; text-wrap: pretty;"><span style="font-family: var(--font-mono); color: var(--text-primary);">--hit-min: 44px</span> is the floor for a pointer target. Controls drawn shorter than it — sm and md — are only permitted inside a container that supplies the rest of the target: a 44px row, a toolbar, a list item. A control below the floor with nothing around it is a defect, not a size choice.</span>
+      </div>
+    </section>
+  </main>
+
+  <sc-if value="{{ dialogOpen }}">
+    <div onClick="{{ closeDialog }}" style="position: fixed; inset: 0; z-index: var(--z-dialog); background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: var(--space-6); animation: fdSettle var(--dur-quick) var(--ease-settle) both;">
+      <div style="width: 100%; max-width: 460px; background: var(--surface-1); background-image: var(--grain-1); border-top: 2px solid var(--accent); border-radius: var(--radius-2); box-shadow: var(--shadow-overlay); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim);">Dialog · z 400</span>
+        <span style="font-family: var(--font-heading); font-size: var(--text-h5); line-height: var(--lh-h5); font-weight: 700;">Surface-1, accent edge, scrim beneath</span>
+        <span style="font-size: var(--text-body-sm); line-height: var(--lh-body-sm); color: var(--text-secondary); text-wrap: pretty;">The only shadow the system allows: long, low and colourless, and always with a scrim. Depth still does the work — the dialog is drawn on the working surface, one stratum above the page it covers.</span>
+        <button onClick="{{ closeDialog }}" style="align-self: flex-start; cursor: pointer; font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); background: var(--accent); border: 0; border-radius: var(--radius-2); padding: var(--space-3) var(--space-5);">Dismiss</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <dc-import name="Footer" max-width="1280px" hint-size="100%,300px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1360},&quot;showTokenNames&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sheet&quot;},&quot;focusRingWidth&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:2,&quot;min&quot;:1,&quot;max&quot;:4,&quot;step&quot;:1,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Focus&quot;},&quot;focusDemoSurface&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;surface-1&quot;,&quot;surface-2&quot;,&quot;surface-3&quot;],&quot;default&quot;:&quot;surface-2&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Focus&quot;}}">
+class Component extends DCLogic {
+  state = { dialogOpen: false, play: {}, loading: false };
+
+  COLOURS() {
+    return [
+      { name: 'Surfaces', note: 'Three strata plus one sunk ground for insets. Containment darkens and compacts.', rows: [
+        ['--surface-1', '#242320', 'Working surface: editable, present, in front of the reader.'],
+        ['--surface-2', '#1B1A18', 'Settled content: rows, cards, the body of a case.'],
+        ['--surface-3', '#131211', 'Page ground, and context or history read on demand.'],
+        ['--surface-sunk', '#0E0D0C', 'Insets that must read as cut into the page: code blocks, wells.', true]
+      ]},
+      { name: 'Text', note: 'Four roles, no more. dim is micro-type only; sentence-length runs use secondary or primary.', rows: [
+        ['--text-primary', '#ECE7DC', 'Headings, prose, control labels.'],
+        ['--text-secondary', '#9B948A', 'Supporting prose, notes, descriptions.'],
+        ['--text-dim', '#918A7F', 'Uppercase micro-labels and metadata only.'],
+        ['--text-label', '#B9AFA0', 'Section labels that must hold against a lighter surface.']
+      ]},
+      { name: 'Borders & dividers', note: 'One seam value per stratum. The seam gets dimmer as the surface sinks.', rows: [
+        ['--boundary-1', '#37342D', 'Section edges and control outlines.'],
+        ['--boundary-2', '#26241F', 'Dividers inside a group.'],
+        ['--boundary-3', '#1B1A18', 'The quietest seam: dense lists, table rows.']
+      ]},
+      { name: 'Interactive & action', note: 'One hot accent on earth neutrals. accent fills, confirm speaks.', rows: [
+        ['--accent', '#A8342B', 'Fills and 2px edges. Never text, never a hairline that must be seen.'],
+        ['--accent-deep', '#7E2620', 'The pressed and hovered step of an accent fill.'],
+        ['--accent-quiet', 'rgba(168,52,43,0.12)', 'Hover wash on secondary controls and selected rows.'],
+        ['--confirm', '#D9705C', 'Links, emphasis, committal labels, focus. Text-safe on every surface.']
+      ]},
+      { name: 'Focus', note: 'Its own role so it can never be tuned away with the accent.', isNew: true, rows: [
+        ['--focus-ring', '#D9705C', '2px ring, 2px offset, on every surface and every focusable thing.', true],
+        ['--scrim', 'rgba(9,8,8,0.72)', 'Under every overlay; also what makes an overlay-focused ring read.', true]
+      ]},
+      { name: 'Action — caution', note: 'Destructive and irreversible actions. Borrowed from the reject verdict rather than adding a hue: the same red means the same thing whether it is a verdict or a delete.', isNew: true, rows: [
+        ['--caution', '#B87264', 'Border and label of a caution control. Text-safe on every surface.', true],
+        ['--caution-deep', '#9C5B4E', 'The pressed fill of a caution control.', true],
+        ['--caution-quiet', 'rgba(184,114,100,0.14)', 'Hover wash on a caution control.', true]
+      ]},
+      { name: 'Status', note: 'The only place hue carries meaning. Verdicts set the palette; provenance, conclusion and track borrow from it rather than adding hues.', rows: [
+        ['--v-approve', '#7C8A5E', 'Approved verdict; Validated Pattern conclusion; filled mark.'],
+        ['--v-defer', '#C08A4A', 'Deferred verdict; Documented Trade-off conclusion; hollow mark.'],
+        ['--v-reject', '#B87264', 'Rejected verdict, and every field or form error.'],
+        ['--v-reject-mark', '#9C5B4E', 'The rejected bar, one step down from its label.'],
+        ['--st-workshop', '#918A7F', 'In the workshop: provenance not yet written. Neutral by decision.', true],
+        ['--st-track', '#B9AFA0', 'Track marker — Engineer or Architect. Never an action colour.', true]
+      ]}
+    ];
+  }
+
+  TYPE() {
+    return [
+      ['--text-h1 · 49/55', 'var(--font-heading)', '49px', '55px', 800, '-0.026em', 'A case is a claim with its reasoning attached', 'var(--text-primary)'],
+      ['--text-h2 · 39/47', 'var(--font-heading)', '39px', '47px', 700, '-0.022em', 'What every component draws from', 'var(--text-primary)'],
+      ['--text-h3 · 31/40', 'var(--font-heading)', '31px', '40px', 700, '-0.02em', 'Foundations, and where they stop', 'var(--text-primary)'],
+      ['--text-h4 · 25/33', 'var(--font-heading)', '25px', '33px', 700, '-0.018em', 'Section heading on a reading surface', 'var(--text-primary)'],
+      ['--text-h5 · 20/28', 'var(--font-heading)', '20px', '28px', 700, '-0.01em', 'Card and block heading', 'var(--text-primary)'],
+      ['--text-read · 17/27', 'var(--font-body)', '17px', '27px', 400, '0', 'Reading size, used only in the case reader and the standfirst: one step up from body, at a measure of 70 characters or less.', 'var(--text-secondary)'],
+      ['--text-body · 16/26', 'var(--font-body)', '16px', '26px', 400, '0', 'Body copy. The default for prose anywhere outside the reader.', 'var(--text-secondary)'],
+      ['--text-body-sm · 14/22', 'var(--font-body)', '14px', '22px', 400, '0', 'Dense contexts: rows, notes, control labels, helper text.', 'var(--text-secondary)'],
+      ['--text-code · 14/22', 'var(--font-mono)', '14px', '22px', 400, '0', 'const port = adapter.session()', 'var(--text-primary)'],
+      ['--text-caption · 12/16', 'var(--font-label)', '12px', '16px', 500, '0.12em', 'Labels, meta, facet names', 'var(--text-dim)', 'uppercase'],
+      ['--text-code-sm · 12/18', 'var(--font-mono)', '12px', '18px', 400, '0', 'lib/auth/adapter.ts · v1', 'var(--text-dim)']
+    ];
+  }
+
+  renderVals() {
+    const rw = Math.max(1, Number(this.props.focusRingWidth ?? 2)) + 'px';
+    const surf = this.props.focusDemoSurface || 'surface-2';
+    const play = this.state.play;
+    const dur = { quick: 180, base: 320, slow: 560 };
+    const anim = (k) => play[k] === undefined ? ''
+      : play[k] ? 'transform: translateY(0); transition: transform ' + dur[k] + 'ms var(--ease-settle);'
+      : 'transform: translateY(-22px); transition: none;';
+
+    return {
+      showTokenNames: this.props.showTokenNames ?? true,
+      tokenNameColor: (this.props.showTokenNames ?? true) ? 'var(--text-primary)' : 'transparent',
+      contents: [
+        ['01', 'Colour roles'], ['02', 'Elevation & layering'], ['03', 'Typography'],
+        ['04', 'Spacing'], ['05', 'Radii'], ['06', 'Strokes'], ['07', 'Motion'],
+        ['08', 'Focus'], ['09', 'Opacity'], ['10', 'Icons'], ['11', 'Interaction states'],
+        ['12', 'Control heights']
+      ].map(c => ({ num: c[0], label: c[1] })),
+      colourGroups: this.COLOURS().map(g => ({
+        name: g.name, note: g.note, isNew: !!g.isNew,
+        rows: g.rows.map(r => ({
+          token: r[0], value: r[1], use: r[2],
+          swatch: r[1].indexOf('rgba') === 0 ? r[1] : r[1]
+        }))
+      })),
+      layers: [
+        ['0', 'page', 'Everything in the reading flow. Depth strata, no z-index.'],
+        ['100', '--z-sticky', 'The app header, and facet rails that stick while a list scrolls.'],
+        ['200', '--z-menu', 'Account menu, sort menu. Anchored, no scrim, closes on outside click.'],
+        ['300', '--z-scrim', 'The scrim itself. Nothing else lives on this layer.'],
+        ['400', '--z-dialog', 'Modal dialogs and the verdict panel. Always above a scrim.'],
+        ['500', '--z-toast', 'Save and error notices. Above everything, dismissible, never blocking.']
+      ].map(l => ({ z: l[0], token: l[1], note: l[2] })),
+      typeScale: this.TYPE().map(t => ({
+        token: t[0], family: t[1], size: t[2], lh: t[3], weight: t[4],
+        tracking: t[5], sample: t[6], color: t[7], transform: t[8] || 'none'
+      })),
+      spacing: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n, i) => {
+        const px = [4, 8, 12, 16, 24, 32, 48, 64, 96][i];
+        return { label: '--space-' + n + ' · ' + px, px: px + 'px' };
+      }),
+      durations: [
+        { token: '--dur-quick', ms: '180ms', use: 'Hover, press, focus. Anything answering a pointer.', play: () => this.play('quick'), anim: anim('quick') },
+        { token: '--dur-base', ms: '320ms', use: 'Content arriving: rows, panels, an opened overlay.', play: () => this.play('base'), anim: anim('base') },
+        { token: '--dur-slow', ms: '560ms', use: 'First paint of a screen, and long settles only.', play: () => this.play('slow'), anim: anim('slow') }
+      ],
+      icons: [
+        ['--icon-1 · 12', 'Inline with caption type: facet marks, tally ticks.'],
+        ['--icon-2 · 14', 'Inline with body-sm: row affordances, chip marks.'],
+        ['--icon-3 · 16', 'Default. Buttons, menu items, field adornments.'],
+        ['--icon-4 · 20', 'Header and toolbar actions, at a 44px hit target.'],
+        ['--icon-5 · 24', 'Empty states and section markers. The largest permitted.']
+      ].map(i => ({ token: i[0], use: i[1], px: i[0].split('· ')[1] + 'px' })),
+      stateRules: [
+        ['Default', 'Boundary-1 outline or no outline at all. Nothing implies pressability but the label and the cursor.', 'boundary-1 · radius-2'],
+        ['Hover', 'Value change only — border to confirm, or an accent-quiet wash. Never a move, never a size change.', 'confirm · accent-quiet · dur-quick'],
+        ['Focus', 'The ring, at 2px with a 2px offset. Additive: it never replaces the hover treatment.', 'focus-ring · offset 2px'],
+        ['Active', 'One pixel down into the surface, and the fill steps to accent-deep.', 'accent-deep · translateY(1px)'],
+        ['Disabled', 'Whole control at op-disabled, cursor not-allowed, layout unchanged, reason stated beside it.', 'op-disabled · 0.38'],
+        ['Loading', 'The control keeps its width and states what it is doing; content loads as a grain-matched placeholder.', 'dur-base · fdBreathe 1.8s']
+      ].map(s => ({ name: s[0], rule: s[1], tokens: s[2] })),
+      focusSurface: 'var(--' + surf + ')',
+      focusSurfaceName: surf,
+      ringWidth: rw,
+      dialogOpen: this.state.dialogOpen,
+      openDialog: () => this.setState({ dialogOpen: true }),
+      closeDialog: () => this.setState({ dialogOpen: false }),
+      loadLabel: this.state.loading ? 'Submitting…' : 'Press to load',
+      loadColor: this.state.loading ? 'var(--text-dim)' : 'var(--text-primary)',
+      loadAnim: this.state.loading ? 'animation: fdBreathe 1.4s var(--ease-settle) infinite; cursor: progress;' : '',
+      startLoad: () => {
+        if (this.state.loading) return;
+        this.setState({ loading: true });
+        setTimeout(() => this.setState({ loading: false }), 2200);
+      }
+    };
+  }
+
+  play(k) {
+    this.setState(s => ({ play: Object.assign({}, s.play, { [k]: false }) }));
+    // two frames: lift with no transition, then settle with it
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      this.setState(s => ({ play: Object.assign({}, s.play, { [k]: true }) }));
+    }));
+  }
+}
+</script>
+</body>
+</html>

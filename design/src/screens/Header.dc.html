@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap">
+<style>
+  @keyframes sfHeadSettle { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px;
+  --text-caption: 12px; --lh-caption: 16px;
+  --text-body-sm: 14px; --lh-body-sm: 22px;
+  --text-h5: 20px;
+  --surface-1: #242320; --surface-2: #1B1A18; --surface-3: #131211;
+  --boundary-1: #37342D; --boundary-2: #26241F; --boundary-3: #1B1A18;
+  --text-primary: #ECE7DC; --text-secondary: #9B948A; --text-dim: #918A7F; --text-label: #B9AFA0;
+  --accent: #A8342B; --confirm: #D9705C;
+  --grain-1: repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px);
+  --grain-3: repeating-linear-gradient(180deg, rgba(0,0,0,0.24) 0 1px, transparent 1px 3px);
+  --font-heading: 'Epilogue', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-label: 'Space Grotesk', ui-monospace, monospace;
+  --ease-settle: cubic-bezier(0.22, 0.68, 0.12, 1);
+  --dur-quick: 180ms;
+  width: 100%; background: var(--surface-3); border-bottom: 1px solid var(--boundary-2); font-family: var(--font-body);
+">
+  <div style="max-width: {{ maxWidth }}; margin: 0 auto; padding: var(--space-4) var(--space-6); display: flex; align-items: center; gap: var(--space-5); flex-wrap: wrap;">
+
+    <a href="{{ homeHref }}" style="text-decoration: none; border: 0; display: flex; align-items: baseline; gap: var(--space-3);">
+      <span style="font-family: var(--font-heading); font-size: var(--text-h5); font-weight: 800; letter-spacing: -0.01em; color: var(--text-primary);">StackFolio</span>
+      <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);">Peer review</span>
+    </a>
+
+    <nav style="display: flex; align-items: stretch; gap: var(--space-4); min-width: 0;">
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="2">
+        <a href="{{ l.href }}" style="position: relative; text-decoration: none; border: 0; padding: var(--space-2) 0; display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.1em; text-transform: uppercase; color: {{ l.color }};">
+          <span>{{ l.label }}</span>
+          <sc-if value="{{ l.hasBadge }}"><span style="font-family: var(--font-label); font-size: var(--text-caption); color: var(--confirm);">{{ l.badge }}</span></sc-if>
+          <sc-if value="{{ l.active }}"><span style="position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent);"></span></sc-if>
+        </a>
+      </sc-for>
+    </nav>
+
+    <sc-if value="{{ anonymous }}" hint-placeholder-val="{{ true }}">
+      <span style="margin-left: auto; display: flex; align-items: center; gap: var(--space-5);">
+        <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-dim); max-width: 26ch; text-wrap: pretty;">Reading never asks you to sign in.</span>
+        <a href="Sign-in interrupted.dc.html" style="text-decoration: none; border: 1px solid var(--boundary-1); padding: var(--space-3) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-primary); transition: border-color var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">Sign in</a>
+      </span>
+    </sc-if>
+
+    <sc-if value="{{ signedIn }}">
+      <a href="Authoring.dc.html?new=1" style="margin-left: auto; text-decoration: none; border: 0; display: flex; align-items: center; gap: var(--space-2); background: var(--accent); padding: var(--space-3) var(--space-4); font-family: var(--font-label); font-size: var(--text-caption); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #ECE7DC; transition: background var(--dur-quick) var(--ease-settle);" style-hover="background: #7E2620;">
+        <span style="font-size: var(--text-body-sm); line-height: 1;">+</span>
+        <span>New case</span>
+      </a>
+    </sc-if>
+
+    <sc-if value="{{ signedIn }}">
+      <span ref="{{ accountRef }}" style="position: relative; display: flex; align-items: center;">
+        <button onClick="{{ toggleAccount }}" style="cursor: pointer; display: flex; align-items: center; gap: var(--space-3); background: transparent; border: 1px solid {{ accountBorder }}; padding: var(--space-2) var(--space-3); font-family: var(--font-body); transition: border-color var(--dur-quick) var(--ease-settle);" style-hover="border-color: #A8342B;">
+          <span style="width: 26px; height: 26px; background: var(--surface-1); border-left: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: var(--text-caption); font-weight: 800; color: var(--text-primary);">{{ initials }}</span>
+          <span style="display: flex; flex-direction: column; align-items: flex-start;">
+            <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-primary);">{{ handle }}</span>
+            <span style="font-family: var(--font-label); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim);">{{ niche }}</span>
+          </span>
+        </button>
+
+        <sc-if value="{{ accountOpen }}">
+          <span style="position: absolute; top: calc(100% + 8px); right: 0; z-index: 40; min-width: 268px; background: var(--surface-3); background-image: var(--grain-3); border-top: 2px solid var(--accent); border-right: 1px solid var(--boundary-1); border-bottom: 1px solid var(--boundary-1); border-left: 1px solid var(--boundary-1); box-shadow: inset 0 12px 24px rgba(0,0,0,0.45); display: flex; flex-direction: column; animation: sfHeadSettle var(--dur-quick) var(--ease-settle) both;">
+            <span style="padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--boundary-2); display: flex; flex-direction: column; gap: var(--space-2);">
+              <span style="font-family: var(--font-label); font-size: var(--text-caption); letter-spacing: 0.04em; color: var(--text-primary);">{{ handle }}</span>
+              <span style="font-size: var(--text-caption); line-height: var(--lh-caption); color: var(--text-secondary);">Verdicts bind on <span style="color: var(--text-label);">{{ niche }}</span>. Set by your invite, not editable here.</span>
+            </span>
+            <a href="{{ profileHref }}" style="text-decoration: none; border: 0; padding: var(--space-3) var(--space-5); font-size: var(--text-body-sm); color: var(--text-primary); border-bottom: 1px solid var(--boundary-2);">Your profile</a>
+            <a href="Notifications.dc.html" style="text-decoration: none; border: 0; padding: var(--space-3) var(--space-5); font-size: var(--text-body-sm); color: var(--text-primary); border-bottom: 1px solid var(--boundary-2);">Notifications</a>
+            <a href="Tracked.dc.html" style="text-decoration: none; border: 0; padding: var(--space-3) var(--space-5); font-size: var(--text-body-sm); color: var(--text-primary); border-bottom: 1px solid var(--boundary-3);">Tracked cases</a>
+            <a href="Account.dc.html" style="text-decoration: none; border: 0; padding: var(--space-3) var(--space-5); font-size: var(--text-body-sm); color: var(--text-primary); border-bottom: 1px solid var(--boundary-3);">Settings</a>
+            <a href="Sign-in interrupted.dc.html" style="text-decoration: none; border: 0; padding: var(--space-3) var(--space-5); font-size: var(--text-body-sm); color: var(--text-secondary);">Sign out</a>
+          </span>
+        </sc-if>
+      </span>
+    </sc-if>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:72},&quot;signedIn&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;State&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cases&quot;,&quot;queue&quot;,&quot;none&quot;],&quot;default&quot;:&quot;none&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;handle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@nkosi.dev&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;niche&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;AWS/Backend · Identity&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;queueCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:9,&quot;tsType&quot;:&quot;number&quot;},&quot;maxWidth&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;1280px&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;initials&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;NK&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const SIGNED_IN = {
+  handle: '@nkosi.dev',
+  initials: 'NK',
+  niche: 'AWS/Backend · Identity',
+  queueCount: 1
+};
+
+class Component extends DCLogic {
+  accountRef = React.createRef();
+  state = { account: false };
+
+  componentDidMount() {
+    this.onDown = (e) => {
+      if (!this.state.account) return;
+      const w = this.accountRef.current;
+      if (w && !w.contains(e.target)) this.setState({ account: false });
+    };
+    this.onKey = (e) => { if (e.key === 'Escape' && this.state.account) this.setState({ account: false }); };
+    document.addEventListener('mousedown', this.onDown, true);
+    document.addEventListener('keydown', this.onKey);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.onDown, true);
+    document.removeEventListener('keydown', this.onKey);
+  }
+
+  renderVals() {
+    const active = this.props.active ?? 'none';
+    // App screens are the norm; entry surfaces (Home, Invite, Sign-in interrupted) opt out explicitly.
+    const signedIn = this.props.signedIn ?? true;
+    const handle = this.props.handle ?? SIGNED_IN.handle;
+    const queueCount = this.props.queueCount ?? SIGNED_IN.queueCount;
+
+    const link = (id, label, href, badge) => ({
+      label, href,
+      active: active === id,
+      color: active === id ? 'var(--text-primary)' : 'var(--text-secondary)',
+      hasBadge: !!badge,
+      badge: badge
+    });
+
+    const links = [link('cases', 'Browse', 'Case Index.dc.html')];
+    if (signedIn) links.push(link('queue', 'Review queue', 'Reviewer Queue.dc.html', queueCount > 0 ? String(queueCount) : null));
+
+    return {
+      maxWidth: this.props.maxWidth ?? '1280px',
+      homeHref: signedIn ? 'Home - signed in.dc.html' : 'Home.dc.html',
+      signedIn,
+      anonymous: !signedIn,
+      handle,
+      profileHref: 'Profile.dc.html?member=' + encodeURIComponent(handle) + '&self=1',
+      niche: this.props.niche ?? SIGNED_IN.niche,
+      initials: this.props.initials ?? (handle === SIGNED_IN.handle
+        ? SIGNED_IN.initials
+        : handle.replace('@', '').replace(/[^a-z]/gi, '').slice(0, 2).toUpperCase()),
+      links,
+      accountRef: this.accountRef,
+      accountOpen: this.state.account,
+      accountBorder: this.state.account ? 'var(--accent)' : 'var(--boundary-1)',
+      toggleAccount: () => this.setState(p => ({ account: !p.account }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>
