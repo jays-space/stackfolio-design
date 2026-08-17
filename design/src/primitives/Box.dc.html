@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="{{ boxStyle }}">{{ content }}</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:320,&quot;height&quot;:160},&quot;pad&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;],&quot;default&quot;:&quot;5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;padX&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Axis override&quot;},&quot;padY&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Axis override&quot;},&quot;surface&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;sunk&quot;],&quot;default&quot;:&quot;none&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ground&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;1&quot;,&quot;2&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ground&quot;},&quot;edge&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;all&quot;,&quot;top&quot;,&quot;left&quot;,&quot;bottom&quot;],&quot;default&quot;:&quot;none&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ground&quot;},&quot;edgeLevel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ground&quot;},&quot;radius&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ground&quot;},&quot;inline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;fill&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;children&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;ReactNode&quot;}}">
+const FALLBACK = { 0: '0px', 1: '4px', 2: '8px', 3: '12px', 4: '16px', 5: '24px', 6: '32px', 7: '48px', 8: '64px', 9: '96px' };
+
+// The only way this component gets a length. A step outside 0–9 is a mistake, not a value.
+function space(step) {
+  if (step === null || step === undefined || step === '') return null;
+  const k = String(step);
+  if (!(k in FALLBACK)) return null;
+  if (k === '0') return '0px';
+  return 'var(--space-' + k + ', ' + FALLBACK[k] + ')';
+}
+
+const T = (name, fallback) => 'var(--' + name + ', ' + fallback + ')';
+
+const SURFACES = {
+  none: null,
+  1: T('surface-1', '#242320'),
+  2: T('surface-2', '#1B1A18'),
+  3: T('surface-3', '#131211'),
+  sunk: T('surface-sunk', '#0E0D0C')
+};
+
+const BOUNDARIES = {
+  1: T('boundary-1', '#37342D'),
+  2: T('boundary-2', '#26241F'),
+  3: T('boundary-3', '#1B1A18')
+};
+
+const GRAINS = {
+  1: T('grain-1', 'repeating-linear-gradient(180deg, rgba(0,0,0,0.09) 0 1px, transparent 1px 5px)'),
+  2: T('grain-2', 'repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 4px)')
+};
+
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const pad = space(p.pad ?? 5) ?? space(5);
+    const padX = space(p.padX);
+    const padY = space(p.padY);
+    const surface = SURFACES[p.surface ?? 'none'] ?? null;
+    const edgeColor = BOUNDARIES[p.edgeLevel ?? 1] || BOUNDARIES[1];
+    const edge = p.edge ?? 'none';
+    const width = (p.edge === 'top' || p.edge === 'left') ? '2px' : '1px';
+    const rule = width + ' solid ' + edgeColor;
+
+    const style = {
+      boxSizing: 'border-box',
+      display: p.inline ? 'inline-block' : 'block',
+      paddingTop: padY ?? pad,
+      paddingBottom: padY ?? pad,
+      paddingLeft: padX ?? pad,
+      paddingRight: padX ?? pad,
+      borderRadius: T('radius-' + (p.radius ?? 1), p.radius === 3 ? '3px' : p.radius === 2 ? '2px' : '0px')
+    };
+    if (surface) style.background = surface;
+    if (p.grain) style.backgroundImage = GRAINS[p.grain] || GRAINS[1];
+    if (edge === 'all') style.border = rule;
+    else if (edge === 'top') style.borderTop = rule;
+    else if (edge === 'left') style.borderLeft = rule;
+    else if (edge === 'bottom') style.borderBottom = rule;
+    if (p.fill) { style.minWidth = 0; style.width = '100%'; }
+
+    return { boxStyle: style, content: p.children };
+  }
+}
+</script>
+</body>
+</html>

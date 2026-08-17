@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="{{ stackStyle }}">{{ content }}</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:360,&quot;height&quot;:180},&quot;direction&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;column&quot;,&quot;row&quot;],&quot;default&quot;:&quot;column&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;gap&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;],&quot;default&quot;:&quot;4&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;align&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;start&quot;,&quot;center&quot;,&quot;end&quot;,&quot;stretch&quot;,&quot;baseline&quot;],&quot;default&quot;:&quot;stretch&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Arrangement&quot;},&quot;justify&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;start&quot;,&quot;center&quot;,&quot;end&quot;,&quot;between&quot;,&quot;around&quot;],&quot;default&quot;:&quot;start&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Arrangement&quot;},&quot;wrap&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Arrangement&quot;},&quot;crossGap&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;,&quot;8&quot;,&quot;9&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Arrangement&quot;},&quot;inline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;fill&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;children&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;ReactNode&quot;}}">
+const FALLBACK = { 0: '0px', 1: '4px', 2: '8px', 3: '12px', 4: '16px', 5: '24px', 6: '32px', 7: '48px', 8: '64px', 9: '96px' };
+
+function space(step) {
+  if (step === null || step === undefined || step === '') return null;
+  const k = String(step);
+  if (!(k in FALLBACK)) return null;
+  if (k === '0') return '0px';
+  return 'var(--space-' + k + ', ' + FALLBACK[k] + ')';
+}
+
+const ALIGN = { start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch', baseline: 'baseline' };
+const JUSTIFY = { start: 'flex-start', center: 'center', end: 'flex-end', between: 'space-between', around: 'space-around' };
+
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const row = (p.direction ?? 'column') === 'row';
+    const gap = space(p.gap ?? 4) ?? space(4);
+    const crossGap = space(p.crossGap);
+
+    const style = {
+      boxSizing: 'border-box',
+      display: p.inline ? 'inline-flex' : 'flex',
+      flexDirection: row ? 'row' : 'column',
+      rowGap: row ? (crossGap ?? gap) : gap,
+      columnGap: row ? gap : (crossGap ?? gap),
+      alignItems: ALIGN[p.align ?? (row ? 'center' : 'stretch')] || 'stretch',
+      justifyContent: JUSTIFY[p.justify ?? 'start'] || 'flex-start',
+      flexWrap: p.wrap ? 'wrap' : 'nowrap',
+      minWidth: 0
+    };
+    if (p.fill) style.width = '100%';
+
+    return { stackStyle: style, content: p.children };
+  }
+}
+</script>
+</body>
+</html>
